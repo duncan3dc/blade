@@ -46,4 +46,16 @@ class BladeTest extends \PHPUnit_Framework_TestCase
         $result = Blade::make("view5")->__toString();
         $this->assertSame(Env::getMachineName(), $result);
     }
+
+
+    public function testExists1()
+    {
+        $this->assertSame(true, Blade::exists("view1"));
+    }
+
+
+    public function testDoesntExist()
+    {
+        $this->assertSame(false, Blade::exists("no-such-view"));
+    }
 }

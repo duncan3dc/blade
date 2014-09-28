@@ -82,6 +82,12 @@ class Blade
     }
 
 
+    public static function exists($view)
+    {
+        return static::getEnvironment()->exists($view);
+    }
+
+
     public static function make($view, array $params = [])
     {
         return static::getEnvironment()->make($view, $params);
