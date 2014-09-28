@@ -42,7 +42,25 @@ class Blade
                 if (!is_dir($path)) {
                     mkdir($path, 0777, true);
                 }
-                return new BladeCompiler($app->make("files"), $path);
+                $blade = new BladeCompiler($app->make("files"), $path);
+
+                # Allow namespace declarations in views
+                $blade->extend(function($view, $compiler) {
+                    $pattern = $compiler->createMatcher("namespace");
+                    return preg_replace_callback($pattern, function($matches) {
+                        return $matches[1] . "<?php namespace " . substr($matches[2], 1, -1) . " ?>";
+                    }, $view);
+                });
+
+                # Allow use imports in views
+                $blade->extend(function($view, $compiler) {
+                    $pattern = $compiler->createMatcher("use");
+                    return preg_replace_callback($pattern, function($matches) {
+                        return $matches[1] . "<?php use " . substr($matches[2], 1, -1) . " ?>";
+                    }, $view);
+                });
+
+                return $blade;
             });
             $resolver = new EngineResolver;
             $resolver->register("blade", function() use ($app) {

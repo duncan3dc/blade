@@ -32,4 +32,18 @@ class BladeTest extends \PHPUnit_Framework_TestCase
         $result = Blade::make("view3")->__toString();
         $this->assertSame(file_get_contents(__DIR__ . "/views/alt/view3.blade.php"), $result);
     }
+
+
+    public function testView4()
+    {
+        $result = Blade::make("view4")->__toString();
+        $this->assertSame("duncan3dc\\Laravel", $result);
+    }
+
+
+    public function testView5()
+    {
+        $result = Blade::make("view5")->__toString();
+        $this->assertSame(Env::getMachineName(), $result);
+    }
 }
