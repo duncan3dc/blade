@@ -12,21 +12,21 @@ class BladeTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function testView1()
+    public function testBasic()
     {
         $result = Blade::make("view1")->__toString();
         $this->assertSame(file_get_contents(__DIR__ . "/views/view1.blade.php"), $result);
     }
 
 
-    public function testView2()
+    public function testParameters()
     {
         $result = Blade::make("view2", ["title" => "Test Title"])->__toString();
         $this->assertSame(file_get_contents(__DIR__ . "/views/view2.html"), $result);
     }
 
 
-    public function testView3()
+    public function testAltPath()
     {
         Blade::addPath(__DIR__ . "/views/alt");
         $result = Blade::make("view3")->__toString();
@@ -34,14 +34,14 @@ class BladeTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function testView4()
+    public function testNamespace()
     {
         $result = Blade::make("view4")->__toString();
         $this->assertSame("duncan3dc\\Laravel", $result);
     }
 
 
-    public function testView5()
+    public function testUse()
     {
         $result = Blade::make("view5")->__toString();
         $this->assertSame(Env::getMachineName(), $result);
