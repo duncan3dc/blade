@@ -24,4 +24,12 @@ class BladeTest extends \PHPUnit_Framework_TestCase
         $result = Blade::make("view2", ["title" => "Test Title"])->__toString();
         $this->assertSame(file_get_contents(__DIR__ . "/views/view2.html"), $result);
     }
+
+
+    public function testView3()
+    {
+        Blade::addPath(__DIR__ . "/views/alt");
+        $result = Blade::make("view3")->__toString();
+        $this->assertSame(file_get_contents(__DIR__ . "/views/alt/view3.blade.php"), $result);
+    }
 }

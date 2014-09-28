@@ -58,6 +58,12 @@ class Blade
     }
 
 
+    public static function addPath($path)
+    {
+        static::getEnvironment()->getContainer()->make("view.finder")->addLocation($path);
+    }
+
+
     public static function make($view, array $params = [])
     {
         return static::getEnvironment()->make($view, $params);
