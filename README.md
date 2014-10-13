@@ -4,6 +4,7 @@ blade
 Use Laravel Blade templates as a standalone component without the full Laravel framework
 
 [![Build Status](https://travis-ci.org/duncan3dc/blade.svg?branch=master)](https://travis-ci.org/duncan3dc/blade)
+[![Latest Stable Version](https://poser.pugx.org/duncan3dc/blade/version.svg)](https://packagist.org/packages/duncan3dc/blade)
 
 
 Documentation
