@@ -12,10 +12,21 @@ use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\FileViewFinder;
 use Illuminate\View\Environment;
 
+/**
+ * Standalone class for generating text using blade templates.
+ */
 class Blade
 {
+    /**
+     * @var Environment $environment The internal cache of the Environment to only instantiate it once
+     */
     protected static $environment;
 
+    /**
+     * Get the laravel environment object.
+     *
+     * @return Environment
+     */
     protected static function getEnvironment()
     {
         if (static::$environment) {
@@ -76,18 +87,40 @@ class Blade
     }
 
 
+    /**
+     * Add a path to look for views in.
+     *
+     * @param string $path The path to look in
+     *
+     * @return void
+     */
     public static function addPath($path)
     {
         static::getEnvironment()->getContainer()->make("view.finder")->addLocation($path);
     }
 
 
+    /**
+     * Check if a view exists.
+     *
+     * @param string $view The name of the view to check
+     *
+     * @return boolean
+     */
     public static function exists($view)
     {
         return static::getEnvironment()->exists($view);
     }
 
 
+    /**
+     * Generate a view.
+     *
+     * @param string $view The name of the view to make
+     * @param array $params The parameters to pass to the view
+     *
+     * @return string The generated content
+     */
     public static function make($view, array $params = [])
     {
         return static::getEnvironment()->make($view, $params);
