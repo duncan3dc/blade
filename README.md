@@ -31,6 +31,7 @@ Output a basic view (from views/index.blade.php)
 echo Blade::make("index");
 ```
 
+
 Output a view from a different directory (from /var/www/views/index.blade.php)
 ```php
 use duncan3dc\Helpers\Env;
@@ -39,6 +40,7 @@ Env::usePath("/var/www/views");
 echo Blade::make("index");
 ```
 
+
 Check multiple directories for a view (from views/index.blade.php if it exists, otherwise /var/www/views/index.blade.php)
 ```php
 
@@ -46,10 +48,12 @@ Blade::addPath("/var/www/views");
 echo Blade::make("index");
 ```
 
+
 Declare a namespace for the php generated from the view
 ```php
 @namespace(duncan3dc\Webapps\Calendar)
 ```
+
 
 Import classes for use in the views
 ```php
