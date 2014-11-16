@@ -11,6 +11,7 @@ use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
+use Illuminate\View\View;
 
 /**
  * Standalone class for generating text using blade templates.
@@ -119,10 +120,24 @@ class Blade
      * @param string $view The name of the view to make
      * @param array $params The parameters to pass to the view
      *
-     * @return string The generated content
+     * @return View The generated view
      */
     public static function make($view, array $params = [])
     {
         return static::getViewFactory()->make($view, $params);
+    }
+
+
+    /**
+     * Get the content by generating a view.
+     *
+     * @param string $view The name of the view to make
+     * @param array $params The parameters to pass to the view
+     *
+     * @return string The generated content
+     */
+    public static function render($view, array $params = [])
+    {
+        return static::make($view, $params)->render();
     }
 }
