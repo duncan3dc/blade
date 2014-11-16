@@ -38,21 +38,20 @@ class Blade
             return static::$factory;
         }
 
-        $files = new Filesystem;
-
-        static::$finder = new FileViewFinder($files, [Env::path("views")]);
+        static::$finder = new FileViewFinder(new Filesystem, [Env::path("views")]);
 
         $resolver = new EngineResolver;
-        $resolver->register("blade", function() use ($files) {
+        $resolver->register("blade", function() {
             $path = Env::path("cache/views");
             if (!is_dir($path)) {
                 mkdir($path, 0777, true);
             }
-            $blade = new BladeCompiler($files, $path);
+
+            $blade = new BladeCompiler(new Filesystem, $path);
 
             static::extendBlade($blade);
 
-            return new CompilerEngine($blade, $files);
+            return new CompilerEngine($blade);
         });
 
         static::$factory = new Factory($resolver, static::$finder, new Dispatcher);
