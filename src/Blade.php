@@ -3,7 +3,6 @@
 namespace duncan3dc\Laravel;
 
 use duncan3dc\Helpers\Env;
-use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\Compilers\BladeCompiler;
@@ -24,6 +23,11 @@ class Blade
     protected static $factory;
 
     /**
+     * @var FileViewFinder $finder The internal cache of the FileViewFinder to only instantiate it once
+     */
+    protected static $finder;
+
+    /**
      * Get the laravel view factory.
      *
      * @return Factory
@@ -34,55 +38,38 @@ class Blade
             return static::$factory;
         }
 
-        $container = new Container;
+        $files = new Filesystem;
 
-        $container->bindShared("files", function() {
-            return new Filesystem;
-        });
+        static::$finder = new FileViewFinder($files, [Env::path("views")]);
 
-        $container->bindShared("events", function() {
-            return new Dispatcher;
-        });
+        $resolver = new EngineResolver;
+        $resolver->register("blade", function() use ($files) {
+            $path = Env::path("cache/views");
+            if (!is_dir($path)) {
+                mkdir($path, 0777, true);
+            }
+            $blade = new BladeCompiler($files, $path);
 
-        $container->bindShared("view.finder", function($app) {
-            return new FileViewFinder($app->make("files"), [Env::path("views")]);
-        });
-
-        $container->bindShared("view.engine.resolver", function($app) use($container) {
-            $container->bindShared("blade.compiler", function($app) {
-                $path = Env::path("cache/views");
-                if (!is_dir($path)) {
-                    mkdir($path, 0777, true);
-                }
-                $blade = new BladeCompiler($app->make("files"), $path);
-
-                # Allow namespace declarations in views
-                $blade->extend(function($view, $compiler) {
-                    $pattern = $compiler->createMatcher("namespace");
-                    return preg_replace_callback($pattern, function($matches) {
-                        return $matches[1] . "<?php namespace " . substr($matches[2], 1, -1) . " ?>";
-                    }, $view);
-                });
-
-                # Allow use imports in views
-                $blade->extend(function($view, $compiler) {
-                    $pattern = $compiler->createMatcher("use");
-                    return preg_replace_callback($pattern, function($matches) {
-                        return $matches[1] . "<?php use " . substr($matches[2], 1, -1) . " ?>";
-                    }, $view);
-                });
-
-                return $blade;
+            # Allow namespace declarations in views
+            $blade->extend(function($view, $compiler) {
+                $pattern = $compiler->createMatcher("namespace");
+                return preg_replace_callback($pattern, function($matches) {
+                    return $matches[1] . "<?php namespace " . substr($matches[2], 1, -1) . " ?>";
+                }, $view);
             });
-            $resolver = new EngineResolver;
-            $resolver->register("blade", function() use ($app) {
-                return new CompilerEngine($app->make("blade.compiler"), $app->make("files"));
+
+            # Allow use imports in views
+            $blade->extend(function($view, $compiler) {
+                $pattern = $compiler->createMatcher("use");
+                return preg_replace_callback($pattern, function($matches) {
+                    return $matches[1] . "<?php use " . substr($matches[2], 1, -1) . " ?>";
+                }, $view);
             });
-            return $resolver;
+
+            return new CompilerEngine($blade, $files);
         });
 
-        static::$factory = new Factory($container->make("view.engine.resolver"), $container->make("view.finder"), $container->make("events"));
-        static::$factory->setContainer($container);
+        static::$factory = new Factory($resolver, static::$finder, new Dispatcher);
 
         return static::$factory;
     }
@@ -97,7 +84,8 @@ class Blade
      */
     public static function addPath($path)
     {
-        static::getViewFactory()->getContainer()->make("view.finder")->addLocation($path);
+        static::getViewFactory();
+        static::$finder->addLocation($path);
     }
 
 
