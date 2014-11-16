@@ -28,7 +28,7 @@ Examples
 
 Output a basic view (from views/index.blade.php)
 ```php
-echo Blade::make("index");
+echo Blade::render("index");
 ```
 
 
@@ -37,7 +37,7 @@ Output a view from a different directory (from /var/www/views/index.blade.php)
 use duncan3dc\Helpers\Env;
 
 Env::usePath("/var/www/views");
-echo Blade::make("index");
+echo Blade::render("index");
 ```
 
 
@@ -45,7 +45,7 @@ Check multiple directories for a view (from views/index.blade.php if it exists, 
 ```php
 
 Blade::addPath("/var/www/views");
-echo Blade::make("index");
+echo Blade::render("index");
 ```
 
 
@@ -60,4 +60,10 @@ Import classes for use in the views
 @use(duncan3dc\Helpers\Html)
 
 {{{ Html::formatKey("project_title") }}}
+```
+
+
+If you need an Illuminate\View\View object there is also a make() method available
+```php
+$view = Blade::make("index");
 ```
