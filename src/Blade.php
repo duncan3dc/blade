@@ -50,21 +50,7 @@ class Blade
             }
             $blade = new BladeCompiler($files, $path);
 
-            # Allow namespace declarations in views
-            $blade->extend(function($view, $compiler) {
-                $pattern = $compiler->createMatcher("namespace");
-                return preg_replace_callback($pattern, function($matches) {
-                    return $matches[1] . "<?php namespace " . substr($matches[2], 1, -1) . " ?>";
-                }, $view);
-            });
-
-            # Allow use imports in views
-            $blade->extend(function($view, $compiler) {
-                $pattern = $compiler->createMatcher("use");
-                return preg_replace_callback($pattern, function($matches) {
-                    return $matches[1] . "<?php use " . substr($matches[2], 1, -1) . " ?>";
-                }, $view);
-            });
+            static::extendBlade($blade);
 
             return new CompilerEngine($blade, $files);
         });
@@ -72,6 +58,33 @@ class Blade
         static::$factory = new Factory($resolver, static::$finder, new Dispatcher);
 
         return static::$factory;
+    }
+
+
+    /**
+     * Add extra functionality to the blade templating compiler.
+     *
+     * @param BladeCompiler $blade The compiler to extend
+     *
+     * @return void
+     */
+    protected static function extendBlade(BladeCompiler $blade)
+    {
+        # Allow namespace declarations in views
+        $blade->extend(function($view, $compiler) {
+            $pattern = $compiler->createMatcher("namespace");
+            return preg_replace_callback($pattern, function($matches) {
+                return $matches[1] . "<?php namespace " . substr($matches[2], 1, -1) . " ?>";
+            }, $view);
+        });
+
+        # Allow use imports in views
+        $blade->extend(function($view, $compiler) {
+            $pattern = $compiler->createMatcher("use");
+            return preg_replace_callback($pattern, function($matches) {
+                return $matches[1] . "<?php use " . substr($matches[2], 1, -1) . " ?>";
+            }, $view);
+        });
     }
 
 

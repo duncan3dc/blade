@@ -67,3 +67,10 @@ If you need an Illuminate\View\View object there is also a make() method availab
 ```php
 $view = Blade::make("index");
 ```
+
+
+You can also use the extra functionality provided by this class inside the Laravel framework.  
+Just pass your Blade instance to the extendBlade() method.
+```php
+Blade::extendBlade(App::make("blade"));
+```
