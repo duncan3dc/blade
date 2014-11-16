@@ -37,25 +37,25 @@ class BladeTest extends \PHPUnit_Framework_TestCase
     public function testNamespace()
     {
         $result = Blade::make("view4")->render();
-        $this->assertSame("duncan3dc\\Laravel", $result);
+        $this->assertSame("duncan3dc\\Laravel", trim($result));
     }
 
 
     public function testUse()
     {
         $result = Blade::make("view5")->render();
-        $this->assertSame(Env::getMachineName(), $result);
+        $this->assertSame(Env::getMachineName(), trim($result));
     }
 
 
     public function testExists1()
     {
-        $this->assertSame(true, Blade::exists("view1"));
+        $this->assertTrue(Blade::exists("view1"));
     }
 
 
     public function testDoesntExist()
     {
-        $this->assertSame(false, Blade::exists("no-such-view"));
+        $this->assertFalse(Blade::exists("no-such-view"));
     }
 }
