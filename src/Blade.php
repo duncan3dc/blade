@@ -6,11 +6,11 @@ use duncan3dc\Helpers\Env;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
-use Illuminate\View\Compilers\BladeCompiler;
+use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
-use Illuminate\View\Environment;
 
 /**
  * Standalone class for generating text using blade templates.
@@ -18,19 +18,19 @@ use Illuminate\View\Environment;
 class Blade
 {
     /**
-     * @var Environment $environment The internal cache of the Environment to only instantiate it once
+     * @var Factory $factory The internal cache of the Factory to only instantiate it once
      */
-    protected static $environment;
+    protected static $factory;
 
     /**
-     * Get the laravel environment object.
+     * Get the laravel view factory.
      *
-     * @return Environment
+     * @return Factory
      */
-    protected static function getEnvironment()
+    protected static function getViewFactory()
     {
-        if (static::$environment) {
-            return static::$environment;
+        if (static::$factory) {
+            return static::$factory;
         }
 
         $container = new Container;
@@ -80,10 +80,10 @@ class Blade
             return $resolver;
         });
 
-        static::$environment = new Environment($container->make("view.engine.resolver"), $container->make("view.finder"), $container->make("events"));
-        static::$environment->setContainer($container);
+        static::$factory = new Factory($container->make("view.engine.resolver"), $container->make("view.finder"), $container->make("events"));
+        static::$factory->setContainer($container);
 
-        return static::$environment;
+        return static::$factory;
     }
 
 
@@ -96,7 +96,7 @@ class Blade
      */
     public static function addPath($path)
     {
-        static::getEnvironment()->getContainer()->make("view.finder")->addLocation($path);
+        static::getViewFactory()->getContainer()->make("view.finder")->addLocation($path);
     }
 
 
@@ -109,7 +109,7 @@ class Blade
      */
     public static function exists($view)
     {
-        return static::getEnvironment()->exists($view);
+        return static::getViewFactory()->exists($view);
     }
 
 
@@ -123,6 +123,6 @@ class Blade
      */
     public static function make($view, array $params = [])
     {
-        return static::getEnvironment()->make($view, $params);
+        return static::getViewFactory()->make($view, $params);
     }
 }
