@@ -6,8 +6,13 @@ php:
   - 5.6
   - hhvm
 
+env:
+  - COMPOSER_OPTS=""
+  - COMPOSER_OPTS="--prefer-lowest"
+
 install:
-  - composer install
+  - composer self-update
+  - composer update $COMPOSER_OPTS
 
 script:
   - phpunit tests
