@@ -62,6 +62,20 @@ class BladeTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    public function testRawOutput()
+    {
+        $result = Blade::render("view6");
+        $this->assertSame(file_get_contents(__DIR__ . "/views/view6.html"), $result);
+    }
+
+
+    public function testEscapedOutput()
+    {
+        $result = Blade::render("view7");
+        $this->assertSame(file_get_contents(__DIR__ . "/views/view7.html"), $result);
+    }
+
+
     public function testExists1()
     {
         $this->assertTrue(Blade::exists("view1"));
