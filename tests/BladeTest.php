@@ -6,11 +6,6 @@ use duncan3dc\Helpers\Env;
 
 class BladeTest extends \PHPUnit_Framework_TestCase
 {
-    public function __construct()
-    {
-        Env::usePath(__DIR__);
-    }
-
 
     public function testBasicMake()
     {
