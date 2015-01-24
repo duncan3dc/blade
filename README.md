@@ -7,6 +7,12 @@ Use Laravel Blade templates as a standalone component without the full Laravel f
 [![Latest Stable Version](https://poser.pugx.org/duncan3dc/blade/version.svg)](https://packagist.org/packages/duncan3dc/blade)
 
 
+Versions
+--------
+* For Laravel 5 style escaping `{!!` = raw, and `{{` = escaped, use version 2.* of this project.
+* For Laravel 4 style escaping `{{` = raw, and `{{{` = escaped, use version 1.* of this project.
+
+
 Documentation
 -------------
 
@@ -59,7 +65,7 @@ Import classes for use in the views
 ```php
 @use(duncan3dc\Helpers\Html)
 
-{{{ Html::formatKey("project_title") }}}
+{!! Html::formatKey("project_title") !!}
 ```
 
 
