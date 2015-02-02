@@ -18,14 +18,44 @@ use Illuminate\View\View;
 class BladeInstance
 {
     /**
-     * @var Factory $factory The internal cache of the Factory to only instantiate it once
+     * @var string $path The default path for views.
+     */
+    protected $path;
+
+    /**
+     * @var string $cache The default path for cached php.
+     */
+    protected $cache;
+
+    /**
+     * @var Factory $factory The internal cache of the Factory to only instantiate it once.
      */
     protected $factory;
 
     /**
-     * @var FileViewFinder $finder The internal cache of the FileViewFinder to only instantiate it once
+     * @var FileViewFinder $finder The internal cache of the FileViewFinder to only instantiate it once.
      */
     protected $finder;
+
+
+    /**
+     * Create a new instance of the blade view factory.
+     *
+     * @param string $path The default path for views
+     * @param string $cache The default path for cached php
+     */
+    public function __construct($path = null, $cache = null)
+    {
+        if ($path === null) {
+            $path = Env::path("views");
+        }
+        $this->path = $path;
+
+        if ($cache === null) {
+            $cache = Env::path("cache/views");
+        }
+        $this->cache = $cache;
+    }
 
     /**
      * Get the laravel view finder.
@@ -35,7 +65,7 @@ class BladeInstance
     protected function getViewFinder()
     {
         if (!$this->finder) {
-            $this->finder = new FileViewFinder(new Filesystem, [Env::path("views")]);
+            $this->finder = new FileViewFinder(new Filesystem, [$this->path]);
         }
 
         return $this->finder;
@@ -55,12 +85,11 @@ class BladeInstance
 
         $resolver = new EngineResolver;
         $resolver->register("blade", function() {
-            $path = Env::path("cache/views");
-            if (!is_dir($path)) {
-                mkdir($path, 0777, true);
+            if (!is_dir($this->cache)) {
+                mkdir($this->cache, 0777, true);
             }
 
-            $blade = new BladeCompiler(new Filesystem, $path);
+            $blade = new BladeCompiler(new Filesystem, $this->cache);
 
             Blade::extendBlade($blade);
 
