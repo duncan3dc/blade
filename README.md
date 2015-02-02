@@ -16,17 +16,24 @@ Versions
 Documentation
 -------------
 
-There is a single class available with a namespace of duncan3dc\Laravel
+There is are two classes available with a namespace of duncan3dc\Laravel. One is for regular usage (`BladeInstance`) and one for static calls (`Blade`) facade style.
 ```php
 use duncan3dc\Laravel\Blade;
+use duncan3dc\Laravel\BladeInstance;
 ```
 
-The class uses the [Env helper](https://github.com/duncan3dc/php-helpers) to resolve paths.  
+The recommended way of using this library is the `BladeInstance` class.  
+```php
+$blade = new BladeInstance;
+```
+
+The classes use the [Env helper](https://github.com/duncan3dc/php-helpers) is used to resolve paths.  
 The following paths are used:
 * views - Default directory to search for *.blade.php templates
 * cache/views - Directory to cache generated php code from the templates
 
-Some minor extensions have been made, such as supporting namespaces (see examples below)
+
+Some minor extensions to blade syntax have been made, such as supporting namespaces (see examples below)
 
 
 Examples
@@ -34,24 +41,15 @@ Examples
 
 Output a basic view (from views/index.blade.php)
 ```php
-echo Blade::render("index");
+echo $blade->render("index");
 ```
 
 
-Output a view from a different directory (from /var/www/views/index.blade.php)
+Check multiple directories for a view (from views/index.blade.php if it exists, otherwise /var/www/custom/views/index.blade.php)
 ```php
-use duncan3dc\Helpers\Env;
-
-Env::usePath("/var/www/views");
-echo Blade::render("index");
-```
-
-
-Check multiple directories for a view (from views/index.blade.php if it exists, otherwise /var/www/views/index.blade.php)
-```php
-
-Blade::addPath("/var/www/views");
-echo Blade::render("index");
+$blade = new BladeInstance;
+$blade->addPath("/var/www/custom/views");
+echo $blade->render("index");
 ```
 
 
@@ -71,12 +69,35 @@ Import classes for use in the views
 
 If you need an Illuminate\View\View object there is also a make() method available
 ```php
-$view = Blade::make("index");
+$view = $blade->make("index");
 ```
 
 
-You can also use the extra functionality provided by this class inside the Laravel framework.  
+
+Static Usage
+------------
+
+Output a basic view (from views/index.blade.php)
+```php
+echo Blade::render("index");
+```
+
+
+Output a view from a different directory (from /home/webapp/views/index.blade.php)
+```php
+use duncan3dc\Helpers\Env;
+
+Env::usePath("/home/webapp");
+echo Blade::render("index");
+```
+
+
+
+Laravel
+-------
+
+You can also use the extra functionality provided by this library inside the Laravel framework.  
 Just pass your Blade instance to the extendBlade() method.
 ```php
-Blade::extendBlade(App::make("blade"));
+\duncan3dc\Laravel\Blade::extendBlade(\App::make("blade"));
 ```
