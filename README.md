@@ -23,11 +23,12 @@ use duncan3dc\Laravel\BladeInstance;
 ```
 
 The recommended way of using this library is the `BladeInstance` class.  
+The paths used for view templates and for cached files can be set by passing them to the constructor:
 ```php
-$blade = new BladeInstance;
+$blade = new BladeInstance("/var/www/views", "/var/www/cache/views");
 ```
 
-The classes use the [Env helper](https://github.com/duncan3dc/php-helpers) is used to resolve paths.  
+If they are not passed, or the static `Blade` class is used then the [Env helper](https://github.com/duncan3dc/php-helpers) is used to resolve paths.  
 The following paths are used:
 * views - Default directory to search for *.blade.php templates
 * cache/views - Directory to cache generated php code from the templates
@@ -45,9 +46,9 @@ echo $blade->render("index");
 ```
 
 
-Check multiple directories for a view (from views/index.blade.php if it exists, otherwise /var/www/custom/views/index.blade.php)
+Check multiple directories for a view (from /var/www/views/index.blade.php if it exists, otherwise /var/www/custom/views/index.blade.php)
 ```php
-$blade = new BladeInstance;
+$blade = new BladeInstance("/var/www/views");
 $blade->addPath("/var/www/custom/views");
 echo $blade->render("index");
 ```
