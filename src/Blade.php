@@ -3,13 +3,7 @@
 namespace duncan3dc\Laravel;
 
 use duncan3dc\Helpers\Env;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\Compilers\BladeCompiler;
-use Illuminate\View\Engines\CompilerEngine;
-use Illuminate\View\Engines\EngineResolver;
-use Illuminate\View\Factory;
-use Illuminate\View\FileViewFinder;
 use Illuminate\View\View;
 
 /**
@@ -18,45 +12,22 @@ use Illuminate\View\View;
 class Blade
 {
     /**
-     * @var Factory $factory The internal cache of the Factory to only instantiate it once
+     * @var BladeInstance $instance The internal cache of the BladeInstance to only instantiate it once
      */
-    protected static $factory;
+    protected static $instance;
 
     /**
-     * @var FileViewFinder $finder The internal cache of the FileViewFinder to only instantiate it once
-     */
-    protected static $finder;
-
-    /**
-     * Get the laravel view factory.
+     * Get the BladeInstance object.
      *
-     * @return Factory
+     * @return BladeInstance
      */
-    protected static function getViewFactory()
+    protected static function getInstance()
     {
-        if (static::$factory) {
-            return static::$factory;
+        if (!static::$instance) {
+            static::$instance = new BladeInstance;
         }
 
-        static::$finder = new FileViewFinder(new Filesystem, [Env::path("views")]);
-
-        $resolver = new EngineResolver;
-        $resolver->register("blade", function() {
-            $path = Env::path("cache/views");
-            if (!is_dir($path)) {
-                mkdir($path, 0777, true);
-            }
-
-            $blade = new BladeCompiler(new Filesystem, $path);
-
-            static::extendBlade($blade);
-
-            return new CompilerEngine($blade);
-        });
-
-        static::$factory = new Factory($resolver, static::$finder, new Dispatcher);
-
-        return static::$factory;
+        return static::$instance;
     }
 
 
@@ -67,7 +38,7 @@ class Blade
      *
      * @return void
      */
-    protected static function extendBlade(BladeCompiler $blade)
+    public static function extendBlade(BladeCompiler $blade)
     {
         # Allow namespace declarations in views
         $blade->extend(function($view, $compiler) {
@@ -96,8 +67,7 @@ class Blade
      */
     public static function addPath($path)
     {
-        static::getViewFactory();
-        static::$finder->addLocation($path);
+        static::getInstance()->addPath($path);
     }
 
 
@@ -110,7 +80,7 @@ class Blade
      */
     public static function exists($view)
     {
-        return static::getViewFactory()->exists($view);
+        return static::getInstance()->exists($view);
     }
 
 
@@ -124,7 +94,7 @@ class Blade
      */
     public static function make($view, array $params = [])
     {
-        return static::getViewFactory()->make($view, $params);
+        return static::getInstance()->make($view, $params);
     }
 
 
@@ -138,6 +108,6 @@ class Blade
      */
     public static function render($view, array $params = [])
     {
-        return static::make($view, $params)->render();
+        return static::getInstance()->render($view, $params);
     }
 }
