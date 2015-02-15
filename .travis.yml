@@ -6,6 +6,8 @@ php:
   - 5.6
   - hhvm
 
+sudo: false
+
 env:
   - COMPOSER_OPTS=""
   - COMPOSER_OPTS="--prefer-lowest"
