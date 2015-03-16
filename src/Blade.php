@@ -40,21 +40,18 @@ class Blade
      */
     public static function extendBlade(BladeCompiler $blade)
     {
-        # Allow namespace declarations in views
-        $blade->extend(function($view, $compiler) {
-            $pattern = $compiler->createMatcher("namespace");
-            return preg_replace_callback($pattern, function($matches) {
-                return $matches[1] . "<?php namespace " . substr($matches[2], 1, -1) . " ?>";
-            }, $view);
-        });
-
-        # Allow use imports in views
-        $blade->extend(function($view, $compiler) {
-            $pattern = $compiler->createMatcher("use");
-            return preg_replace_callback($pattern, function($matches) {
-                return $matches[1] . "<?php use " . substr($matches[2], 1, -1) . " ?>";
-            }, $view);
-        });
+        $keywords = [
+            "namespace",
+            "use",
+        ];
+        foreach ($keywords as $keyword) {
+            $blade->extend(function($view, $compiler) use($keyword) {
+                $pattern = $compiler->createMatcher($keyword);
+                return preg_replace_callback($pattern, function($matches) use($keyword) {
+                    return $matches[1] . "<?php {$keyword} " . substr($matches[2], 1, -1) . " ?>";
+                }, $view);
+            });
+        }
     }
 
 
