@@ -41,8 +41,8 @@ class BladeInstance
     /**
      * Create a new instance of the blade view factory.
      *
-     * @param string $path The default path for views
-     * @param string $cache The default path for cached php
+     * @param string|null $path The default path for views
+     * @param string|null $cache The default path for cached php
      */
     public function __construct($path = null, $cache = null)
     {
