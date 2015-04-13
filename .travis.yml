@@ -18,7 +18,7 @@ install:
   - composer update $COMPOSER_OPTS
 
 script:
-  - phpunit tests
+  - phpunit
   - ./tests/lint.sh
 
 git:
