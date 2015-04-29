@@ -84,6 +84,26 @@ class BladeTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    public function testComposer()
+    {
+        Blade::composer("*", function($view) {
+            $view->with("items", ["One", "Two", "Three"]);
+        });
+        $result = Blade::render("view9");
+        $this->assertSame(file_get_contents(__DIR__ . "/views/view9.html"), $result);
+    }
+
+
+    public function testCreator()
+    {
+        Blade::creator("*", function($view) {
+            $view->with("items", ["One", "Two", "Three"]);
+        });
+        $result = Blade::render("view9");
+        $this->assertSame(file_get_contents(__DIR__ . "/views/view9.html"), $result);
+    }
+
+
     public function testExists1()
     {
         $this->assertTrue(Blade::exists("view1"));

@@ -145,6 +145,37 @@ class BladeInstance
 
 
     /**
+     * Register a composer.
+     *
+     * @param string $key The name of the composer to register
+     * @param mixed $value The closure or class to use
+     *
+     * @return void
+     */
+    public function composer($key, $value)
+    {
+        $this->getViewFactory()->composer($key, $value);
+        return $this;
+    }
+
+
+    /**
+     * Register a creator.
+     *
+     * @param string $key The name of the creator to register
+     * @param mixed $value The closure or class to use
+     *
+     * @return void
+     */
+    public function creator($key, $value)
+    {
+        $this->getViewFactory()->creator($key, $value);
+        return $this;
+    }
+
+
+
+    /**
      * Generate a view.
      *
      * @param string $view The name of the view to make
