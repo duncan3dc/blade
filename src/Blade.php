@@ -82,6 +82,19 @@ class Blade
 
 
     /**
+     * Share data across all views.
+     *
+     * @param string $key The name of the variable to share
+     * @param mixed $value The value to assign to the variable
+     *
+     * @return void
+     */
+    public static function share($key, $value)
+    {
+        static::getInstance()->share($key, $value);
+    }
+
+    /**
      * Generate a view.
      *
      * @param string $view The name of the view to make

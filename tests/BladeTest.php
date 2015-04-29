@@ -76,6 +76,14 @@ class BladeTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    public function testShare()
+    {
+        Blade::share("shareData", "shared");
+        $result = Blade::render("view8");
+        $this->assertSame(file_get_contents(__DIR__ . "/views/view8.html"), $result);
+    }
+
+
     public function testExists1()
     {
         $this->assertTrue(Blade::exists("view1"));

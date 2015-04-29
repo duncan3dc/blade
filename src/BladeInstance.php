@@ -130,6 +130,21 @@ class BladeInstance
 
 
     /**
+     * Share data across all views.
+     *
+     * @param string $key The name of the variable to share
+     * @param mixed $value The value to assign to the variable
+     *
+     * @return static
+     */
+    public function share($key, $value)
+    {
+        $this->getViewFactory()->share($key, $value);
+        return $this;
+    }
+
+
+    /**
      * Generate a view.
      *
      * @param string $view The name of the view to make
