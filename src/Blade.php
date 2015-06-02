@@ -16,12 +16,26 @@ class Blade
      */
     protected static $instance;
 
+
+    /**
+     * Set the BladeInstance object to use.
+     *
+     * @param BladeInstance $instance The instance to use
+     *
+     * @return void
+     */
+    public static function setInstance(BladeInstance $instance)
+    {
+        static::$instance = $instance;
+    }
+
+
     /**
      * Get the BladeInstance object.
      *
      * @return BladeInstance
      */
-    protected static function getInstance()
+    public static function getInstance()
     {
         if (!static::$instance) {
             static::$instance = new BladeInstance;
