@@ -66,6 +66,40 @@ class Blade
                 }, $view);
             });
         }
+
+        $assetify = function($file, $type) {
+            $file = trim($file, "()");
+
+            if (in_array(substr($file, 0, 1), ["'", '"'], true)) {
+                $file = trim($file, "'\"");
+            } else {
+                return "{{ {$file} }}";
+            }
+
+            if (substr($file, 0, 1) !== "/") {
+                $file = "/{$type}/{$file}";
+            }
+            if (substr($file, (strlen($type) + 1) * -1) !== ".{$type}") {
+                $file .= ".{$type}";
+            }
+            return $file;
+        };
+
+        $blade->extend(function($view, $compiler) use($assetify) {
+            $pattern = $compiler->createMatcher("css");
+            return preg_replace_callback($pattern, function($matches) use($assetify) {
+                $file = $assetify($matches[2], "css");
+                return "<link rel='stylesheet' type='text/css' href='{$file}'>";
+            }, $view);
+        });
+
+        $blade->extend(function($view, $compiler) use($assetify) {
+            $pattern = $compiler->createMatcher("js");
+            return preg_replace_callback($pattern, function($matches) use($assetify) {
+                $file = $assetify($matches[2], "js");
+                return "<script type='text/javascript' src='{$file}'></script>";
+            }, $view);
+        });
     }
 
 
