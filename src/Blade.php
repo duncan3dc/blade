@@ -59,11 +59,9 @@ class Blade
             "use",
         ];
         foreach ($keywords as $keyword) {
-            $blade->extend(function($view, $compiler) use($keyword) {
-                $pattern = $compiler->createMatcher($keyword);
-                return preg_replace_callback($pattern, function($matches) use($keyword) {
-                    return $matches[1] . "<?php {$keyword} " . substr($matches[2], 1, -1) . " ?>";
-                }, $view);
+            $blade->directive($keyword, function($parameter) use($keyword) {
+                $parameter = trim($parameter, "()");
+                return "<?php {$keyword} {$parameter} ?>";
             });
         }
 
@@ -85,20 +83,14 @@ class Blade
             return $file;
         };
 
-        $blade->extend(function($view, $compiler) use($assetify) {
-            $pattern = $compiler->createMatcher("css");
-            return preg_replace_callback($pattern, function($matches) use($assetify) {
-                $file = $assetify($matches[2], "css");
-                return "<link rel='stylesheet' type='text/css' href='{$file}'>";
-            }, $view);
+        $blade->directive("css", function($parameter) use($assetify) {
+            $file = $assetify($parameter, "css");
+            return "<link rel='stylesheet' type='text/css' href='{$file}'>";
         });
 
-        $blade->extend(function($view, $compiler) use($assetify) {
-            $pattern = $compiler->createMatcher("js");
-            return preg_replace_callback($pattern, function($matches) use($assetify) {
-                $file = $assetify($matches[2], "js");
-                return "<script type='text/javascript' src='{$file}'></script>";
-            }, $view);
+        $blade->directive("js", function($parameter) use($assetify) {
+            $file = $assetify($parameter, "js");
+            return "<script type='text/javascript' src='{$file}'></script>";
         });
     }
 

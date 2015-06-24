@@ -13,9 +13,9 @@
     }],
     "require": {
         "duncan3dc/helpers": "~1.4",
-        "illuminate/view": "~5.0.0",
-        "illuminate/events": "~5.0.0",
-        "php": ">=5.4.0"
+        "illuminate/view": "~5.1.0",
+        "illuminate/events": "~5.1.0",
+        "php": ">=5.5.0"
     },
     "autoload": {
         "psr-4": {"duncan3dc\\Laravel\\": "src/"}
