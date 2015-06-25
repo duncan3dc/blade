@@ -98,7 +98,7 @@ Laravel
 -------
 
 You can also use the extra functionality provided by this library inside the Laravel framework.  
-Just pass your Blade instance to the extendBlade() method.
+Just pass your Blade instance to the registerDirectives() method.
 ```php
-\duncan3dc\Laravel\Blade::extendBlade(\App::make("blade"));
+\duncan3dc\Laravel\Blade::registerDirectives(\App::make("blade"));
 ```

@@ -91,7 +91,7 @@ class BladeInstance
 
             $blade = new BladeCompiler(new Filesystem, $this->cache);
 
-            Blade::extendBlade($blade);
+            Blade::registerDirectives($blade);
 
             return new CompilerEngine($blade);
         });

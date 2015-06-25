@@ -46,13 +46,26 @@ class Blade
 
 
     /**
-     * Add extra functionality to the blade templating compiler.
+     * Maintain compatibility for the duration of the 2.* release.
      *
      * @param BladeCompiler $blade The compiler to extend
      *
      * @return void
      */
     public static function extendBlade(BladeCompiler $blade)
+    {
+        static::registerDirectives($blade);
+    }
+
+
+    /**
+     * Add extra directives to the blade templating compiler.
+     *
+     * @param BladeCompiler $blade The compiler to extend
+     *
+     * @return void
+     */
+    public static function registerDirectives(BladeCompiler $blade)
     {
         $keywords = [
             "namespace",
