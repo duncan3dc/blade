@@ -17,6 +17,9 @@
         "illuminate/events": "~5.1.0",
         "php": ">=5.5.0"
     },
+    "require-dev": {
+        "mockery/mockery": "^0.9.4"
+    },
     "autoload": {
         "psr-4": {
             "duncan3dc\\Laravel\\": "src/",

@@ -4,6 +4,8 @@ namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Helpers\Env;
 use duncan3dc\Laravel\Blade;
+use duncan3dc\Laravel\BladeInstance;
+use Mockery;
 
 class BladeTest extends \PHPUnit_Framework_TestCase
 {
@@ -114,5 +116,14 @@ class BladeTest extends \PHPUnit_Framework_TestCase
     public function testDoesntExist()
     {
         $this->assertFalse(Blade::exists("no-such-view"));
+    }
+
+
+    public function testOverrideInstance()
+    {
+        $this->assertInstanceOf(BladeInstance::class, Blade::getInstance());
+        $blade = Mockery::mock(BladeInstance::class);
+        Blade::setInstance($blade);
+        $this->assertSame($blade, Blade::getInstance());
     }
 }
