@@ -1,8 +1,9 @@
 <?php
 
-namespace duncan3dc\Laravel;
+namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Helpers\Env;
+use duncan3dc\Laravel\BladeInstance;
 
 class BladeInstanceTest extends \PHPUnit_Framework_TestCase
 {

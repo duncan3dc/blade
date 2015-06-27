@@ -18,6 +18,9 @@
         "php": ">=5.5.0"
     },
     "autoload": {
-        "psr-4": {"duncan3dc\\Laravel\\": "src/"}
+        "psr-4": {
+            "duncan3dc\\Laravel\\": "src/",
+            "duncan3dc\\LaravelTests\\": "tests/"
+        }
     }
 }
