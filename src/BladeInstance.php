@@ -112,6 +112,7 @@ class BladeInstance
     public function addPath($path)
     {
         $this->getViewFinder()->addLocation($path);
+
         return $this;
     }
 
@@ -140,6 +141,7 @@ class BladeInstance
     public function share($key, $value)
     {
         $this->getViewFactory()->share($key, $value);
+
         return $this;
     }
 
@@ -150,11 +152,12 @@ class BladeInstance
      * @param string $key The name of the composer to register
      * @param mixed $value The closure or class to use
      *
-     * @return void
+     * @return static
      */
     public function composer($key, $value)
     {
         $this->getViewFactory()->composer($key, $value);
+
         return $this;
     }
 
@@ -165,11 +168,12 @@ class BladeInstance
      * @param string $key The name of the creator to register
      * @param mixed $value The closure or class to use
      *
-     * @return void
+     * @return static
      */
     public function creator($key, $value)
     {
         $this->getViewFactory()->creator($key, $value);
+
         return $this;
     }
 

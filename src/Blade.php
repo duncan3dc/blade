@@ -2,7 +2,6 @@
 
 namespace duncan3dc\Laravel;
 
-use duncan3dc\Helpers\Env;
 use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\View;
 
