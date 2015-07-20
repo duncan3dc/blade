@@ -2,7 +2,7 @@
     "name": "duncan3dc/blade",
     "type": "library",
     "description": "Use Laravel Blade templates without the full Laravel framework",
-    "keywords": ["laravel", "templating", "views"],
+    "keywords": ["laravel", "templating", "template", "views"],
     "homepage": "https://github.com/duncan3dc/blade",
     "license": "Apache-2.0",
     "authors": [{
@@ -12,13 +12,14 @@
         "role": "Developer"
     }],
     "require": {
-        "duncan3dc/helpers": "~1.4",
+        "duncan3dc/helpers": "^1.6",
         "illuminate/view": "~5.1.0",
         "illuminate/events": "~5.1.0",
         "php": ">=5.5.0"
     },
     "require-dev": {
-        "mockery/mockery": "^0.9.4"
+        "mockery/mockery": "^0.9.4",
+        "phpunit/phpunit": "^4.7"
     },
     "autoload": {
         "psr-4": {
