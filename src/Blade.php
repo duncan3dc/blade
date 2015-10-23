@@ -45,6 +45,20 @@ class Blade
 
 
     /**
+     * Allow all the methods of BladeInstance to be called.
+     *
+     * @param string $name The name of the method to run
+     * @param array $arguments The parameters to pass to the method
+     *
+     * @return mixed
+     */
+    public static function __callStatic($name, array $arguments)
+    {
+        return static::getInstance()->$name(...$arguments);
+    }
+
+
+    /**
      * Maintain compatibility for the duration of the 2.* release.
      *
      * @param BladeCompiler $blade The compiler to extend
@@ -104,101 +118,5 @@ class Blade
             $file = $assetify($parameter, "js");
             return "<script type='text/javascript' src='{$file}'></script>";
         });
-    }
-
-
-    /**
-     * Add a path to look for views in.
-     *
-     * @param string $path The path to look in
-     *
-     * @return void
-     */
-    public static function addPath($path)
-    {
-        static::getInstance()->addPath($path);
-    }
-
-
-    /**
-     * Check if a view exists.
-     *
-     * @param string $view The name of the view to check
-     *
-     * @return boolean
-     */
-    public static function exists($view)
-    {
-        return static::getInstance()->exists($view);
-    }
-
-
-    /**
-     * Share data across all views.
-     *
-     * @param string $key The name of the variable to share
-     * @param mixed $value The value to assign to the variable
-     *
-     * @return void
-     */
-    public static function share($key, $value)
-    {
-        static::getInstance()->share($key, $value);
-    }
-
-
-    /**
-     * Register a composer.
-     *
-     * @param string $key The name of the composer to register
-     * @param mixed $value The closure or class to use
-     *
-     * @return void
-     */
-    public static function composer($key, $value)
-    {
-        static::getInstance()->composer($key, $value);
-    }
-
-
-    /**
-     * Register a creator.
-     *
-     * @param string $key The name of the creator to register
-     * @param mixed $value The closure or class to use
-     *
-     * @return void
-     */
-    public static function creator($key, $value)
-    {
-        static::getInstance()->creator($key, $value);
-    }
-
-
-    /**
-     * Generate a view.
-     *
-     * @param string $view The name of the view to make
-     * @param array $params The parameters to pass to the view
-     *
-     * @return View The generated view
-     */
-    public static function make($view, array $params = [])
-    {
-        return static::getInstance()->make($view, $params);
-    }
-
-
-    /**
-     * Get the content by generating a view.
-     *
-     * @param string $view The name of the view to make
-     * @param array $params The parameters to pass to the view
-     *
-     * @return string The generated content
-     */
-    public static function render($view, array $params = [])
-    {
-        return static::getInstance()->render($view, $params);
     }
 }
