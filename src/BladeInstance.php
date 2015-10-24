@@ -2,7 +2,6 @@
 
 namespace duncan3dc\Laravel;
 
-use duncan3dc\Helpers\Env;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\Compilers\BladeCompiler;
@@ -41,19 +40,12 @@ class BladeInstance
     /**
      * Create a new instance of the blade view factory.
      *
-     * @param string|null $path The default path for views
-     * @param string|null $cache The default path for cached php
+     * @param string $path The default path for views
+     * @param string $cache The default path for cached php
      */
-    public function __construct($path = null, $cache = null)
+    public function __construct($path, $cache)
     {
-        if ($path === null) {
-            $path = Env::path("views");
-        }
         $this->path = $path;
-
-        if ($cache === null) {
-            $cache = Env::path("cache/views");
-        }
         $this->cache = $cache;
     }
 

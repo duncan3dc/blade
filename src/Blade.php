@@ -37,7 +37,13 @@ class Blade
     public static function getInstance()
     {
         if (!static::$instance) {
-            static::$instance = new BladeInstance;
+            # Calculate the parent of the vendor directory
+            $path = realpath(__DIR__ . "/../../../..");
+            if (!is_dir($path)) {
+                throw new \RuntimeException("Unable to locate the root directory: {$path}");
+            }
+
+            static::$instance = new BladeInstance("{$path}/views", "{$path}/cache/views");
         }
 
         return static::$instance;
