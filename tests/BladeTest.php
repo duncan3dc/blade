@@ -2,7 +2,6 @@
 
 namespace duncan3dc\LaravelTests;
 
-use duncan3dc\Helpers\Env;
 use duncan3dc\Laravel\Blade;
 use duncan3dc\Laravel\BladeInstance;
 use Mockery;
@@ -12,7 +11,7 @@ class BladeTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $blade = new BladeInstance(__DIR__ . "/views", "/tmp/cache/views");
+        $blade = new BladeInstance(__DIR__ . "/views", CACHE_PATH);
         Blade::setInstance($blade);
     }
 
@@ -62,7 +61,7 @@ class BladeTest extends \PHPUnit_Framework_TestCase
     public function testUse()
     {
         $result = Blade::render("view5");
-        $this->assertSame(Env::getMachineName(), trim($result));
+        $this->assertSame("stuff", trim($result));
     }
 
 

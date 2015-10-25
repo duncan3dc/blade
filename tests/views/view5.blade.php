@@ -1,3 +1,3 @@
-@use(duncan3dc\Helpers\Env)
+@use(duncan3dc\LaravelTests\Helper)
 
-{{ Env::getMachineName() }}
+{{ Helper::getStuff() }}

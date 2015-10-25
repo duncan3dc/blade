@@ -1,12 +1,10 @@
 <?php
 
-use duncan3dc\Helpers\Env;
+namespace duncan3dc\LaravelTests;
 
 require __DIR__ . "/../vendor/autoload.php";
 
-Env::usePath(__DIR__);
+const CACHE_PATH = "/tmp/cache/views";
 
-$files = glob(Env::path("cache/views/*"));
-foreach ($files as $filename) {
-    unlink($filename);
-}
+$files = glob(CACHE_PATH . "/*");
+array_map("unlink", $files);

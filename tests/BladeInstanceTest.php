@@ -2,7 +2,6 @@
 
 namespace duncan3dc\LaravelTests;
 
-use duncan3dc\Helpers\Env;
 use duncan3dc\Laravel\BladeInstance;
 
 class BladeInstanceTest extends \PHPUnit_Framework_TestCase
@@ -11,7 +10,7 @@ class BladeInstanceTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->blade = new BladeInstance(__DIR__ . "/views", "/tmp/cache/views");
+        $this->blade = new BladeInstance(__DIR__ . "/views", CACHE_PATH);
     }
 
     public function testBasicMake()
@@ -60,7 +59,7 @@ class BladeInstanceTest extends \PHPUnit_Framework_TestCase
     public function testUse()
     {
         $result = $this->blade->render("view5");
-        $this->assertSame(Env::getMachineName(), trim($result));
+        $this->assertSame("stuff", trim($result));
     }
 
 
