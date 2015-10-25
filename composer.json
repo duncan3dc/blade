@@ -12,13 +12,13 @@
         "role": "Developer"
     }],
     "require": {
-        "illuminate/view": "~5.1.0",
-        "illuminate/events": "~5.1.0",
+        "illuminate/view": ">=5.1,<5.3",
+        "illuminate/events": ">=5.1,<5.3",
         "php": ">=5.5.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
-        "phpunit/phpunit": "^4.7"
+        "phpunit/phpunit": "^5.1"
     },
     "autoload": {
         "psr-4": {
