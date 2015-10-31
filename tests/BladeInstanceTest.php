@@ -87,7 +87,7 @@ class BladeInstanceTest extends \PHPUnit_Framework_TestCase
 
     public function testComposer()
     {
-        $this->blade->composer("*", function($view) {
+        $this->blade->composer("*", function ($view) {
             $view->with("items", ["One", "Two", "Three"]);
         });
         $result = $this->blade->render("view9");
@@ -97,7 +97,7 @@ class BladeInstanceTest extends \PHPUnit_Framework_TestCase
 
     public function testCreator()
     {
-        $this->blade->creator("*", function($view) {
+        $this->blade->creator("*", function ($view) {
             $view->with("items", ["One", "Two", "Three"]);
         });
         $result = $this->blade->render("view9");

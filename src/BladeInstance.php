@@ -76,7 +76,7 @@ class BladeInstance
         }
 
         $resolver = new EngineResolver;
-        $resolver->register("blade", function() {
+        $resolver->register("blade", function () {
             if (!is_dir($this->cache)) {
                 mkdir($this->cache, 0777, true);
             }

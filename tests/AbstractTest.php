@@ -19,9 +19,6 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function assertTemplateString($expected, $template)
     {
-#        $class = new \ReflectionClass($this->blade);
-#        $method = $class->getMethod("")
-
         $result = $this->blade->compileString($template);
 
         $this->assertSame($expected, $result);

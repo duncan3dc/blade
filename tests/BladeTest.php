@@ -89,7 +89,7 @@ class BladeTest extends \PHPUnit_Framework_TestCase
 
     public function testComposer()
     {
-        Blade::composer("*", function($view) {
+        Blade::composer("*", function ($view) {
             $view->with("items", ["One", "Two", "Three"]);
         });
         $result = Blade::render("view9");
@@ -99,7 +99,7 @@ class BladeTest extends \PHPUnit_Framework_TestCase
 
     public function testCreator()
     {
-        Blade::creator("*", function($view) {
+        Blade::creator("*", function ($view) {
             $view->with("items", ["One", "Two", "Three"]);
         });
         $result = Blade::render("view9");

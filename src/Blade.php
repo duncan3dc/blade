@@ -65,19 +65,6 @@ class Blade
 
 
     /**
-     * Maintain compatibility for the duration of the 2.* release.
-     *
-     * @param BladeCompiler $blade The compiler to extend
-     *
-     * @return void
-     */
-    public static function extendBlade(BladeCompiler $blade)
-    {
-        static::registerDirectives($blade);
-    }
-
-
-    /**
      * Add extra directives to the blade templating compiler.
      *
      * @param BladeCompiler $blade The compiler to extend
@@ -91,13 +78,13 @@ class Blade
             "use",
         ];
         foreach ($keywords as $keyword) {
-            $blade->directive($keyword, function($parameter) use($keyword) {
+            $blade->directive($keyword, function ($parameter) use ($keyword) {
                 $parameter = trim($parameter, "()");
                 return "<?php {$keyword} {$parameter} ?>";
             });
         }
 
-        $assetify = function($file, $type) {
+        $assetify = function ($file, $type) {
             $file = trim($file, "()");
 
             if (in_array(substr($file, 0, 1), ["'", '"'], true)) {
@@ -115,12 +102,12 @@ class Blade
             return $file;
         };
 
-        $blade->directive("css", function($parameter) use($assetify) {
+        $blade->directive("css", function ($parameter) use ($assetify) {
             $file = $assetify($parameter, "css");
             return "<link rel='stylesheet' type='text/css' href='{$file}'>";
         });
 
-        $blade->directive("js", function($parameter) use($assetify) {
+        $blade->directive("js", function ($parameter) use ($assetify) {
             $file = $assetify($parameter, "js");
             return "<script type='text/javascript' src='{$file}'></script>";
         });
