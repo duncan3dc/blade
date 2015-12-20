@@ -2,6 +2,7 @@
 
 namespace duncan3dc\Laravel;
 
+use Illuminate\Contracts\View\Factory as FactoryContract;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\Compilers\BladeCompiler;
@@ -14,7 +15,7 @@ use Illuminate\View\View;
 /**
  * Standalone class for generating text using blade templates.
  */
-class BladeInstance
+class BladeInstance implements FactoryContract
 {
     /**
      * @var string $path The default path for views.
@@ -130,7 +131,7 @@ class BladeInstance
      *
      * @return static
      */
-    public function share($key, $value)
+    public function share($key, $value = null)
     {
         $this->getViewFactory()->share($key, $value);
 
@@ -146,9 +147,9 @@ class BladeInstance
      *
      * @return static
      */
-    public function composer($key, $value)
+    public function composer($key, $value, $priority = null)
     {
-        $this->getViewFactory()->composer($key, $value);
+        $this->getViewFactory()->composer($key, $value, $priority);
 
         return $this;
     }
@@ -172,6 +173,37 @@ class BladeInstance
 
 
     /**
+     * Add a new namespace to the loader.
+     *
+     * @param string $namespace The namespace to use
+     * @param array|string $hints The hints to apply
+     *
+     * @return static
+     */
+    public function addNamespace($namespace, $hints)
+    {
+        $this->getViewFactory()->addNamespace($namespace, $hints);
+
+        return $this;
+    }
+
+
+    /**
+     * Get the evaluated view contents for the given path.
+     *
+     * @param string $path The path of the file to use
+     * @param array $data The parameters to pass to the view
+     * @param array $mergeData The extra data to merge
+     *
+     * @return View The generated view
+     */
+    public function file($path, $data = [], $mergeData = [])
+    {
+        return $this->getViewFactory()->file($path, $data, $mergeData);
+    }
+
+
+    /**
      * Generate a view.
      *
      * @param string $view The name of the view to make
@@ -179,9 +211,9 @@ class BladeInstance
      *
      * @return View The generated view
      */
-    public function make($view, array $params = [])
+    public function make($view, $params = [], $mergeData = [])
     {
-        return $this->getViewFactory()->make($view, $params);
+        return $this->getViewFactory()->make($view, $params, $mergeData);
     }
 
 
