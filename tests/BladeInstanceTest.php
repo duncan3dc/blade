@@ -115,4 +115,19 @@ class BladeInstanceTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->blade->exists("no-such-view"));
     }
+
+
+    public function testInheritance()
+    {
+        $result = $this->blade->render("view10");
+        $this->assertSame(file_get_contents(__DIR__ . "/views/view10.html"), $result);
+    }
+
+
+    public function testInheritanceAltPath()
+    {
+        $this->blade->addPath(__DIR__ . "/views/alt");
+        $result = $this->blade->render("view11");
+        $this->assertSame(file_get_contents(__DIR__ . "/views/view11.html"), $result);
+    }
 }
