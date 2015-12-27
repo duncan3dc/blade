@@ -7,12 +7,6 @@ Use Laravel Blade templates as a standalone component without the full Laravel f
 [![Latest Stable Version](https://poser.pugx.org/duncan3dc/blade/version.svg)](https://packagist.org/packages/duncan3dc/blade)
 
 
-Versions
---------
-* For Laravel 5 style escaping `{!!` = raw, and `{{` = escaped, use version 2.* of this project.
-* For Laravel 4 style escaping `{{` = raw, and `{{{` = escaped, use version 1.* of this project.
-
-
 Documentation
 -------------
 
@@ -23,16 +17,10 @@ use duncan3dc\Laravel\BladeInstance;
 ```
 
 The recommended way of using this library is the `BladeInstance` class.  
-The paths used for view templates and for cached files can be set by passing them to the constructor:
+The paths used for view templates and for cached files are set by passing them to the constructor:
 ```php
 $blade = new BladeInstance("/var/www/views", "/var/www/cache/views");
 ```
-
-If they are not passed, or the static `Blade` class is used then the [Env helper](https://github.com/duncan3dc/php-helpers) is used to resolve paths.  
-The following paths are used:
-* views - Default directory to search for *.blade.php templates
-* cache/views - Directory to cache generated php code from the templates
-
 
 Some minor extensions to blade syntax have been made, such as supporting namespaces (see examples below)
 
@@ -77,6 +65,16 @@ $view = $blade->make("index");
 
 Static Usage
 ------------
+
+When using the static `Blade` class, the paths are guessed by assuming this library has been installed in the default composer `vendor` directory.  
+/var/www
++-- composer.json
++-- vendor
++-- views
++-- cache
+|   +-- views
+
+
 
 Output a basic view (from views/index.blade.php)
 ```php
