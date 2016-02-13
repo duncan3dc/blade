@@ -67,13 +67,10 @@ Static Usage
 ------------
 
 When using the static `Blade` class, the paths are guessed by assuming this library has been installed in the default composer `vendor` directory.  
-/var/www
-+-- composer.json
-+-- vendor
-+-- views
-+-- cache
-|   +-- views
-
+* composer.json
+* vendor
+* __views__ _[The directory to look for *.blade.php templates]_
+* __cache/views__ _[The directory to cache compiled php in]_
 
 
 Output a basic view (from views/index.blade.php)
