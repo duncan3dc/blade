@@ -1,0 +1,32 @@
+.message-info,
+.message-warning,
+.message-api {
+    box-sizing: border-box;
+    margin: 1em 0;
+    padding: 10px 10px 10px 15px;
+}
+
+.message-info {
+    $color: #3498db;
+    color: darken($color, 20%);
+    background: lighten($color, 35%);
+    border-left: solid 4px $color;
+}
+
+.message-warning {
+    $color: #e74c3c;
+    color: darken($color, 20%);
+    background: lighten($color, 35%);
+    border-left: solid 4px $color;
+}
+
+.message-api {
+    $color: #f1c40f;
+    color: darken($color, 20%);
+    background: lighten($color, 35%);
+    border-left: solid 4px $color;
+
+    padding: 4px 0px 4px 15px;
+    position: relative;
+    top: -20px;
+}

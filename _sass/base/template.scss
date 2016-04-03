@@ -1,0 +1,410 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #95ab63;
+
+    @media screen and (max-width: 549px) {
+        overflow-x: hidden;
+    }
+}
+
+body {
+    @media screen and (max-width: 549px) {
+        overflow-x: hidden;
+    }
+}
+
+header {
+    position: relative;
+
+    .name {
+        -webkit-font-smoothing: antialiased;
+        text-decoration: none;
+        font-family: "Museo 100";
+        color: #10222b;
+        font-size: 44px;
+        line-height: 90%;
+    }
+
+    .tagline {
+        font-family: "Museo Sans 500";
+        color: #10222b;
+        font-size: 12px;
+        line-height: 100%;
+        text-transform: uppercase;
+    }
+
+    @media screen and (max-width: 549px) {
+        padding: 85px 10px 25px 10px;
+        text-align: center;
+        font-size: 0;
+        line-height: 0;
+
+        .name {
+            display: block;
+            margin: 0 0 10px 0;
+        }
+
+        .tagline {
+            display: block;
+        }
+    }
+
+    @media screen and (min-width: 550px) {
+        max-width: 1000px;
+        padding: 20px 250px 10px 30px;
+        font-size: 0;
+        line-height: 0;
+
+        .name {
+            margin: 0 7px 0 0;
+        }
+
+        .tagline {
+            display: inline-block;
+            margin: 7px 0;
+        }
+    }
+
+    @media screen and (min-width: 850px) {
+        padding-left: 45px;
+    }
+}
+
+#menu
+{
+    display: none;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+
+    @media screen and (max-width: 549px) {
+        display: block;
+
+        &:checked {
+            ~ label[for="menu"] {
+                .closed {
+                    display: none;
+                }
+                .open {
+                    display: block;
+                }
+            }
+            ~ main {
+                right: 0;
+            }
+        }
+    }
+}
+
+label[for="menu"]
+{
+    display: none;
+    padding: 15px;
+    font-family: "Museo Sans 500";
+    color: darken(#eff0f1, 65%);
+    font-size: 18px;
+    line-height: 100%;
+    text-transform: uppercase;
+    text-align: center;
+    background: darken(#eff0f1, 20%);
+    cursor: pointer;
+
+    &:hover {
+        background: darken(#eff0f1, 25%);
+    }
+
+    .closed {
+        display: block;
+    }
+
+    .open {
+        display: none;
+    }
+
+    @media screen and (max-width: 549px) {
+        display: block;
+    }
+}
+
+main
+{
+    overflow: hidden;
+    position: relative;
+    background: #fffad5;
+    transition-duration: .2s;
+    transition-property: right;
+
+    @media screen and (max-width: 549px) {
+        width: 200%;
+        right: 100%;
+        background-size: 50% 1px;
+        background-repeat: repeat-y;
+        background-color: linear-gradient(#bdd684 100%, #bdd684 100%);
+    }
+
+    @media screen and (min-width: 550px) and (max-width: 849px) {
+        background-size: 200px 1px;
+        background-repeat: repeat-y;
+        background-image: linear-gradient(#bdd684 100%, #bdd684 100%);
+    }
+
+    @media screen and (min-width: 850px) {
+        background-size: 250px 1px;
+        background-repeat: repeat-y;
+        background-image: linear-gradient(#bdd684 100%, #bdd684 100%);
+    }
+
+    menu {
+        margin: 0;
+        padding: 0;
+
+        h2 {
+            font-family: "Museo 300";
+            color: #10222b;
+            line-height: 100%;
+            font-weight: normal;
+            text-transform: uppercase;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                a {
+                    padding: 8px 3px 6px 0;
+                    display: block;
+                    font-family: "Museo 300";
+                    color: #105b6c;
+                    line-height: 100%;
+                    font-weight: normal;
+                    text-decoration: none;
+                    transition-duration: .2s;
+                    transition-property: all;
+
+                    &:hover {
+                        color: lighten(#105b6c, 15%);
+                        padding: 8px 0 6px 3px;
+                    }
+                }
+
+                &.selected {
+                    background: #95ab63;
+                }
+            }
+        }
+
+        @media screen and (max-width: 549px) {
+            float: left;
+            width: 50%;
+            padding: 10px 0;
+
+            h2 {
+                margin: 35px 15px 5px 15px;
+                font-size: 12px;
+                text-align: center;
+            }
+
+            ul {
+                li {
+                    padding: 0 15px;
+
+                    a {
+                        font-size: 17px;
+                        text-align: center;
+
+                        &:hover {
+                            padding: 8px 3px 6px 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        @media screen and (min-width: 550px) and (max-width: 849px) {
+            float: left;
+            width: 200px;
+            padding: 10px 0 30px 0;
+
+            h2 {
+                margin: 35px 20px 5px 30px;
+                font-size: 12px;
+            }
+
+            ul {
+                li {
+                    padding: 0 20px 0 30px;
+
+                    a {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+
+        @media screen and (min-width: 850px) {
+            float: left;
+            width: 250px;
+            padding: 15px 0 50px 0;
+
+            h2 {
+                margin: 35px 25px 5px 45px;
+                font-size: 13px;
+            }
+
+            ul {
+                li {
+                    padding: 0 25px 0 45px;
+
+                    a {
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+    }
+
+    article {
+        overflow: hidden;
+
+        font-family: "Museo 300";
+        color: #2b3d50;
+        line-height: 160%;
+        font-weight: normal;
+
+        h1 {
+            -webkit-font-smoothing: antialiased;
+            font-family: "Museo 100";
+            color: #105b6c;
+            line-height: 100%;
+            font-weight: normal;
+        }
+
+        h2 {
+            -webkit-font-smoothing: antialiased;
+            font-family: "Museo 300";
+            color: #105b6c;
+            line-height: 100%;
+            font-weight: normal;
+        }
+
+        p {
+            margin: 15px 0;
+        }
+
+        a {
+            color: #6abcdd;
+            text-decoration: underline;
+
+            &:hover {
+                color: darken(#6abcdd, 20%);
+            }
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        p > code,
+        li > code {
+            display: inline-block;
+            padding: 3px 5px;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 17px;
+            line-height: 100%;
+            border-radius: 2px;
+            background: #f5f6f7;
+            border: solid #dcdddd 1px;
+        }
+
+        @media screen and (max-width: 549px) {
+            float: left;
+            width: 50%;
+
+            margin: 0 0 30px 0;
+            padding: 0 15px;
+
+            h1 {
+                margin: 30px 0 25px 0;
+                font-size: 40px;
+            }
+
+            h2 {
+                margin: 30px 0 10px 0;
+                font-size: 22px;
+            }
+        }
+
+        @media screen and (min-width: 550px) and (max-width: 849px) {
+            margin: 0 0 30px 0;
+            padding: 0 30px;
+
+            h1 {
+                margin: 30px 0 25px 0;
+                font-size: 50px;
+            }
+
+            h2 {
+                margin: 40px 0 10px 0;
+                font-size: 22px;
+            }
+        }
+
+        @media screen and (min-width: 850px) {
+            margin: 0 0 50px 0;
+            padding: 0 50px;
+            max-width: 950px;
+
+            font-size: 18px;
+
+            h1 {
+                margin: 50px 0 30px 0;
+                font-size: 70px;
+            }
+
+            h2 {
+                margin: 50px 0 15px 0;
+                font-size: 30px;
+            }
+        }
+    }
+}
+
+footer
+{
+    font-family: "Museo Sans 500";
+    color: #10222b;
+    font-size: 12px;
+    line-height: 175%;
+
+    span {
+        display: inline-block;
+        margin: 0 5px 0 0;
+
+        a {
+            color: #105b6c;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    @media screen and (max-width: 549px) {
+        padding: 25px 15px;
+        text-align: center;
+    }
+
+    @media screen and (min-width: 550px) and (max-width: 849px) {
+        padding: 25px 0 25px 30px;
+    }
+
+    @media screen and (min-width: 850px) {
+        padding: 25px 0 25px 45px;
+    }
+}

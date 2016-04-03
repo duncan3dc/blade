@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if page.url == '/' %}
+        <title>{{ site.data.project.title }} - {{ site.data.project.description }}</title>
+    {% else %}
+        <title>{{ page.title }} - {{ site.data.project.title }}</title>
+    {% endif %}
+    <meta name="description" content="{{ site.data.project.description }}">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/all.css">
+    <link rel="icon" type="image/x-icon" href="//assets-cdn.github.com/favicon.ico">
+</head>
+<body>
+
+<header>
+    <a class="name" href="{{ site.baseurl }}/">{{ site.data.project.title }}</a>
+    <span class="tagline">{{ site.data.project.description }}</span>
+</header>
+
+<input type="checkbox" id="menu">
+<label for="menu" onclick>
+    <div class="closed">&#9776; Menu</div>
+    <div class="open">&#9776; Hide Menu</div>
+</label>
+
+<main>
+    <menu>
+        {% for section in site.data.menu %}
+            <h2>{{ section[0] }}</h2>
+            <ul>
+                {% for link in section[1] %}
+                    <li {% if page.url == link[1] %}class="selected"{% endif %}>
+                        <a href="{{ site.baseurl }}{{ link[1] }}">{{ link[0] }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </menu>
+    <article>
+        {% if page.page-title %}
+            <h1>{{ page.page-title }}</h1>
+        {% else %}
+            <h1>{{ page.title }}</h1>
+        {% endif %}
+
+        {% if page.api %}
+            <p class="message-api">View the <a href='{{ site.baseurl }}/api/classes/duncan3dc.Laravel.{{ page.api }}.html'>API Documentation</a> for this class</p>
+        {% endif %}
+
+        {{ content }}
+    </article>
+</main>
+
+<footer>
+    <span>
+        Site design by <a href="http://reinink.ca">Jonathan Reinink</a>
+    </span>
+</footer>
+
+</body>
+</html>
