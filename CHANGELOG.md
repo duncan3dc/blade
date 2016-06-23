@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 3.1.0 - 2016-06-23
+
+### Added
+
+* [BladeInstance] Added an extend() method to register custom compilers.
+
+--------
+
 ## 3.0.0 - 2015-12-27
 
 ### Added

@@ -126,4 +126,14 @@ class BladeTest extends \PHPUnit_Framework_TestCase
         Blade::setInstance($blade);
         $this->assertSame($blade, Blade::getInstance());
     }
+
+
+    public function testCustomCompiler()
+    {
+        Blade::extend(function ($value) {
+            return str_replace("Original", "New", $value);
+        });
+        $result = Blade::render("view12");
+        $this->assertSame(file_get_contents(__DIR__ . "/views/view12.html"), $result);
+    }
 }
