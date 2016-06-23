@@ -36,6 +36,11 @@ class BladeInstance implements FactoryContract
      * @var FileViewFinder $finder The internal cache of the FileViewFinder to only instantiate it once.
      */
     protected $finder;
+    
+    /**
+     * @var $extensions array of extensions
+     */
+    protected $extensions = [];
 
 
     /**
@@ -83,6 +88,12 @@ class BladeInstance implements FactoryContract
             }
 
             $blade = new BladeCompiler(new Filesystem, $this->cache);
+            
+            if(!empty($this->extensions)){
+                foreach($this->extensions as $extension){
+                    $blade->extend($extension);
+                }
+            }
 
             Blade::registerDirectives($blade);
 
@@ -94,6 +105,17 @@ class BladeInstance implements FactoryContract
         return $this->factory;
     }
 
+    /**
+     * Ability to add extensions
+     *
+     * @param Callable $compiler
+     *
+     * @return static
+     */
+    public function extend($compiler){
+        $this->extensions = $compiler;
+        return $this;
+    }
 
     /**
      * Add a path to look for views in.
