@@ -10,7 +10,7 @@ class BladeInstanceTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->blade = new BladeInstance(__DIR__ . "/views", CACHE_PATH);
+        $this->blade = new BladeInstance(__DIR__ . "/views", getCachePath());
     }
 
     public function testBasicMake()
