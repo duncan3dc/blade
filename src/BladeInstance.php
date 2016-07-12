@@ -114,6 +114,25 @@ class BladeInstance implements FactoryContract
         return $this;
     }
 
+    /**
+     * Register a handler for custom directives.
+     *
+     * @param  string  $name
+     * @param  callable  $handler
+     *
+     * @return static
+     */
+    public function directive($name, callable $handler)
+    {
+        $this
+            ->getViewFactory()
+            ->getEngineResolver()
+            ->resolve("blade")
+            ->getCompiler()
+            ->directive($name, $handler);
+
+        return $this;
+    }
 
     /**
      * Add a path to look for views in.
