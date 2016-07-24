@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 3.3.0 - 2016-08-12
+
+### Changed
+
+* [Support] Add support for Laravel 5.3.
+
+--------
+
 ## 3.2.0 - 2016-07-31
 
 ### Added
