@@ -140,4 +140,15 @@ class BladeInstanceTest extends \PHPUnit_Framework_TestCase
         $result = $this->blade->render("view12");
         $this->assertSame(file_get_contents(__DIR__ . "/views/view12.html"), $result);
     }
+
+
+    public function testCustomDirective()
+    {
+        $this->blade->directive("normandie", function ($parameter) {
+            return "inguz{$parameter};";
+        });
+
+        $result = $this->blade->render("view13");
+        $this->assertSame(file_get_contents(__DIR__ . "/views/view13.html"), $result);
+    }
 }
