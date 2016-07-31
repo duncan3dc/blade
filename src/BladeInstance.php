@@ -96,6 +96,21 @@ class BladeInstance implements FactoryContract
 
 
     /**
+     * Get the internal compiler in use.
+     *
+     * @return CompilerEngine
+     */
+    private function getCompiler()
+    {
+        return $this
+            ->getViewFactory()
+            ->getEngineResolver()
+            ->resolve("blade")
+            ->getCompiler();
+    }
+
+
+    /**
      * Register a custom Blade compiler.
      *
      * @param callable $compiler
@@ -105,34 +120,30 @@ class BladeInstance implements FactoryContract
     public function extend(callable $compiler)
     {
         $this
-            ->getViewFactory()
-            ->getEngineResolver()
-            ->resolve("blade")
             ->getCompiler()
             ->extend($compiler);
 
         return $this;
     }
 
+
     /**
      * Register a handler for custom directives.
      *
-     * @param  string  $name
-     * @param  callable  $handler
+     * @param string $name
+     * @param callable $handler
      *
      * @return static
      */
     public function directive($name, callable $handler)
     {
         $this
-            ->getViewFactory()
-            ->getEngineResolver()
-            ->resolve("blade")
             ->getCompiler()
             ->directive($name, $handler);
 
         return $this;
     }
+
 
     /**
      * Add a path to look for views in.
