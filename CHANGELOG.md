@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 3.2.0 - 2016-07-31
+
+### Added
+
+* [BladeInstance] Added an directive() method to add custom directives.
+
+--------
+
 ## 3.1.0 - 2016-06-23
 
 ### Added
