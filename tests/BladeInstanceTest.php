@@ -145,7 +145,8 @@ class BladeInstanceTest extends \PHPUnit_Framework_TestCase
     public function testCustomDirective()
     {
         $this->blade->directive("normandie", function ($parameter) {
-            return "inguz{$parameter};";
+            $parameter = trim($parameter, "()");
+            return "inguz({$parameter});";
         });
 
         $result = $this->blade->render("view13");

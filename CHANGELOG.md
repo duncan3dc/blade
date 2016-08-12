@@ -10,6 +10,7 @@ Changelog
 ### Changed
 
 * [Support] Add support for Laravel 5.3.
+* [BladeInstance] Laravel 5.3 has changed the directive() method so that it now strips the surrounding brackets.
 
 --------
 
