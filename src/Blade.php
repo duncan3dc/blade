@@ -73,20 +73,15 @@ class Blade
      */
     public static function registerDirectives(BladeCompiler $blade)
     {
-        $keywords = [
-            "namespace",
-            "use",
-        ];
-        foreach ($keywords as $keyword) {
-            $blade->directive($keyword, function ($parameter) use ($keyword) {
-                $parameter = trim($parameter, "()");
-                return "<?php {$keyword} {$parameter} ?>";
-            });
-        }
+        $blade->directive("namespace", function ($parameter) {
+            return "<?php namespace {$parameter} ?>";
+        });
+
+        $blade->directive("use", function ($parameter) {
+            return "<?php use {$parameter} ?>";
+        });
 
         $assetify = function ($file, $type) {
-            $file = trim($file, "()");
-
             if (in_array(substr($file, 0, 1), ["'", '"'], true)) {
                 $file = trim($file, "'\"");
             } else {
