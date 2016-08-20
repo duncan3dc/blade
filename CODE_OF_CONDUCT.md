@@ -6,7 +6,7 @@ This code of conduct outlines our expectations for participants within the open 
 * __Be respectful__ _Not all of us will agree all the time, but disagreement is no excuse for poor behavior and poor manners._
 
 # Unacceptable Behaviour
-* Offensive comments related to gender, gender, sexual orientation, disability, mental illness, physical appearance, body size, race, age, regional discrimination, political or religious affiliation.
+* Offensive comments related to gender, sexual orientation, disability, mental illness, physical appearance, body size, race, age, regional discrimination, political or religious affiliation.
 * Threats of violence, both physical and psycological.
 * Incitement of violence towards any individual, including encouraging a person to commit suicide or to engage in self-harm.
 * Continued communication after requests to cease.
