@@ -18,6 +18,7 @@
         "php": "^5.6|^7.0"
     },
     "require-dev": {
+        "duncan3dc/object-intruder": "^0.1.0",
         "mockery/mockery": "^0.9.5",
         "phpunit/phpunit": "^5.5"
     },

@@ -3,6 +3,7 @@
 namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Laravel\BladeInstance;
+use duncan3dc\ObjectIntruder\Intruder;
 use Mockery;
 
 class BladeMockTest extends \PHPUnit_Framework_TestCase
@@ -15,17 +16,13 @@ class BladeMockTest extends \PHPUnit_Framework_TestCase
     {
         $this->blade = new BladeInstance(__DIR__ . "/views", getCachePath());
 
-        $class = new \ReflectionClass($this->blade);
+        $intruder = new Intruder($this->blade);
 
         $this->finder = Mockery::mock(FileViewFinder::class);
-        $property = $class->getProperty("finder");
-        $property->setAccessible(true);
-        $property->setValue($this->blade, $this->finder);
+        $intruder->finder = $this->finder;
 
         $this->factory = Mockery::mock(FileViewFinder::class);
-        $property = $class->getProperty("factory");
-        $property->setAccessible(true);
-        $property->setValue($this->blade, $this->factory);
+        $intruder->factory = $this->factory;
     }
 
 
