@@ -79,7 +79,12 @@ class BladeInstance implements FactoryContract
         $resolver = new EngineResolver;
         $resolver->register("blade", function () {
             if (!is_dir($this->cache)) {
-                mkdir($this->cache, 0777, true);
+                if (false == mkdir($this->cache, 0777, true)) {
+                    throw  new \Exception(sprintf('unable to create temp folder %s.', $this->cache));
+                }
+            }
+            if (!is_writable(dirname($this->cache))) {
+                throw  new \Exception(sprintf('%s must be writable', $this->cache));
             }
 
             $blade = new BladeCompiler(new Filesystem, $this->cache);
@@ -219,7 +224,6 @@ class BladeInstance implements FactoryContract
 
         return $this;
     }
-
 
 
     /**
