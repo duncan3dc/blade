@@ -279,4 +279,14 @@ class BladeInstance implements FactoryContract
     {
         return $this->make($view, $params)->render();
     }
+	
+	/**
+     * Get the laravel view factory.
+     *
+     * @return Factory
+     */
+    public function view()
+    {
+        return $this->getViewFactory();
+    }
 }
