@@ -5,6 +5,15 @@ Changelog
 
 --------
 
+## 3.4.0 - 2017-01-28
+
+### Added
+
+* [Support] Add support for Laravel 5.4.
+* [BladeInstance] Added support for the replaceNamespace() method from Laravel.
+
+--------
+
 ## 3.3.0 - 2016-08-12
 
 ### Changed

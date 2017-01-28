@@ -239,6 +239,22 @@ class BladeInstance implements FactoryContract
 
 
     /**
+     * Replace the namespace hints for the given namespace.
+     *
+     * @param string $namespace The namespace to replace
+     * @param array|string $hints The hints to use
+     *
+     * @return $this
+     */
+    public function replaceNamespace($namespace, $hints)
+    {
+        $this->getViewFactory()->replaceNamespace($namespace, $hints);
+
+        return $this;
+    }
+
+
+    /**
      * Get the evaluated view contents for the given path.
      *
      * @param string $path The path of the file to use
