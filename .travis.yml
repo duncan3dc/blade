@@ -9,12 +9,16 @@ php:
 sudo: false
 
 env:
-  - COMPOSER_OPTS=""
-  - COMPOSER_OPTS="--prefer-lowest"
+  - LARAVEL_VERSION=""
+  - LARAVEL_VERSION="5.1"
+  - LARAVEL_VERSION="5.2"
+  - LARAVEL_VERSION="5.3"
+  - LARAVEL_VERSION="5.4"
 
 install:
   - composer self-update --snapshot
-  - composer update $COMPOSER_OPTS
+  - travis/laravel.php
+  - composer update
 
 script:
   - ./vendor/bin/phpunit
