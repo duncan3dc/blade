@@ -15,6 +15,10 @@ class Blade
      */
     protected static $instance;
 
+    /**
+     * @var string Path to the Cache Directory
+     */
+    protected static $cacheDir = null;
 
     /**
      * Set the BladeInstance object to use.
@@ -28,6 +32,20 @@ class Blade
         static::$instance = $instance;
     }
 
+    /**
+     *  Set the Cache Directory
+     * @param string $dir Path to a custom Cache Directory
+     * @throws \Exception
+     *
+     * @return null
+     */
+    public static function setCacheDir($dir)
+    {
+        if (!is_writable(dirname($dir))) {
+            throw  new \Exception(sprintf('%s must be writable', $dir));
+        }
+        static::$cacheDir = $dir;
+    }
 
     /**
      * Get the BladeInstance object.
@@ -37,8 +55,12 @@ class Blade
     public static function getInstance()
     {
         if (!static::$instance) {
-            # Calculate the parent of the vendor directory
-            $path = realpath(__DIR__ . "/../../../..");
+            if (null == static::$cacheDir) {
+                # Calculate the parent of the vendor directory
+                $path = realpath(__DIR__ . "/../../../..");
+            } else {
+                $path = static::$cacheDir;
+            }
             if (!is_dir($path)) {
                 throw new \RuntimeException("Unable to locate the root directory: {$path}");
             }
