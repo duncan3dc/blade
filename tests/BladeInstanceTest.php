@@ -3,8 +3,9 @@
 namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Laravel\BladeInstance;
+use PHPUnit\Framework\TestCase;
 
-class BladeInstanceTest extends \PHPUnit_Framework_TestCase
+class BladeInstanceTest extends TestCase
 {
     protected $blade;
 

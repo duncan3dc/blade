@@ -5,8 +5,9 @@ namespace duncan3dc\LaravelTests;
 use duncan3dc\Laravel\Blade;
 use duncan3dc\Laravel\BladeInstance;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
-class BladeTest extends \PHPUnit_Framework_TestCase
+class BladeTest extends TestCase
 {
 
     public function setUp()

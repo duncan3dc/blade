@@ -5,8 +5,9 @@ namespace duncan3dc\LaravelTests;
 use duncan3dc\Laravel\BladeInstance;
 use duncan3dc\ObjectIntruder\Intruder;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
-class BladeMockTest extends \PHPUnit_Framework_TestCase
+class BladeMockTest extends TestCase
 {
     protected $blade;
     protected $finder;

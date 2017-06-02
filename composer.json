@@ -21,7 +21,7 @@
     "require-dev": {
         "duncan3dc/object-intruder": "^0.1.0",
         "mockery/mockery": "^0.9.5",
-        "phpunit/phpunit": "^5.5",
+        "phpunit/phpunit": "^6.0",
         "satooshi/php-coveralls": "^1.0"
     },
     "autoload": {

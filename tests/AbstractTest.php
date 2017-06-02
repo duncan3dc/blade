@@ -5,8 +5,9 @@ namespace duncan3dc\LaravelTests;
 use duncan3dc\Laravel\Blade;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\Compilers\BladeCompiler;
+use PHPUnit\Framework\TestCase;
 
-abstract class AbstractTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractTest extends TestCase
 {
     protected $blade;
 
