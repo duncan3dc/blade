@@ -12,10 +12,7 @@ matrix:
 
 env:
   - LARAVEL_VERSION=""
-  - LARAVEL_VERSION="5.1"
-  - LARAVEL_VERSION="5.2"
-  - LARAVEL_VERSION="5.3"
-  - LARAVEL_VERSION="5.4"
+  - LARAVEL_VERSION="5.5"
 
 install:
   - composer self-update --snapshot
