@@ -9,9 +9,9 @@ use PHPUnit\Framework\TestCase;
 
 class BladeMockTest extends TestCase
 {
-    protected $blade;
-    protected $finder;
-    protected $factory;
+    private $blade;
+    private $finder;
+    private $factory;
 
     public function setUp()
     {

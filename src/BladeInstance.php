@@ -20,22 +20,22 @@ class BladeInstance implements FactoryContract
     /**
      * @var string $path The default path for views.
      */
-    protected $path;
+    private $path;
 
     /**
      * @var string $cache The default path for cached php.
      */
-    protected $cache;
+    private $cache;
 
     /**
      * @var Factory $factory The internal cache of the Factory to only instantiate it once.
      */
-    protected $factory;
+    private $factory;
 
     /**
      * @var FileViewFinder $finder The internal cache of the FileViewFinder to only instantiate it once.
      */
-    protected $finder;
+    private $finder;
 
 
     /**
@@ -55,7 +55,7 @@ class BladeInstance implements FactoryContract
      *
      * @return FileViewFinder
      */
-    protected function getViewFinder()
+    private function getViewFinder()
     {
         if (!$this->finder) {
             $this->finder = new FileViewFinder(new Filesystem, [$this->path]);
@@ -70,7 +70,7 @@ class BladeInstance implements FactoryContract
      *
      * @return Factory
      */
-    protected function getViewFactory()
+    private function getViewFactory()
     {
         if ($this->factory) {
             return $this->factory;

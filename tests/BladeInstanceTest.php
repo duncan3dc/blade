@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class BladeInstanceTest extends TestCase
 {
-    protected $blade;
+    private $blade;
 
     public function setUp()
     {

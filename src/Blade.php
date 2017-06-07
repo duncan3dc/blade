@@ -13,7 +13,7 @@ class Blade
     /**
      * @var BladeInstance $instance The internal cache of the BladeInstance to only instantiate it once
      */
-    protected static $instance;
+    private static $instance;
 
 
     /**
