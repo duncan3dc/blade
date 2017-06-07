@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-if (!$_ENV["LARAVEL_VERSION"]) {
+if (!getenv("LARAVEL_VERSION")) {
     return;
 }
 
@@ -10,7 +10,7 @@ $composer = json_decode($json);
 
 foreach ($composer->require as $package => &$version) {
     if (substr($package, 0, 11) === "illuminate/") {
-        $version = $_ENV["LARAVEL_VERSION"] . ".*";
+        $version = getenv("LARAVEL_VERSION") . ".*";
     }
 }
 unset($version);
