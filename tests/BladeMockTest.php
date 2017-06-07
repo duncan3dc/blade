@@ -4,6 +4,9 @@ namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Laravel\BladeInstance;
 use duncan3dc\ObjectIntruder\Intruder;
+use Illuminate\Contracts\View\View as ViewInterface;
+use Illuminate\Contracts\View\Factory as FactoryInterface;
+use Illuminate\View\FileViewFinder;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +25,7 @@ class BladeMockTest extends TestCase
         $this->finder = Mockery::mock(FileViewFinder::class);
         $intruder->finder = $this->finder;
 
-        $this->factory = Mockery::mock(FileViewFinder::class);
+        $this->factory = Mockery::mock(FactoryInterface::class);
         $intruder->factory = $this->factory;
     }
 
@@ -78,21 +81,23 @@ class BladeMockTest extends TestCase
 
     public function testFile()
     {
-        $this->factory->shouldReceive("file")->once()->with("stuff", ["one" => 1], ["two" => 2])->andReturn("file");
-        $this->assertSame("file", $this->blade->file("stuff", ["one" => 1], ["two" => 2]));
+        $view = Mockery::mock(ViewInterface::class);
+        $this->factory->shouldReceive("file")->once()->with("stuff", ["one" => 1], ["two" => 2])->andReturn($view);
+        $this->assertSame($view, $this->blade->file("stuff", ["one" => 1], ["two" => 2]));
     }
 
 
     public function testMake()
     {
-        $this->factory->shouldReceive("make")->once()->with("stuff", ["one" => 1], ["two" => 2])->andReturn("view");
-        $this->assertSame("view", $this->blade->make("stuff", ["one" => 1], ["two" => 2]));
+        $view = Mockery::mock(ViewInterface::class);
+        $this->factory->shouldReceive("make")->once()->with("stuff", ["one" => 1], ["two" => 2])->andReturn($view);
+        $this->assertSame($view, $this->blade->make("stuff", ["one" => 1], ["two" => 2]));
     }
 
 
     public function testRender()
     {
-        $view = Mockery::mock(View::class);
+        $view = Mockery::mock(ViewInterface::class);
         $view->shouldReceive("render")->once()->with()->andReturn("content");
 
         $this->factory->shouldReceive("make")->once()->with("stuff", ["one" => 1], [])->andReturn($view);

@@ -2,8 +2,7 @@
 
 namespace duncan3dc\Laravel;
 
-use Illuminate\View\Compilers\BladeCompiler;
-use Illuminate\View\View;
+use Illuminate\View\Compilers\CompilerInterface;
 
 /**
  * Standalone class for generating text using blade templates.
@@ -32,9 +31,9 @@ class Blade
     /**
      * Get the BladeInstance object.
      *
-     * @return BladeInstance
+     * @return BladeInterface
      */
-    public static function getInstance()
+    public static function getInstance(): BladeInterface
     {
         if (!static::$instance) {
             # Calculate the parent of the vendor directory
@@ -58,7 +57,7 @@ class Blade
      *
      * @return mixed
      */
-    public static function __callStatic($name, array $arguments)
+    public static function __callStatic(string $name, array $arguments)
     {
         return static::getInstance()->$name(...$arguments);
     }
@@ -67,11 +66,11 @@ class Blade
     /**
      * Add extra directives to the blade templating compiler.
      *
-     * @param BladeCompiler $blade The compiler to extend
+     * @param CompilerInterface $blade The compiler to extend
      *
      * @return void
      */
-    public static function registerDirectives(BladeCompiler $blade)
+    public static function registerDirectives(CompilerInterface $blade)
     {
         $blade->directive("namespace", function ($parameter) {
             return "<?php namespace {$parameter} ?>";

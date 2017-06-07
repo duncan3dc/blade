@@ -2,20 +2,21 @@
 
 namespace duncan3dc\Laravel;
 
-use Illuminate\Contracts\View\Factory as FactoryContract;
+use Illuminate\Contracts\View\Factory as FactoryInterface;
+use Illuminate\Contracts\View\View as ViewInterface;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\Compilers\BladeCompiler;
+use Illuminate\View\Compilers\CompilerInterface;
 use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
-use Illuminate\View\View;
 
 /**
  * Standalone class for generating text using blade templates.
  */
-class BladeInstance implements FactoryContract
+class BladeInstance implements BladeInterface
 {
     /**
      * @var string $path The default path for views.
@@ -44,18 +45,19 @@ class BladeInstance implements FactoryContract
      * @param string $path The default path for views
      * @param string $cache The default path for cached php
      */
-    public function __construct($path, $cache)
+    public function __construct(string $path, string $cache)
     {
         $this->path = $path;
         $this->cache = $cache;
     }
+
 
     /**
      * Get the laravel view finder.
      *
      * @return FileViewFinder
      */
-    private function getViewFinder()
+    private function getViewFinder(): FileViewFinder
     {
         if (!$this->finder) {
             $this->finder = new FileViewFinder(new Filesystem, [$this->path]);
@@ -68,9 +70,9 @@ class BladeInstance implements FactoryContract
     /**
      * Get the laravel view factory.
      *
-     * @return Factory
+     * @return FactoryInterface
      */
-    private function getViewFactory()
+    private function getViewFactory(): FactoryInterface
     {
         if ($this->factory) {
             return $this->factory;
@@ -98,9 +100,9 @@ class BladeInstance implements FactoryContract
     /**
      * Get the internal compiler in use.
      *
-     * @return CompilerEngine
+     * @return CompilerInterface
      */
-    private function getCompiler()
+    private function getCompiler(): CompilerInterface
     {
         return $this
             ->getViewFactory()
@@ -115,9 +117,9 @@ class BladeInstance implements FactoryContract
      *
      * @param callable $compiler
      *
-     * @return static
+     * @return $this
      */
-    public function extend(callable $compiler)
+    public function extend(callable $compiler): BladeInterface
     {
         $this
             ->getCompiler()
@@ -133,9 +135,9 @@ class BladeInstance implements FactoryContract
      * @param string $name
      * @param callable $handler
      *
-     * @return static
+     * @return $this
      */
-    public function directive($name, callable $handler)
+    public function directive(string $name, callable $handler): BladeInterface
     {
         $this
             ->getCompiler()
@@ -150,9 +152,9 @@ class BladeInstance implements FactoryContract
      *
      * @param string $path The path to look in
      *
-     * @return static
+     * @return $this
      */
-    public function addPath($path)
+    public function addPath(string $path): BladeInterface
     {
         $this->getViewFinder()->addLocation($path);
 
@@ -165,9 +167,9 @@ class BladeInstance implements FactoryContract
      *
      * @param string $view The name of the view to check
      *
-     * @return boolean
+     * @return bool
      */
-    public function exists($view)
+    public function exists($view): bool
     {
         return $this->getViewFactory()->exists($view);
     }
@@ -179,9 +181,9 @@ class BladeInstance implements FactoryContract
      * @param string $key The name of the variable to share
      * @param mixed $value The value to assign to the variable
      *
-     * @return static
+     * @return $this
      */
-    public function share($key, $value = null)
+    public function share($key, $value = null): BladeInterface
     {
         $this->getViewFactory()->share($key, $value);
 
@@ -195,9 +197,9 @@ class BladeInstance implements FactoryContract
      * @param string $key The name of the composer to register
      * @param mixed $value The closure or class to use
      *
-     * @return static
+     * @return $this
      */
-    public function composer($key, $value, $priority = null)
+    public function composer($key, $value, $priority = null): BladeInterface
     {
         $this->getViewFactory()->composer($key, $value, $priority);
 
@@ -211,9 +213,9 @@ class BladeInstance implements FactoryContract
      * @param string $key The name of the creator to register
      * @param mixed $value The closure or class to use
      *
-     * @return static
+     * @return $this
      */
-    public function creator($key, $value)
+    public function creator($key, $value): BladeInterface
     {
         $this->getViewFactory()->creator($key, $value);
 
@@ -228,9 +230,9 @@ class BladeInstance implements FactoryContract
      * @param string $namespace The namespace to use
      * @param array|string $hints The hints to apply
      *
-     * @return static
+     * @return $this
      */
-    public function addNamespace($namespace, $hints)
+    public function addNamespace($namespace, $hints): BladeInterface
     {
         $this->getViewFactory()->addNamespace($namespace, $hints);
 
@@ -246,7 +248,7 @@ class BladeInstance implements FactoryContract
      *
      * @return $this
      */
-    public function replaceNamespace($namespace, $hints)
+    public function replaceNamespace($namespace, $hints): BladeInterface
     {
         $this->getViewFactory()->replaceNamespace($namespace, $hints);
 
@@ -261,9 +263,9 @@ class BladeInstance implements FactoryContract
      * @param array $data The parameters to pass to the view
      * @param array $mergeData The extra data to merge
      *
-     * @return View The generated view
+     * @return ViewInterface The generated view
      */
-    public function file($path, $data = [], $mergeData = [])
+    public function file($path, $data = [], $mergeData = []): ViewInterface
     {
         return $this->getViewFactory()->file($path, $data, $mergeData);
     }
@@ -274,10 +276,11 @@ class BladeInstance implements FactoryContract
      *
      * @param string $view The name of the view to make
      * @param array $params The parameters to pass to the view
+     * @param array $mergeData The extra data to merge
      *
-     * @return View The generated view
+     * @return ViewInterface The generated view
      */
-    public function make($view, $params = [], $mergeData = [])
+    public function make($view, $params = [], $mergeData = []): ViewInterface
     {
         return $this->getViewFactory()->make($view, $params, $mergeData);
     }
@@ -291,7 +294,7 @@ class BladeInstance implements FactoryContract
      *
      * @return string The generated content
      */
-    public function render($view, array $params = [])
+    public function render(string $view, array $params = []): string
     {
         return $this->make($view, $params)->render();
     }
