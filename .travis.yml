@@ -23,8 +23,11 @@ install:
   - composer update
 
 script:
-  - ./vendor/bin/phpunit
-  - ./tests/lint.sh
+  - vendor/bin/phpunit --coverage-clover=clover.xml
+  - tests/lint.sh
+
+after_success:
+  - vendor/bin/coveralls
 
 git:
   depth: 5
