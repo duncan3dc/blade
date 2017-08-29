@@ -5,6 +5,26 @@ Changelog
 
 --------
 
+## 4.0.0 - 2017-08-30
+
+### Added
+
+* [Support] Add support for Laravel 5.5.
+* [BladeInstance] Added support for the if() method from Laravel.
+* [BladeInterface] Created an interface for BladeInstance to implement.
+
+### Changed
+
+* [Support] Drop support for Laravel 5.1, 5.2, 5.3 and 5.4.
+* [Support] Drop support for PHP 5.6.
+* [Support] Drop support for HHVM.
+
+### Removed
+
+* [BladeInstance] Removed the priority parameter from composer() to follow upstream.
+
+--------
+
 ## 3.4.0 - 2017-01-28
 
 ### Added
