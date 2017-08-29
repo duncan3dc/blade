@@ -79,6 +79,13 @@ class BladeMockTest extends TestCase
     }
 
 
+    public function testReplaceNamespace()
+    {
+        $this->factory->shouldReceive("replaceNamespace")->once()->with("name", "hint");
+        $this->assertSame($this->blade, $this->blade->replaceNamespace("name", "hint"));
+    }
+
+
     public function testFile()
     {
         $view = Mockery::mock(ViewInterface::class);
