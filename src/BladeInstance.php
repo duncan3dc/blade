@@ -38,6 +38,11 @@ class BladeInstance implements BladeInterface
      */
     private $finder;
 
+    /**
+     * @var ConditionHandler $conditionHandler The custom conditionals that have been registered.
+     */
+    private $conditionHandler;
+
 
     /**
      * Create a new instance of the blade view factory.
@@ -142,6 +147,38 @@ class BladeInstance implements BladeInterface
         $this
             ->getCompiler()
             ->directive($name, $handler);
+
+        return $this;
+    }
+
+
+    /**
+     * Register an custom conditional directive.
+     *
+     * @param string $name
+     * @param callable $handler
+     *
+     * @return $this
+     */
+    public function if(string $name, callable $handler): BladeInterface
+    {
+        if (!$this->conditionHandler) {
+            $this->conditionHandler = new ConditionHandler;
+            $this->share("_condition_handler", $this->conditionHandler);
+        }
+
+        $this->conditionHandler->add($name, $handler);
+
+        $this->directive($name, function (string $expression) use ($name) {
+            if ($expression === "") {
+                $expression = "null";
+            }
+            return "<?php if (\$_condition_handler->check('{$name}', {$expression})): ?>";
+        });
+
+        $this->directive("end{$name}", function () {
+            return "<?php endif; ?>";
+        });
 
         return $this;
     }

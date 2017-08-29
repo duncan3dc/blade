@@ -32,6 +32,17 @@ interface BladeInterface extends FactoryInterface
 
 
     /**
+     * Register an custom conditional directive.
+     *
+     * @param string $name
+     * @param callable $handler
+     *
+     * @return $this
+     */
+    public function if(string $name, callable $handler): BladeInterface;
+
+
+    /**
      * Add a path to look for views in.
      *
      * @param string $path The path to look in

@@ -153,4 +153,37 @@ class BladeInstanceTest extends TestCase
         $result = $this->blade->render("view13");
         $this->assertSame(file_get_contents(__DIR__ . "/views/view13.html"), $result);
     }
+
+
+    public function customConditionProvider()
+    {
+        yield [false, "off"];
+        yield [true, "on"];
+    }
+    /**
+     * @dataProvider customConditionProvider
+     */
+    public function testCustomConditions(bool $global, string $expected)
+    {
+        $this->blade->if("global", function () use ($global) {
+            return $global;
+        });
+
+        $result = $this->blade->render("view14");
+        $this->assertSame("{$expected}\n", $result);
+    }
+    /**
+     * @dataProvider customConditionProvider
+     */
+    public function testCustomConditionArguments(bool $global, string $expected)
+    {
+        $this->blade->if("global", function (bool $global) {
+            return $global;
+        });
+
+        $result = $this->blade->render("view15", [
+            "global"    =>  $global,
+        ]);
+        $this->assertSame("{$expected}\n", $result);
+    }
 }
