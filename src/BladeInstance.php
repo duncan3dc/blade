@@ -236,9 +236,9 @@ class BladeInstance implements BladeInterface
      *
      * @return $this
      */
-    public function composer($key, $value, $priority = null): BladeInterface
+    public function composer($key, $value): BladeInterface
     {
-        $this->getViewFactory()->composer($key, $value, $priority);
+        $this->getViewFactory()->composer($key, $value);
 
         return $this;
     }

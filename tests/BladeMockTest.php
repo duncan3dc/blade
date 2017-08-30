@@ -60,8 +60,8 @@ class BladeMockTest extends TestCase
 
     public function testComposer()
     {
-        $this->factory->shouldReceive("composer")->once()->with("site", "main", 4);
-        $this->assertSame($this->blade, $this->blade->composer("site", "main", 4));
+        $this->factory->shouldReceive("composer")->once()->with("site", "main");
+        $this->assertSame($this->blade, $this->blade->composer("site", "main"));
     }
 
 
