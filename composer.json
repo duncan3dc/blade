@@ -25,9 +25,9 @@
         "satooshi/php-coveralls": "^1.0"
     },
     "autoload": {
-        "psr-4": {
-            "duncan3dc\\Laravel\\": "src/",
-            "duncan3dc\\LaravelTests\\": "tests/"
-        }
+        "psr-4": {"duncan3dc\\Laravel\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {"duncan3dc\\LaravelTests\\": "tests/"}
     }
 }
