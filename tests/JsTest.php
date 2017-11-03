@@ -24,4 +24,14 @@ class JsTest extends AbstractTest
     {
         $this->assertTemplateString("<script type='text/javascript' src='<?php echo e(\$file); ?>'></script>", "@js(\$file)");
     }
+
+    public function testUrl()
+    {
+        $this->assertTemplateString("<script type='text/javascript' src='https://res.com/ok.js'></script>", "@js('https://res.com/ok.js')");
+    }
+
+    public function testInsecureUrl()
+    {
+        $this->assertTemplateString("<script type='text/javascript' src='http://res.com/ok.js'></script>", "@js('http://res.com/ok.js')");
+    }
 }

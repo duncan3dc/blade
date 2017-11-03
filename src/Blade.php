@@ -87,6 +87,13 @@ class Blade
                 return "{{ {$file} }}";
             }
 
+            if (substr($file, 0, 8) === "https://") {
+                return $file;
+            }
+            if (substr($file, 0, 7) === "http://") {
+                return $file;
+            }
+
             if (substr($file, 0, 1) !== "/") {
                 $file = "/{$type}/{$file}";
             }

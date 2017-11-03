@@ -24,4 +24,14 @@ class CssTest extends AbstractTest
     {
         $this->assertTemplateString("<link rel='stylesheet' type='text/css' href='<?php echo e(\$file); ?>'>", "@css(\$file)");
     }
+
+    public function testUrl()
+    {
+        $this->assertTemplateString("<link rel='stylesheet' type='text/css' href='https://res.com/ok.css'>", "@css('https://res.com/ok.css')");
+    }
+
+    public function testInsecureUrl()
+    {
+        $this->assertTemplateString("<link rel='stylesheet' type='text/css' href='http://res.com/ok.css'>", "@css('http://res.com/ok.css')");
+    }
 }
