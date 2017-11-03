@@ -29,6 +29,11 @@ class BladeInstance implements BladeInterface
     private $cache;
 
     /**
+     * @var DirectivesInterface $directives The custom directives to apply to this instance.
+     */
+    private $directives;
+
+    /**
      * @var Factory $factory The internal cache of the Factory to only instantiate it once.
      */
     private $factory;
@@ -50,10 +55,15 @@ class BladeInstance implements BladeInterface
      * @param string $path The default path for views
      * @param string $cache The default path for cached php
      */
-    public function __construct(string $path, string $cache)
+    public function __construct(string $path, string $cache, DirectivesInterface $directives = null)
     {
         $this->path = $path;
         $this->cache = $cache;
+
+        if ($directives === null) {
+            $directives = new Directives;
+        }
+        $this->directives = $directives;
     }
 
 
@@ -91,7 +101,7 @@ class BladeInstance implements BladeInterface
 
             $blade = new BladeCompiler(new Filesystem, $this->cache);
 
-            Blade::registerDirectives($blade);
+            $this->directives->register($blade);
 
             return new CompilerEngine($blade);
         });

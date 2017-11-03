@@ -34,4 +34,22 @@ class CssTest extends AbstractTest
     {
         $this->assertTemplateString("<link rel='stylesheet' type='text/css' href='http://res.com/ok.css'>", "@css('http://res.com/ok.css')");
     }
+
+    public function testAlternativePath()
+    {
+        $this->directives = $this->directives->withCss("styles");
+        $this->assertTemplateString("<link rel='stylesheet' type='text/css' href='/styles/path1.css'>", "@css('path1')");
+    }
+
+    public function testRootPath()
+    {
+        $this->directives = $this->directives->withCss("/");
+        $this->assertTemplateString("<link rel='stylesheet' type='text/css' href='/path2.css'>", "@css('path2')");
+    }
+
+    public function testNoPath()
+    {
+        $this->directives = $this->directives->withCss("");
+        $this->assertTemplateString("<link rel='stylesheet' type='text/css' href='/path3.css'>", "@css('path3')");
+    }
 }

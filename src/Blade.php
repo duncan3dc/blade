@@ -72,45 +72,9 @@ class Blade
      */
     public static function registerDirectives(CompilerInterface $blade)
     {
-        $blade->directive("namespace", function ($parameter) {
-            return "<?php namespace {$parameter} ?>";
-        });
+        trigger_error('Blade::registerDirectives() is deprecated in favour of using the Directives class', \E_USER_DEPRECATED);
 
-        $blade->directive("use", function ($parameter) {
-            return "<?php use {$parameter} ?>";
-        });
-
-        $assetify = function ($file, $type) {
-            if (in_array(substr($file, 0, 1), ["'", '"'], true)) {
-                $file = trim($file, "'\"");
-            } else {
-                return "{{ {$file} }}";
-            }
-
-            if (substr($file, 0, 8) === "https://") {
-                return $file;
-            }
-            if (substr($file, 0, 7) === "http://") {
-                return $file;
-            }
-
-            if (substr($file, 0, 1) !== "/") {
-                $file = "/{$type}/{$file}";
-            }
-            if (substr($file, (strlen($type) + 1) * -1) !== ".{$type}") {
-                $file .= ".{$type}";
-            }
-            return $file;
-        };
-
-        $blade->directive("css", function ($parameter) use ($assetify) {
-            $file = $assetify($parameter, "css");
-            return "<link rel='stylesheet' type='text/css' href='{$file}'>";
-        });
-
-        $blade->directive("js", function ($parameter) use ($assetify) {
-            $file = $assetify($parameter, "js");
-            return "<script type='text/javascript' src='{$file}'></script>";
-        });
+        $directives = new Directives;
+        $directives->register($blade);
     }
 }

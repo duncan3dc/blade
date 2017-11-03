@@ -34,4 +34,22 @@ class JsTest extends AbstractTest
     {
         $this->assertTemplateString("<script type='text/javascript' src='http://res.com/ok.js'></script>", "@js('http://res.com/ok.js')");
     }
+
+    public function testAlternativePath()
+    {
+        $this->directives = $this->directives->withJs("scripts");
+        $this->assertTemplateString("<script type='text/javascript' src='/scripts/path1.js'></script>", "@js('path1')");
+    }
+
+    public function testRootPath()
+    {
+        $this->directives = $this->directives->withJs("/");
+        $this->assertTemplateString("<script type='text/javascript' src='/path2.js'></script>", "@js('path2')");
+    }
+
+    public function testNoPath()
+    {
+        $this->directives = $this->directives->withJs("");
+        $this->assertTemplateString("<script type='text/javascript' src='/path3.js'></script>", "@js('path3')");
+    }
 }
