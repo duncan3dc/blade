@@ -5,6 +5,15 @@ Changelog
 
 --------
 
+## 4.1.0 - 2017-11-06
+
+### Added
+
+* [Directives] The custom directives are now handled by the Directives class.
+* [Directives] The assets (css/js) now support full URLs.
+
+--------
+
 ## 4.0.0 - 2017-08-30
 
 ### Added
