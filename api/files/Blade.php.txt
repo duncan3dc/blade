@@ -2,8 +2,7 @@
 
 namespace duncan3dc\Laravel;
 
-use Illuminate\View\Compilers\BladeCompiler;
-use Illuminate\View\View;
+use Illuminate\View\Compilers\CompilerInterface;
 
 /**
  * Standalone class for generating text using blade templates.
@@ -13,7 +12,7 @@ class Blade
     /**
      * @var BladeInstance $instance The internal cache of the BladeInstance to only instantiate it once
      */
-    protected static $instance;
+    private static $instance;
 
 
     /**
@@ -32,9 +31,9 @@ class Blade
     /**
      * Get the BladeInstance object.
      *
-     * @return BladeInstance
+     * @return BladeInterface
      */
-    public static function getInstance()
+    public static function getInstance(): BladeInterface
     {
         if (!static::$instance) {
             # Calculate the parent of the vendor directory
@@ -58,7 +57,7 @@ class Blade
      *
      * @return mixed
      */
-    public static function __callStatic($name, array $arguments)
+    public static function __callStatic(string $name, array $arguments)
     {
         return static::getInstance()->$name(...$arguments);
     }
@@ -67,50 +66,16 @@ class Blade
     /**
      * Add extra directives to the blade templating compiler.
      *
-     * @param BladeCompiler $blade The compiler to extend
+     * @param CompilerInterface $blade The compiler to extend
      *
      * @return void
      */
-    public static function registerDirectives(BladeCompiler $blade)
+    public static function registerDirectives(CompilerInterface $blade)
     {
-        $keywords = [
-            "namespace",
-            "use",
-        ];
-        foreach ($keywords as $keyword) {
-            $blade->directive($keyword, function ($parameter) use ($keyword) {
-                $parameter = trim($parameter, "()");
-                return "<?php {$keyword} {$parameter} ?>";
-            });
-        }
+        trigger_error('Blade::registerDirectives() is deprecated in favour of using the Directives class', \E_USER_DEPRECATED);
 
-        $assetify = function ($file, $type) {
-            $file = trim($file, "()");
-
-            if (in_array(substr($file, 0, 1), ["'", '"'], true)) {
-                $file = trim($file, "'\"");
-            } else {
-                return "{{ {$file} }}";
-            }
-
-            if (substr($file, 0, 1) !== "/") {
-                $file = "/{$type}/{$file}";
-            }
-            if (substr($file, (strlen($type) + 1) * -1) !== ".{$type}") {
-                $file .= ".{$type}";
-            }
-            return $file;
-        };
-
-        $blade->directive("css", function ($parameter) use ($assetify) {
-            $file = $assetify($parameter, "css");
-            return "<link rel='stylesheet' type='text/css' href='{$file}'>";
-        });
-
-        $blade->directive("js", function ($parameter) use ($assetify) {
-            $file = $assetify($parameter, "js");
-            return "<script type='text/javascript' src='{$file}'></script>";
-        });
+        $directives = new Directives;
+        $directives->register($blade);
     }
 }
 

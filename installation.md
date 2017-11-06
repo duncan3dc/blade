@@ -18,7 +18,7 @@ Or you can manually add it to your composer.json:
 ```javascript
 {
     "require": {
-        "duncan3dc/blade": "^3.0"
+        "duncan3dc/blade": "^4.0"
     }
 }
 ```

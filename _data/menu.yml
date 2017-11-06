@@ -10,6 +10,7 @@ Static:
   Setup: /static/setup/
   Usage: /static/usage/
 
-Extra:
-  Namespaces: /extra/namespaces/
-  Assets: /extra/assets/
+Directives:
+  Introduction: /directives/
+  Namespaces: /directives/namespaces/
+  Assets: /directives/assets/

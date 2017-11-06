@@ -6,9 +6,6 @@ api: BladeInstance
 ---
 
 
-Basic
------
-
 Output a basic view (from views/index.blade.php)
 
 ```php
