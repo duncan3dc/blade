@@ -25,7 +25,7 @@ script:
   - vendor/bin/composer-require-checker
 
 after_success:
-  - vendor/bin/coveralls
+  - vendor/bin/php-coveralls
 
 git:
   depth: 5
