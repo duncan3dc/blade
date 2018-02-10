@@ -22,7 +22,7 @@ class Blade
      *
      * @return void
      */
-    public static function setInstance(BladeInstance $instance)
+    public static function setInstance(BladeInstance $instance): void
     {
         static::$instance = $instance;
     }
@@ -70,7 +70,7 @@ class Blade
      *
      * @return void
      */
-    public static function registerDirectives(CompilerInterface $blade)
+    public static function registerDirectives(CompilerInterface $blade): void
     {
         trigger_error('Blade::registerDirectives() is deprecated in favour of using the Directives class', \E_USER_DEPRECATED);
 

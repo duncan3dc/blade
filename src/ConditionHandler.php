@@ -18,7 +18,7 @@ class ConditionHandler
      *
      * @return $this
      */
-    public function add($name, callable $handler)
+    public function add(string $name, callable $handler): ConditionHandler
     {
         if (array_key_exists($name, $this->conditions)) {
             throw new \UnexpectedValueException("A conditional by this name already exists: @{$name}");
@@ -36,9 +36,9 @@ class ConditionHandler
      * @param string $name
      * @param mixed $params
      *
-     * @return bool
+     * @return mixed
      */
-    public function check($name, ...$params)
+    public function check(string $name, ...$params)
     {
         if (!array_key_exists($name, $this->conditions)) {
             throw new \UnexpectedValueException("Unknown conditional: @{$name}");

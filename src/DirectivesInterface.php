@@ -13,5 +13,5 @@ interface DirectivesInterface
      *
      * @return void
      */
-    public function register(CompilerInterface $blade);
+    public function register(CompilerInterface $blade): void;
 }

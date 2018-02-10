@@ -142,7 +142,7 @@ class Directives implements DirectivesInterface
      *
      * @return void
      */
-    public function register(CompilerInterface $blade)
+    public function register(CompilerInterface $blade): void
     {
         if ($this->namespace) {
             $blade->directive("namespace", function ($parameter) {
@@ -181,7 +181,7 @@ class Directives implements DirectivesInterface
      *
      * @return string The full path to the asset
      */
-    private function assetify(string $file, string $type, string $path)
+    private function assetify(string $file, string $type, string $path): string
     {
         if (in_array(substr($file, 0, 1), ["'", '"'], true)) {
             $file = trim($file, "'\"");
