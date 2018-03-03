@@ -12,6 +12,8 @@ use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
+use function is_dir;
+use function mkdir;
 
 /**
  * Standalone class for generating text using blade templates.

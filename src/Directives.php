@@ -3,6 +3,10 @@
 namespace duncan3dc\Laravel;
 
 use Illuminate\View\Compilers\CompilerInterface;
+use function in_array;
+use function strlen;
+use function substr;
+use function trim;
 
 class Directives implements DirectivesInterface
 {

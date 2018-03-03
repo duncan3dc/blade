@@ -2,6 +2,8 @@
 
 namespace duncan3dc\Laravel;
 
+use function array_key_exists;
+
 class ConditionHandler
 {
     /**

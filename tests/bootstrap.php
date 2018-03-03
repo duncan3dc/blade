@@ -2,6 +2,9 @@
 
 namespace duncan3dc\LaravelTests;
 
+use function array_map;
+use function glob;
+
 require __DIR__ . "/../vendor/autoload.php";
 
 function getCachePath()

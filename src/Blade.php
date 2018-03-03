@@ -3,6 +3,8 @@
 namespace duncan3dc\Laravel;
 
 use Illuminate\View\Compilers\CompilerInterface;
+use function is_dir;
+use function realpath;
 
 /**
  * Standalone class for generating text using blade templates.
@@ -72,7 +74,7 @@ class Blade
      */
     public static function registerDirectives(CompilerInterface $blade): void
     {
-        trigger_error('Blade::registerDirectives() is deprecated in favour of using the Directives class', \E_USER_DEPRECATED);
+        \trigger_error('Blade::registerDirectives() is deprecated in favour of using the Directives class', \E_USER_DEPRECATED);
 
         $directives = new Directives;
         $directives->register($blade);

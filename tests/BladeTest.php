@@ -6,6 +6,9 @@ use duncan3dc\Laravel\Blade;
 use duncan3dc\Laravel\BladeInstance;
 use Mockery;
 use PHPUnit\Framework\TestCase;
+use function file_get_contents;
+use function str_replace;
+use function trim;
 
 class BladeTest extends TestCase
 {

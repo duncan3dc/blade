@@ -4,6 +4,9 @@ namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Laravel\BladeInstance;
 use PHPUnit\Framework\TestCase;
+use function file_get_contents;
+use function str_replace;
+use function trim;
 
 class BladeInstanceTest extends TestCase
 {
