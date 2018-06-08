@@ -22,7 +22,6 @@
         "duncan3dc/object-intruder": "^0.3.0",
         "maglnet/composer-require-checker": "^0.1.6",
         "mockery/mockery": "^1.0",
-        "php-coveralls/php-coveralls": "^2.0",
         "phpunit/phpunit": "^6.4"
     },
     "autoload": {

@@ -6,9 +6,9 @@ Use Laravel Blade templates as a standalone component without the full Laravel f
 Full documentation is available at http://duncan3dc.github.io/blade/  
 PHPDoc API documentation is also available at [http://duncan3dc.github.io/blade/api/](http://duncan3dc.github.io/blade/api/namespaces/duncan3dc.Laravel.html)  
 
-[![Latest Stable Version](https://poser.pugx.org/duncan3dc/blade/version.svg)](https://packagist.org/packages/duncan3dc/blade)
-[![Build Status](https://travis-ci.org/duncan3dc/blade.svg?branch=master)](https://travis-ci.org/duncan3dc/blade)
-[![Coverage Status](https://coveralls.io/repos/github/duncan3dc/blade/badge.svg)](https://coveralls.io/github/duncan3dc/blade)
+[![release](https://poser.pugx.org/duncan3dc/blade/version.svg)](https://packagist.org/packages/duncan3dc/blade)
+[![build](https://travis-ci.org/duncan3dc/blade.svg?branch=master)](https://travis-ci.org/duncan3dc/blade)
+[![coverage](https://codecov.io/gh/duncan3dc/blade/graph/badge.svg)](https://codecov.io/gh/duncan3dc/blade)
 
 
 Quick Examples
