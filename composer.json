@@ -12,10 +12,10 @@
         "role": "Developer"
     }],
     "require": {
-        "illuminate/contracts": ">=5.5,<5.7",
-        "illuminate/events": ">=5.5,<5.7",
-        "illuminate/filesystem": ">=5.5,<5.7",
-        "illuminate/view": ">=5.5,<5.7",
+        "illuminate/contracts": ">=5.5,<5.8",
+        "illuminate/events": ">=5.5,<5.8",
+        "illuminate/filesystem": ">=5.5,<5.8",
+        "illuminate/view": ">=5.5,<5.8",
         "php": "^7.1"
     },
     "require-dev": {
