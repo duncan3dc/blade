@@ -2,7 +2,6 @@
 
 namespace duncan3dc\Laravel;
 
-use Illuminate\View\Compilers\CompilerInterface;
 use function is_dir;
 use function realpath;
 
@@ -62,21 +61,5 @@ class Blade
     public static function __callStatic(string $name, array $arguments)
     {
         return static::getInstance()->$name(...$arguments);
-    }
-
-
-    /**
-     * Add extra directives to the blade templating compiler.
-     *
-     * @param CompilerInterface $blade The compiler to extend
-     *
-     * @return void
-     */
-    public static function registerDirectives(CompilerInterface $blade): void
-    {
-        \trigger_error('Blade::registerDirectives() is deprecated in favour of using the Directives class', \E_USER_DEPRECATED);
-
-        $directives = new Directives();
-        $directives->register($blade);
     }
 }
