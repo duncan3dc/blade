@@ -39,9 +39,9 @@ class Directives implements DirectivesInterface
      * @param string $parameter The name of the parameter to modify
      * @param mixed $value The value to set the parameter to
      *
-     * @return DirectivesInterface The new modified instance
+     * @return self The new modified instance
      */
-    private function clone(string $parameter, $value): DirectivesInterface
+    private function clone(string $parameter, $value): self
     {
         $directives = clone $this;
         $directives->$parameter = $value;
@@ -52,9 +52,9 @@ class Directives implements DirectivesInterface
     /**
      * Get a new instance with the namespace directive applied.
      *
-     * @return DirectivesInterface
+     * @return self
      */
-    public function withNamespace(): DirectivesInterface
+    public function withNamespace(): self
     {
         return $this->clone("namespace", true);
     }
@@ -63,9 +63,9 @@ class Directives implements DirectivesInterface
     /**
      * Get a new instance without the namespace directive applied.
      *
-     * @return DirectivesInterface
+     * @return self
      */
-    public function withoutNamespace(): DirectivesInterface
+    public function withoutNamespace(): self
     {
         return $this->clone("namespace", false);
     }
@@ -74,9 +74,9 @@ class Directives implements DirectivesInterface
     /**
      * Get a new instance with the use directive applied.
      *
-     * @return DirectivesInterface
+     * @return self
      */
-    public function withUse(): DirectivesInterface
+    public function withUse(): self
     {
         return $this->clone("use", true);
     }
@@ -85,9 +85,9 @@ class Directives implements DirectivesInterface
     /**
      * Get a new instance without the use directive applied.
      *
-     * @return DirectivesInterface
+     * @return self
      */
-    public function withoutUse(): DirectivesInterface
+    public function withoutUse(): self
     {
         return $this->clone("use", false);
     }
@@ -98,9 +98,9 @@ class Directives implements DirectivesInterface
      *
      * @param string $path The default path to the css files
      *
-     * @return DirectivesInterface
+     * @return self
      */
-    public function withCss(string $path = "css"): DirectivesInterface
+    public function withCss(string $path = "css"): self
     {
         return $this->clone("css", $path);
     }
@@ -109,9 +109,9 @@ class Directives implements DirectivesInterface
     /**
      * Get a new instance without the css directive applied.
      *
-     * @return DirectivesInterface
+     * @return self
      */
-    public function withoutCss(): DirectivesInterface
+    public function withoutCss(): self
     {
         return $this->clone("css", null);
     }
@@ -122,9 +122,9 @@ class Directives implements DirectivesInterface
      *
      * @param string $path The default path to the javascript files
      *
-     * @return DirectivesInterface
+     * @return self
      */
-    public function withJs(string $path = "js"): DirectivesInterface
+    public function withJs(string $path = "js"): self
     {
         return $this->clone("js", $path);
     }
@@ -133,9 +133,9 @@ class Directives implements DirectivesInterface
     /**
      * Get a new instance without the javascript directive applied.
      *
-     * @return DirectivesInterface
+     * @return self
      */
-    public function withoutJs(): DirectivesInterface
+    public function withoutJs(): self
     {
         return $this->clone("js", null);
     }
