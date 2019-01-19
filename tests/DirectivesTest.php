@@ -13,7 +13,7 @@ class DirectivesTest extends TestCase
 
     public function setUp()
     {
-        $this->directives = (new Directives)
+        $this->directives = (new Directives())
             ->withoutNamespace()
             ->withoutUse()
             ->withoutCss()
@@ -31,7 +31,7 @@ class DirectivesTest extends TestCase
 
     public function testDefaults()
     {
-        $directives = new Directives;
+        $directives = new Directives();
 
         $this->compiler->shouldReceive("directive")->with("namespace", Mockery::any());
         $this->compiler->shouldReceive("directive")->with("use", Mockery::any());

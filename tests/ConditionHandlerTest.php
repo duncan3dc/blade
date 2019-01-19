@@ -12,7 +12,7 @@ class ConditionHandlerTest extends TestCase
 
     public function setUp()
     {
-        $this->handler = new ConditionHandler;
+        $this->handler = new ConditionHandler();
     }
 
 

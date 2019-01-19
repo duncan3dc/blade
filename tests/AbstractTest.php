@@ -14,9 +14,9 @@ abstract class AbstractTest extends TestCase
 
     public function setUp()
     {
-        $this->blade = new BladeCompiler(new Filesystem, "/tmp/phpunit/cache/views");
+        $this->blade = new BladeCompiler(new Filesystem(), "/tmp/phpunit/cache/views");
 
-        $this->directives = new Directives;
+        $this->directives = new Directives();
     }
 
     public function assertTemplateString($expected, $template)

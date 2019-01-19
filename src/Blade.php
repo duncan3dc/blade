@@ -76,7 +76,7 @@ class Blade
     {
         \trigger_error('Blade::registerDirectives() is deprecated in favour of using the Directives class', \E_USER_DEPRECATED);
 
-        $directives = new Directives;
+        $directives = new Directives();
         $directives->register($blade);
     }
 }

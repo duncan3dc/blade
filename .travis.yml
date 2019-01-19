@@ -30,6 +30,10 @@ jobs:
       script:
         - vendor/bin/composer-require-checker
 
+    - stage: coding standards
+      script:
+        - vendor/bin/phpcs --standard=phpcs.xml
+
     - stage: coverage
       script:
         - vendor/bin/phpunit --coverage-clover=coverage.xml
