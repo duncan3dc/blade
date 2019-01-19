@@ -3,13 +3,17 @@
 namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Laravel\Directives;
-use Illuminate\View\Compilers\CompilerInterface;
+use Illuminate\View\Compilers\BladeCompiler;
 use Mockery;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 class DirectivesTest extends TestCase
 {
     private $directives;
+
+    /** @var BladeCompiler&MockInterface */
+    private $compiler;
 
     public function setUp()
     {
@@ -19,7 +23,7 @@ class DirectivesTest extends TestCase
             ->withoutCss()
             ->withoutJs();
 
-        $this->compiler = Mockery::mock(CompilerInterface::class);
+        $this->compiler = Mockery::mock(BladeCompiler::class);
     }
 
 

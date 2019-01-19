@@ -2,7 +2,7 @@
 
 namespace duncan3dc\Laravel;
 
-use Illuminate\View\Compilers\CompilerInterface;
+use Illuminate\View\Compilers\BladeCompiler;
 use function in_array;
 use function strlen;
 use function substr;
@@ -142,11 +142,11 @@ class Directives implements DirectivesInterface
     /**
      * Register all the active directives to the blade templating compiler.
      *
-     * @param CompilerInterface $blade The compiler to extend
+     * @param BladeCompiler $blade The compiler to extend
      *
      * @return void
      */
-    public function register(CompilerInterface $blade): void
+    public function register(BladeCompiler $blade): void
     {
         if ($this->namespace) {
             $blade->directive("namespace", function ($parameter) {
