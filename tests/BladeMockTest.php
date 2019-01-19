@@ -18,7 +18,7 @@ class BladeMockTest extends TestCase
 
     public function setUp()
     {
-        $this->blade = new BladeInstance(__DIR__ . "/views", getCachePath());
+        $this->blade = new BladeInstance(__DIR__ . "/views", Utils::getCachePath());
 
         $intruder = new Intruder($this->blade);
 

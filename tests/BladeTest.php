@@ -15,7 +15,7 @@ class BladeTest extends TestCase
 
     public function setUp()
     {
-        $blade = new BladeInstance(__DIR__ . "/views", getCachePath());
+        $blade = new BladeInstance(__DIR__ . "/views", Utils::getCachePath());
         Blade::setInstance($blade);
     }
 
