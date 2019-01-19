@@ -3,7 +3,9 @@
 namespace duncan3dc\Laravel;
 
 use Illuminate\View\Compilers\BladeCompiler;
+use function assert;
 use function in_array;
+use function is_string;
 use function strlen;
 use function substr;
 use function trim;
@@ -162,6 +164,7 @@ class Directives implements DirectivesInterface
 
         if ($this->css !== null) {
             $blade->directive("css", function ($parameter) {
+                assert(is_string($this->css));
                 $file = $this->assetify($parameter, "css", $this->css);
                 return "<link rel='stylesheet' type='text/css' href='{$file}'>";
             });
@@ -169,6 +172,7 @@ class Directives implements DirectivesInterface
 
         if ($this->js !== null) {
             $blade->directive("js", function ($parameter) {
+                assert(is_string($this->js));
                 $file = $this->assetify($parameter, "js", $this->js);
                 return "<script type='text/javascript' src='{$file}'></script>";
             });

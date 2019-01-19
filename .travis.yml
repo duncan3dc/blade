@@ -34,6 +34,11 @@ jobs:
       script:
         - vendor/bin/phpcs --standard=phpcs.xml
 
+    - stage: code quality
+      script:
+        - vendor/bin/phpstan analyse --level=max src
+        - vendor/bin/phpstan analyse --level=max --configuration=phpstan-tests.neon tests
+
     - stage: coverage
       script:
         - vendor/bin/phpunit --coverage-clover=coverage.xml

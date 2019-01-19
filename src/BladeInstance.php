@@ -2,7 +2,6 @@
 
 namespace duncan3dc\Laravel;
 
-use Illuminate\Contracts\View\Factory as FactoryInterface;
 use Illuminate\Contracts\View\View as ViewInterface;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
@@ -35,12 +34,12 @@ class BladeInstance implements BladeInterface
     private $directives;
 
     /**
-     * @var Factory $factory The internal cache of the Factory to only instantiate it once.
+     * @var Factory|null $factory The internal cache of the Factory to only instantiate it once.
      */
     private $factory;
 
     /**
-     * @var FileViewFinder $finder The internal cache of the FileViewFinder to only instantiate it once.
+     * @var FileViewFinder|null $finder The internal cache of the FileViewFinder to only instantiate it once.
      */
     private $finder;
 
@@ -50,7 +49,7 @@ class BladeInstance implements BladeInterface
     private $compiler;
 
     /**
-     * @var ConditionHandler $conditionHandler The custom conditionals that have been registered.
+     * @var ConditionHandler|null $conditionHandler The custom conditionals that have been registered.
      */
     private $conditionHandler;
 
@@ -91,9 +90,9 @@ class BladeInstance implements BladeInterface
     /**
      * Get the laravel view factory.
      *
-     * @return FactoryInterface
+     * @return Factory
      */
-    private function getViewFactory(): FactoryInterface
+    private function getViewFactory(): Factory
     {
         if ($this->factory) {
             return $this->factory;

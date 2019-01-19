@@ -3,18 +3,26 @@
 namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Laravel\BladeInstance;
+use duncan3dc\Laravel\BladeInterface;
 use duncan3dc\ObjectIntruder\Intruder;
 use Illuminate\Contracts\View\View as ViewInterface;
-use Illuminate\Contracts\View\Factory as FactoryInterface;
+use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
 use Mockery;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 class BladeMockTest extends TestCase
 {
+    /** @var BladeInterface */
     private $blade;
+
+    /** @var FileViewFinder|MockInterface */
     private $finder;
+
+    /** @var Factory|MockInterface */
     private $factory;
+
 
     public function setUp()
     {
@@ -25,7 +33,7 @@ class BladeMockTest extends TestCase
         $this->finder = Mockery::mock(FileViewFinder::class);
         $intruder->finder = $this->finder;
 
-        $this->factory = Mockery::mock(FactoryInterface::class);
+        $this->factory = Mockery::mock(Factory::class);
         $intruder->factory = $this->factory;
     }
 

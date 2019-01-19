@@ -36,7 +36,7 @@ class ConditionHandler
      * Call a registered conditional directive.
      *
      * @param string $name
-     * @param mixed $params
+     * @param mixed ...$params
      *
      * @return mixed
      */

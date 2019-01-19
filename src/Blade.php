@@ -4,6 +4,7 @@ namespace duncan3dc\Laravel;
 
 use Illuminate\Contracts\View\View as ViewInterface;
 use function is_dir;
+use function is_string;
 use function realpath;
 
 /**
@@ -12,7 +13,7 @@ use function realpath;
 class Blade
 {
     /**
-     * @var BladeInstance $instance The internal cache of the BladeInstance to only instantiate it once
+     * @var BladeInstance|null $instance The internal cache of the BladeInstance to only instantiate it once
      */
     private static $instance;
 
@@ -40,7 +41,7 @@ class Blade
         if (!static::$instance) {
             # Calculate the parent of the vendor directory
             $path = realpath(__DIR__ . "/../../../..");
-            if (!is_dir($path)) {
+            if (!is_string($path) || !is_dir($path)) {
                 throw new \RuntimeException("Unable to locate the root directory: {$path}");
             }
 
