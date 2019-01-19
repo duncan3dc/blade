@@ -2,6 +2,7 @@
 
 namespace duncan3dc\Laravel;
 
+use Illuminate\Contracts\View\View as ViewInterface;
 use function is_dir;
 use function realpath;
 
@@ -51,15 +52,182 @@ class Blade
 
 
     /**
-     * Allow all the methods of BladeInstance to be called.
+     * Register a custom Blade compiler.
      *
-     * @param string $name The name of the method to run
-     * @param array $arguments The parameters to pass to the method
+     * @param callable $compiler
      *
-     * @return mixed
+     * @return BladeInterface
      */
-    public static function __callStatic(string $name, array $arguments)
+    public static function extend(callable $compiler): BladeInterface
     {
-        return static::getInstance()->$name(...$arguments);
+        return static::getInstance()->extend($compiler);
+    }
+
+
+    /**
+     * Register a handler for custom directives.
+     *
+     * @param string $name
+     * @param callable $handler
+     *
+     * @return BladeInterface
+     */
+    public static function directive(string $name, callable $handler): BladeInterface
+    {
+        return static::getInstance()->directive($name, $handler);
+    }
+
+
+    /**
+     * Register an custom conditional directive.
+     *
+     * @param string $name
+     * @param callable $handler
+     *
+     * @return BladeInterface
+     */
+    public static function if(string $name, callable $handler): BladeInterface
+    {
+        return static::getInstance()->if($name, $handler);
+    }
+
+
+    /**
+     * Add a path to look for views in.
+     *
+     * @param string $path The path to look in
+     *
+     * @return BladeInterface
+     */
+    public static function addPath(string $path): BladeInterface
+    {
+        return static::getInstance()->addPath($path);
+    }
+
+
+    /**
+     * Check if a view exists.
+     *
+     * @param string $view The name of the view to check
+     *
+     * @return bool
+     */
+    public static function exists(string $view): bool
+    {
+        return static::getInstance()->exists($view);
+    }
+
+
+    /**
+     * Share data across all views.
+     *
+     * @param string $key The name of the variable to share
+     * @param mixed $value The value to assign to the variable
+     *
+     * @return BladeInterface
+     */
+    public static function share(string $key, $value = null): BladeInterface
+    {
+        return static::getInstance()->share($key, $value);
+    }
+
+
+    /**
+     * Register a composer.
+     *
+     * @param string $key The name of the composer to register
+     * @param mixed $value The closure or class to use
+     *
+     * @return BladeInterface
+     */
+    public static function composer(string $key, $value): BladeInterface
+    {
+        return static::getInstance()->composer($key, $value);
+    }
+
+
+    /**
+     * Register a creator.
+     *
+     * @param string $key The name of the creator to register
+     * @param mixed $value The closure or class to use
+     *
+     * @return BladeInterface
+     */
+    public static function creator(string $key, $value): BladeInterface
+    {
+        return static::getInstance()->creator($key, $value);
+    }
+
+
+    /**
+     * Add a new namespace to the loader.
+     *
+     * @param string $namespace The namespace to use
+     * @param array|string $hints The hints to apply
+     *
+     * @return BladeInterface
+     */
+    public static function addNamespace(string $namespace, $hints): BladeInterface
+    {
+        return static::getInstance()->addNamespace($namespace, $hints);
+    }
+
+
+    /**
+     * Replace the namespace hints for the given namespace.
+     *
+     * @param string $namespace The namespace to replace
+     * @param array|string $hints The hints to use
+     *
+     * @return BladeInterface
+     */
+    public static function replaceNamespace(string $namespace, $hints): BladeInterface
+    {
+        return static::getInstance()->replaceNamespace($namespace, $hints);
+    }
+
+
+    /**
+     * Get the evaluated view contents for the given path.
+     *
+     * @param string $path The path of the file to use
+     * @param array $data The parameters to pass to the view
+     * @param array $mergeData The extra data to merge
+     *
+     * @return ViewInterface The generated view
+     */
+    public static function file(string $path, array $data = [], array $mergeData = []): ViewInterface
+    {
+        return static::getInstance()->file($path, $data, $mergeData);
+    }
+
+
+    /**
+     * Generate a view.
+     *
+     * @param string $view The name of the view to make
+     * @param array $params The parameters to pass to the view
+     * @param array $mergeData The extra data to merge
+     *
+     * @return ViewInterface The generated view
+     */
+    public static function make(string $view, array $params = [], array $mergeData = []): ViewInterface
+    {
+        return static::getInstance()->make($view, $params, $mergeData);
+    }
+
+
+    /**
+     * Get the content by generating a view.
+     *
+     * @param string $view The name of the view to make
+     * @param array $params The parameters to pass to the view
+     *
+     * @return string The generated content
+     */
+    public static function render(string $view, array $params = []): string
+    {
+        return static::getInstance()->render($view, $params);
     }
 }
