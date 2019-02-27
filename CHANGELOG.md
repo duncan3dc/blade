@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 4.4.0 - 2019-02-27
+
+### Added
+
+* [Support] Add support for Laravel 5.8.
+
+--------
+
 ## 4.3.0 - 2018-09-04
 
 ### Added
