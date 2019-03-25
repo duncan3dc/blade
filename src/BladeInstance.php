@@ -136,6 +136,19 @@ class BladeInstance implements BladeInterface
 
 
     /**
+     * @inheritdoc
+     */
+    public function addExtension(string $extension): BladeInterface
+    {
+        $this
+            ->getViewFactory()
+            ->addExtension($extension, "blade");
+
+        return $this;
+    }
+
+
+    /**
      * Register a custom Blade compiler.
      *
      * @param callable $compiler

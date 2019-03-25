@@ -53,6 +53,19 @@ class Blade
 
 
     /**
+     * Add another extension to use to search for template files.
+     *
+     * @param string $extension (eg 'blade.php', or 'template')
+     *
+     * @return BladeInterface
+     */
+    public static function addExtension(string $extension): BladeInterface
+    {
+        return static::getInstance()->addExtension($extension);
+    }
+
+
+    /**
      * Register a custom Blade compiler.
      *
      * @param callable $compiler

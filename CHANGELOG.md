@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 4.5.0 - 2019-03-25
+
+### Added
+
+* [BladeInterface] Added an `addExtension()` method to use custom file extensions.
+
+--------
+
 ## 4.4.0 - 2019-02-27
 
 ### Added

@@ -19,6 +19,16 @@ class BladeTest extends TestCase
         Blade::setInstance($blade);
     }
 
+
+    public function testAddExtension1(): void
+    {
+        Blade::addExtension("custom");
+        $expected = file_get_contents(__DIR__ . "/views/view16.html");
+        $result = Blade::render("view16", ["title" => "Test Title"]);
+        $this->assertSame($expected, $result);
+    }
+
+
     public function testBasicMake()
     {
         $result = Blade::make("view1")->render();

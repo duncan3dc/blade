@@ -11,6 +11,16 @@ use Illuminate\Contracts\View\View as ViewInterface;
 interface BladeInterface extends FactoryInterface
 {
     /**
+     * Add another extension to use to search for template files.
+     *
+     * @param string $extension (eg 'blade.php', or 'template')
+     *
+     * @return $this
+     */
+    public function addExtension(string $extension): BladeInterface;
+
+
+    /**
      * Register a custom Blade compiler.
      *
      * @param callable $compiler

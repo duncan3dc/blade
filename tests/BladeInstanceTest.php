@@ -17,6 +17,16 @@ class BladeInstanceTest extends TestCase
         $this->blade = new BladeInstance(__DIR__ . "/views", Utils::getCachePath());
     }
 
+
+    public function testAddExtension1(): void
+    {
+        $this->blade->addExtension("custom");
+        $expected = file_get_contents(__DIR__ . "/views/view16.html");
+        $result = $this->blade->render("view16", ["title" => "Test Title"]);
+        $this->assertSame($expected, $result);
+    }
+
+
     public function testBasicMake()
     {
         $result = $this->blade->make("view1")->render();
