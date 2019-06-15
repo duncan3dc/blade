@@ -20,7 +20,7 @@
     },
     "require-dev": {
         "duncan3dc/object-intruder": "^0.3.0",
-        "maglnet/composer-require-checker": "^1.1",
+        "maglnet/composer-require-checker": "^2.0",
         "mockery/mockery": "^1.2",
         "phpstan/phpstan": "^0.10",
         "phpstan/phpstan-mockery": "^0.10",
