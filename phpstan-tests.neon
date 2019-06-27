@@ -1,6 +1,8 @@
 parameters:
 	ignoreErrors:
 		- '/Access to an undefined property duncan3dc\\ObjectIntruder\\Intruder::/'
+	excludes_analyse:
+		- %rootDir%/../../../tests/views/*
 
 includes:
 	- vendor/phpstan/phpstan-mockery/extension.neon

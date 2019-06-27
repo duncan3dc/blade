@@ -199,4 +199,24 @@ class BladeInstanceTest extends TestCase
         ]);
         $this->assertSame("{$expected}\n", $result);
     }
+
+
+    /**
+     * Ensure we support the basic PHP engine.
+     */
+    public function testRender1(): void
+    {
+        $result = $this->blade->render("view17", ["title" => "Test Title"]);
+        $this->assertSame(file_get_contents(__DIR__ . "/views/view17.html"), $result);
+    }
+
+
+    /**
+     * Ensure we support the basic text file engine.
+     */
+    public function testRender2(): void
+    {
+        $result = $this->blade->render("view18");
+        $this->assertSame(file_get_contents(__DIR__ . "/views/view18.html"), $result);
+    }
 }
