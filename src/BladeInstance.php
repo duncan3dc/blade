@@ -103,6 +103,13 @@ class BladeInstance implements BladeInterface
             $blade = $this->getCompiler();
             return new CompilerEngine($blade);
         });
+        $resolver->register('php', function () {
+            return new PhpEngine;
+        });
+        $resolver->register('file', function () {
+            return new FileEngine;
+        });
+
 
         $this->factory = new Factory($resolver, $this->getViewFinder(), new Dispatcher());
 
