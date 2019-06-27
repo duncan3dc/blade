@@ -8,6 +8,8 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
+use Illuminate\View\Engines\FileEngine;
+use Illuminate\View\Engines\PhpEngine;
 use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
 use function is_dir;
@@ -96,15 +98,9 @@ class BladeInstance implements BladeInterface
     {
         if ($this->factory) {
             return $this->factory;
-        }
+        }  
 
-        $resolver = new EngineResolver();
-        $resolver->register("blade", function () {
-            $blade = $this->getCompiler();
-            return new CompilerEngine($blade);
-        });
-
-        $this->factory = new Factory($resolver, $this->getViewFinder(), new Dispatcher());
+        $this->factory = new Factory($this->getResolver(), $this->getViewFinder(), new Dispatcher());
 
         return $this->factory;
     }
@@ -365,5 +361,27 @@ class BladeInstance implements BladeInterface
     public function render(string $view, array $params = []): string
     {
         return $this->make($view, $params)->render();
+    }
+    
+    
+     /**
+     * @return \Illuminate\View\Engines\EngineResolver
+     */
+    private function getResolver(): \Illuminate\View\Engines\EngineResolver
+    {
+        $resolver = new EngineResolver();
+        $resolver->register("blade", function () {
+            $blade = $this->getCompiler();
+            return new CompilerEngine($blade);
+        });
+
+        $resolver->register('file', function () {
+            return new FileEngine;
+        });
+
+        $resolver->register('php', function () {
+            return new PhpEngine;
+        });
+        return $resolver;
     }
 }
