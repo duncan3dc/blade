@@ -3,6 +3,7 @@
 namespace duncan3dc\LaravelTests;
 
 use function glob;
+use function is_iterable;
 use function unlink;
 
 final class Utils
@@ -13,8 +14,11 @@ final class Utils
 
         # Remove any previously cached files
         $files = glob("{$path}/*");
-        foreach ($files as $filename) {
-            unlink($filename);
+
+        if (is_iterable($files)) {
+            foreach ($files as $filename) {
+                unlink($filename);
+            }
         }
 
         return $path;
