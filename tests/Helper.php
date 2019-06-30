@@ -4,7 +4,7 @@ namespace duncan3dc\LaravelTests;
 
 class Helper
 {
-    public static function getStuff()
+    public static function getStuff(): string
     {
         return "stuff";
     }

@@ -3,6 +3,7 @@
 namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Laravel\BladeInstance;
+use Illuminate\Contracts\View\View;
 use PHPUnit\Framework\TestCase;
 use function file_get_contents;
 use function str_replace;
@@ -10,9 +11,11 @@ use function trim;
 
 class BladeInstanceTest extends TestCase
 {
+    /** @var BladeInstance */
     private $blade;
 
-    public function setUp()
+
+    public function setUp(): void
     {
         $this->blade = new BladeInstance(__DIR__ . "/views", Utils::getCachePath());
     }
@@ -27,35 +30,35 @@ class BladeInstanceTest extends TestCase
     }
 
 
-    public function testBasicMake()
+    public function testBasicMake(): void
     {
         $result = $this->blade->make("view1")->render();
         $this->assertSame(file_get_contents(__DIR__ . "/views/view1.blade.php"), $result);
     }
 
 
-    public function testBasicRender()
+    public function testBasicRender(): void
     {
         $result = $this->blade->render("view1");
         $this->assertSame(file_get_contents(__DIR__ . "/views/view1.blade.php"), $result);
     }
 
 
-    public function testParametersMake()
+    public function testParametersMake(): void
     {
         $result = $this->blade->make("view2", ["title" => "Test Title"])->render();
         $this->assertSame(file_get_contents(__DIR__ . "/views/view2.html"), $result);
     }
 
 
-    public function testParametersRender()
+    public function testParametersRender(): void
     {
         $result = $this->blade->render("view2", ["title" => "Test Title"]);
         $this->assertSame(file_get_contents(__DIR__ . "/views/view2.html"), $result);
     }
 
 
-    public function testAltPath()
+    public function testAltPath(): void
     {
         $this->blade->addPath(__DIR__ . "/views/alt");
         $result = $this->blade->render("view3");
@@ -63,35 +66,35 @@ class BladeInstanceTest extends TestCase
     }
 
 
-    public function testNamespace()
+    public function testNamespace(): void
     {
         $result = $this->blade->render("view4");
         $this->assertSame("duncan3dc\\Laravel", trim($result));
     }
 
 
-    public function testUse()
+    public function testUse(): void
     {
         $result = $this->blade->render("view5");
         $this->assertSame("stuff", trim($result));
     }
 
 
-    public function testRawOutput()
+    public function testRawOutput(): void
     {
         $result = $this->blade->render("view6");
         $this->assertSame(file_get_contents(__DIR__ . "/views/view6.html"), $result);
     }
 
 
-    public function testEscapedOutput()
+    public function testEscapedOutput(): void
     {
         $result = $this->blade->render("view7");
         $this->assertSame(file_get_contents(__DIR__ . "/views/view7.html"), $result);
     }
 
 
-    public function testShare()
+    public function testShare(): void
     {
         $this->blade->share("shareData", "shared");
         $result = $this->blade->render("view8");
@@ -99,9 +102,9 @@ class BladeInstanceTest extends TestCase
     }
 
 
-    public function testComposer()
+    public function testComposer(): void
     {
-        $this->blade->composer("*", function ($view) {
+        $this->blade->composer("*", function (View $view) {
             $view->with("items", ["One", "Two", "Three"]);
         });
         $result = $this->blade->render("view9");
@@ -109,9 +112,9 @@ class BladeInstanceTest extends TestCase
     }
 
 
-    public function testCreator()
+    public function testCreator(): void
     {
-        $this->blade->creator("*", function ($view) {
+        $this->blade->creator("*", function (View $view) {
             $view->with("items", ["One", "Two", "Three"]);
         });
         $result = $this->blade->render("view9");
@@ -119,26 +122,26 @@ class BladeInstanceTest extends TestCase
     }
 
 
-    public function testExists1()
+    public function testExists1(): void
     {
         $this->assertTrue($this->blade->exists("view1"));
     }
 
 
-    public function testDoesntExist()
+    public function testDoesntExist(): void
     {
         $this->assertFalse($this->blade->exists("no-such-view"));
     }
 
 
-    public function testInheritance()
+    public function testInheritance(): void
     {
         $result = $this->blade->render("view10");
         $this->assertSame(file_get_contents(__DIR__ . "/views/view10.html"), $result);
     }
 
 
-    public function testInheritanceAltPath()
+    public function testInheritanceAltPath(): void
     {
         $this->blade->addPath(__DIR__ . "/views/alt");
         $result = $this->blade->render("view11");
@@ -146,9 +149,9 @@ class BladeInstanceTest extends TestCase
     }
 
 
-    public function testCustomCompiler()
+    public function testCustomCompiler(): void
     {
-        $this->blade->extend(function ($value) {
+        $this->blade->extend(function (string $value) {
             return str_replace("Original", "New", $value);
         });
         $result = $this->blade->render("view12");
@@ -156,9 +159,9 @@ class BladeInstanceTest extends TestCase
     }
 
 
-    public function testCustomDirective()
+    public function testCustomDirective(): void
     {
-        $this->blade->directive("normandie", function ($parameter) {
+        $this->blade->directive("normandie", function (string $parameter) {
             $parameter = trim($parameter, "()");
             return "inguz({$parameter});";
         });
@@ -168,7 +171,7 @@ class BladeInstanceTest extends TestCase
     }
 
 
-    public function customConditionProvider()
+    public function customConditionProvider(): iterable
     {
         yield [false, "off"];
         yield [true, "on"];
@@ -188,7 +191,7 @@ class BladeInstanceTest extends TestCase
     /**
      * @dataProvider customConditionProvider
      */
-    public function testCustomConditionArguments(bool $global, string $expected)
+    public function testCustomConditionArguments(bool $global, string $expected): void
     {
         $this->blade->if("global", function (bool $global) {
             return $global;

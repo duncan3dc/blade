@@ -4,6 +4,7 @@ namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Laravel\Blade;
 use duncan3dc\Laravel\BladeInstance;
+use Illuminate\Contracts\View\View;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use function file_get_contents;
@@ -13,7 +14,7 @@ use function trim;
 class BladeTest extends TestCase
 {
 
-    public function setUp()
+    public function setUp(): void
     {
         $blade = new BladeInstance(__DIR__ . "/views", Utils::getCachePath());
         Blade::setInstance($blade);
@@ -29,35 +30,35 @@ class BladeTest extends TestCase
     }
 
 
-    public function testBasicMake()
+    public function testBasicMake(): void
     {
         $result = Blade::make("view1")->render();
         $this->assertSame(file_get_contents(__DIR__ . "/views/view1.blade.php"), $result);
     }
 
 
-    public function testBasicRender()
+    public function testBasicRender(): void
     {
         $result = Blade::render("view1");
         $this->assertSame(file_get_contents(__DIR__ . "/views/view1.blade.php"), $result);
     }
 
 
-    public function testParametersMake()
+    public function testParametersMake(): void
     {
         $result = Blade::make("view2", ["title" => "Test Title"])->render();
         $this->assertSame(file_get_contents(__DIR__ . "/views/view2.html"), $result);
     }
 
 
-    public function testParametersRender()
+    public function testParametersRender(): void
     {
         $result = Blade::render("view2", ["title" => "Test Title"]);
         $this->assertSame(file_get_contents(__DIR__ . "/views/view2.html"), $result);
     }
 
 
-    public function testAltPath()
+    public function testAltPath(): void
     {
         Blade::addPath(__DIR__ . "/views/alt");
         $result = Blade::render("view3");
@@ -65,35 +66,35 @@ class BladeTest extends TestCase
     }
 
 
-    public function testNamespace()
+    public function testNamespace(): void
     {
         $result = Blade::render("view4");
         $this->assertSame("duncan3dc\\Laravel", trim($result));
     }
 
 
-    public function testUse()
+    public function testUse(): void
     {
         $result = Blade::render("view5");
         $this->assertSame("stuff", trim($result));
     }
 
 
-    public function testRawOutput()
+    public function testRawOutput(): void
     {
         $result = Blade::render("view6");
         $this->assertSame(file_get_contents(__DIR__ . "/views/view6.html"), $result);
     }
 
 
-    public function testEscapedOutput()
+    public function testEscapedOutput(): void
     {
         $result = Blade::render("view7");
         $this->assertSame(file_get_contents(__DIR__ . "/views/view7.html"), $result);
     }
 
 
-    public function testShare()
+    public function testShare(): void
     {
         Blade::share("shareData", "shared");
         $result = Blade::render("view8");
@@ -101,9 +102,9 @@ class BladeTest extends TestCase
     }
 
 
-    public function testComposer()
+    public function testComposer(): void
     {
-        Blade::composer("*", function ($view) {
+        Blade::composer("*", function (View $view) {
             $view->with("items", ["One", "Two", "Three"]);
         });
         $result = Blade::render("view9");
@@ -111,9 +112,9 @@ class BladeTest extends TestCase
     }
 
 
-    public function testCreator()
+    public function testCreator(): void
     {
-        Blade::creator("*", function ($view) {
+        Blade::creator("*", function (View $view) {
             $view->with("items", ["One", "Two", "Three"]);
         });
         $result = Blade::render("view9");
@@ -121,19 +122,19 @@ class BladeTest extends TestCase
     }
 
 
-    public function testExists1()
+    public function testExists1(): void
     {
         $this->assertTrue(Blade::exists("view1"));
     }
 
 
-    public function testDoesntExist()
+    public function testDoesntExist(): void
     {
         $this->assertFalse(Blade::exists("no-such-view"));
     }
 
 
-    public function testOverrideInstance()
+    public function testOverrideInstance(): void
     {
         $this->assertInstanceOf(BladeInstance::class, Blade::getInstance());
         $blade = Mockery::mock(BladeInstance::class);
@@ -142,9 +143,9 @@ class BladeTest extends TestCase
     }
 
 
-    public function testCustomCompiler()
+    public function testCustomCompiler(): void
     {
-        Blade::extend(function ($value) {
+        Blade::extend(function (string $value) {
             return str_replace("Original", "New", $value);
         });
         $result = Blade::render("view12");

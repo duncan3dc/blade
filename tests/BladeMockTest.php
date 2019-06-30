@@ -24,7 +24,7 @@ class BladeMockTest extends TestCase
     private $factory;
 
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->blade = new BladeInstance(__DIR__ . "/views", Utils::getCachePath());
 
@@ -38,63 +38,63 @@ class BladeMockTest extends TestCase
     }
 
 
-    public function testAddPath()
+    public function testAddPath(): void
     {
         $this->finder->shouldReceive("addLocation")->once()->with("/tmp");
         $this->assertSame($this->blade, $this->blade->addPath("/tmp"));
     }
 
 
-    public function testExists()
+    public function testExists(): void
     {
         $this->factory->shouldReceive("exists")->once()->with("test-view")->andReturn(true);
         $this->assertTrue($this->blade->exists("test-view"));
     }
 
 
-    public function testDoesntExist()
+    public function testDoesntExist(): void
     {
         $this->factory->shouldReceive("exists")->once()->with("test-view")->andReturn(false);
         $this->assertFalse($this->blade->exists("test-view"));
     }
 
 
-    public function testShare()
+    public function testShare(): void
     {
         $this->factory->shouldReceive("share")->once()->with("site", "main");
         $this->assertSame($this->blade, $this->blade->share("site", "main"));
     }
 
 
-    public function testComposer()
+    public function testComposer(): void
     {
         $this->factory->shouldReceive("composer")->once()->with("site", "main");
         $this->assertSame($this->blade, $this->blade->composer("site", "main"));
     }
 
 
-    public function testCreator()
+    public function testCreator(): void
     {
         $this->factory->shouldReceive("creator")->once()->with("site", "main");
         $this->assertSame($this->blade, $this->blade->creator("site", "main"));
     }
 
 
-    public function testAddNamespace()
+    public function testAddNamespace(): void
     {
         $this->factory->shouldReceive("addNamespace")->once()->with("name", "hint");
         $this->assertSame($this->blade, $this->blade->addNamespace("name", "hint"));
     }
 
 
-    public function testReplaceNamespace()
+    public function testReplaceNamespace(): void
     {
         $this->factory->shouldReceive("replaceNamespace")->once()->with("name", "hint");
         $this->assertSame($this->blade, $this->blade->replaceNamespace("name", "hint"));
     }
 
 
-    public function testFile()
+    public function testFile(): void
     {
         $view = Mockery::mock(ViewInterface::class);
         $this->factory->shouldReceive("file")->once()->with("stuff", ["one" => 1], ["two" => 2])->andReturn($view);
@@ -102,7 +102,7 @@ class BladeMockTest extends TestCase
     }
 
 
-    public function testMake()
+    public function testMake(): void
     {
         $view = Mockery::mock(ViewInterface::class);
         $this->factory->shouldReceive("make")->once()->with("stuff", ["one" => 1], ["two" => 2])->andReturn($view);
@@ -110,7 +110,7 @@ class BladeMockTest extends TestCase
     }
 
 
-    public function testRender()
+    public function testRender(): void
     {
         $view = Mockery::mock(ViewInterface::class);
         $view->shouldReceive("render")->once()->with()->andReturn("content");

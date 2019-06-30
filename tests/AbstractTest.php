@@ -9,17 +9,22 @@ use PHPUnit\Framework\TestCase;
 
 abstract class AbstractTest extends TestCase
 {
+    /** @var BladeCompiler */
     private $blade;
+
+    /** @var Directives */
     protected $directives;
 
-    public function setUp()
+
+    public function setUp(): void
     {
         $this->blade = new BladeCompiler(new Filesystem(), "/tmp/phpunit/cache/views");
 
         $this->directives = new Directives();
     }
 
-    public function assertTemplateString($expected, $template)
+
+    public function assertTemplateString(string $expected, string $template): void
     {
         $this->directives->register($this->blade);
 

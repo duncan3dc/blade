@@ -10,12 +10,14 @@ use PHPUnit\Framework\TestCase;
 
 class DirectivesTest extends TestCase
 {
+    /** @var Directives */
     private $directives;
 
     /** @var BladeCompiler&MockInterface */
     private $compiler;
 
-    public function setUp()
+
+    public function setUp(): void
     {
         $this->directives = (new Directives())
             ->withoutNamespace()
@@ -27,13 +29,13 @@ class DirectivesTest extends TestCase
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
 
 
-    public function testDefaults()
+    public function testDefaults(): void
     {
         $directives = new Directives();
 
@@ -47,7 +49,7 @@ class DirectivesTest extends TestCase
     }
 
 
-    public function testWithNamespace()
+    public function testWithNamespace(): void
     {
         $this->directives->withNamespace();
 
@@ -58,7 +60,7 @@ class DirectivesTest extends TestCase
     }
 
 
-    public function testWithUse()
+    public function testWithUse(): void
     {
         $this->directives->withUse();
 
@@ -69,7 +71,7 @@ class DirectivesTest extends TestCase
     }
 
 
-    public function testWithCss()
+    public function testWithCss(): void
     {
         $this->directives->withCss();
 
@@ -80,7 +82,7 @@ class DirectivesTest extends TestCase
     }
 
 
-    public function testWithJs()
+    public function testWithJs(): void
     {
         $this->directives->withJs();
 
