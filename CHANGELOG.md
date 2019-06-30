@@ -5,6 +5,18 @@ Changelog
 
 --------
 
+## 4.6.0 - 2019-06-30
+
+### Added
+
+* [Blade/BladeInstance] Add support for PHP templates and CSS files.
+
+### Fixed
+
+* [BladeInterface] Correct the return value of `composer()` and `creator()`.
+
+--------
+
 ## 4.5.0 - 2019-03-25
 
 ### Added
