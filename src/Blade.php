@@ -152,9 +152,9 @@ class Blade
      * @param string $key The name of the composer to register
      * @param mixed $value The closure or class to use
      *
-     * @return BladeInterface
+     * @return array
      */
-    public static function composer(string $key, $value): BladeInterface
+    public static function composer(string $key, $value): array
     {
         return static::getInstance()->composer($key, $value);
     }
@@ -166,9 +166,9 @@ class Blade
      * @param string $key The name of the creator to register
      * @param mixed $value The closure or class to use
      *
-     * @return BladeInterface
+     * @return array
      */
-    public static function creator(string $key, $value): BladeInterface
+    public static function creator(string $key, $value): array
     {
         return static::getInstance()->creator($key, $value);
     }

@@ -89,9 +89,9 @@ interface BladeInterface extends FactoryInterface
      * @param string $key The name of the composer to register
      * @param mixed $value The closure or class to use
      *
-     * @return $this
+     * @return array
      */
-    public function composer($key, $value): BladeInterface;
+    public function composer($key, $value): array;
 
 
     /**
@@ -100,9 +100,9 @@ interface BladeInterface extends FactoryInterface
      * @param string $key The name of the creator to register
      * @param mixed $value The closure or class to use
      *
-     * @return $this
+     * @return array
      */
-    public function creator($key, $value): BladeInterface;
+    public function creator($key, $value): array;
 
 
     /**

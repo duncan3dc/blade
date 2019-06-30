@@ -285,13 +285,11 @@ class BladeInstance implements BladeInterface
      * @param string $key The name of the composer to register
      * @param mixed $value The closure or class to use
      *
-     * @return $this
+     * @return array
      */
-    public function composer($key, $value): BladeInterface
+    public function composer($key, $value): array
     {
-        $this->getViewFactory()->composer($key, $value);
-
-        return $this;
+        return $this->getViewFactory()->composer($key, $value);
     }
 
 
@@ -301,13 +299,11 @@ class BladeInstance implements BladeInterface
      * @param string $key The name of the creator to register
      * @param mixed $value The closure or class to use
      *
-     * @return $this
+     * @return array
      */
-    public function creator($key, $value): BladeInterface
+    public function creator($key, $value): array
     {
-        $this->getViewFactory()->creator($key, $value);
-
-        return $this;
+        return $this->getViewFactory()->creator($key, $value);
     }
 
 
