@@ -61,6 +61,7 @@ class BladeInstance implements BladeInterface
      *
      * @param string $path The default path for views
      * @param string $cache The default path for cached php
+     * @param DirectivesInterface $directives
      */
     public function __construct(string $path, string $cache, DirectivesInterface $directives = null)
     {
