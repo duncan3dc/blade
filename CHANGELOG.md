@@ -5,6 +5,19 @@ Changelog
 
 --------
 
+## 4.7.0 - 2019-09-05
+
+### Added
+
+* [Support] Add support for Laravel 6.0.
+
+### Changed
+
+* [Support] Drop support for Laravel 5.5, 5.6, 5.7 and 5.8.
+* [Support] Drop support for PHP 7.1.
+
+--------
+
 ## 4.6.0 - 2019-06-30
 
 ### Added
