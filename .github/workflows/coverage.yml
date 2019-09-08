@@ -1,0 +1,25 @@
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Create Docker Container
+        run: |
+          docker build . -t ci-image --build-arg PHP_VERSION=7.3 --build-arg COVERAGE=pcov
+          docker run --interactive --detach \
+            --volume ${{ github.workspace }}:/app \
+            --env CODECOV_TOKEN=${{ secrets.CODECOV_TOKEN }} \
+            --name ci ci-image
+
+      - name: Install Dependencies
+        run: docker exec ci composer update --no-interaction --no-ansi --prefer-dist
+
+      - name: PHPUnit
+        run: docker exec ci vendor/bin/phpunit --coverage-clover=coverage.xml
+
+      - name: Code Coverage
+        run: docker exec ci bash -c "bash <(curl -s https://codecov.io/bash)"
