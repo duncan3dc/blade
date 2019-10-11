@@ -93,6 +93,21 @@ class Blade
 
 
     /**
+     * Register a component alias directive.
+     *
+     * @param string $path Path to blade component e.g. `components.radio-input`.
+     * @param string|null $alias Name of the component alias. If null, alias will be created
+     *                           from last item of exploed path e.g. `radio-input`.
+     *
+     * @return BladeInterface
+     */
+    public function component(string $path, string $alias=null): BladeInterface
+    {
+        return static::getInstance()->component($path, $alias);
+    }
+
+
+    /**
      * Register an custom conditional directive.
      *
      * @param string $name
