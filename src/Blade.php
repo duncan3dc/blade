@@ -96,8 +96,7 @@ class Blade
      * Register a component alias directive.
      *
      * @param string $path Path to blade component e.g. `components.radio-input`.
-     * @param string|null $alias Name of the component alias. If null, alias will be created
-     *                           from last item of exploed path e.g. `radio-input`.
+     * @param string|null $alias Name of the component alias. By default the component filename will be used
      *
      * @return BladeInterface
      */
