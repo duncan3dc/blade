@@ -3,6 +3,7 @@
 namespace duncan3dc\Laravel;
 
 use Illuminate\View\Compilers\BladeCompiler;
+
 use function assert;
 use function in_array;
 use function is_string;
