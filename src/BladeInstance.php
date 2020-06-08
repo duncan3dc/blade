@@ -22,9 +22,9 @@ use function mkdir;
 class BladeInstance implements BladeInterface
 {
     /**
-     * @var string $path The default path for views.
+     * @var array $paths The default path for views.
      */
-    private $path;
+    private $paths;
 
     /**
      * @var string $cache The default path for cached php.
@@ -60,13 +60,16 @@ class BladeInstance implements BladeInterface
     /**
      * Create a new instance of the blade view factory.
      *
-     * @param string $path The default path for views
+     * @param string|array $path The default path for views
      * @param string $cache The default path for cached php
      * @param DirectivesInterface $directives
      */
-    public function __construct(string $path, string $cache, DirectivesInterface $directives = null)
+    public function __construct($path, string $cache, DirectivesInterface $directives = null)
     {
-        $this->path = $path;
+        if (!is_array($path)) {
+            $path = [$path];
+        }
+        $this->paths = $path;
         $this->cache = $cache;
 
         if ($directives === null) {
@@ -108,7 +111,7 @@ class BladeInstance implements BladeInterface
     private function getViewFinder(): FileViewFinder
     {
         if (!$this->finder) {
-            $this->finder = new FileViewFinder(new Filesystem(), [$this->path]);
+            $this->finder = new FileViewFinder(new Filesystem(), $this->paths);
         }
 
         return $this->finder;
