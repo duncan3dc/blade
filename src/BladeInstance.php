@@ -59,6 +59,23 @@ class BladeInstance implements BladeInterface
     private $conditionHandler;
 
 
+    public static function fromPaths(array $paths, string $cache, ?DirectivesInterface $directives = null): BladeInterface
+    {
+        $instance = null;
+        foreach ($paths as $path) {
+            if ($instance === null) {
+                $instance = new self($path, $cache, $directives);
+                continue;
+            }
+            $instance->addPath($path);
+        }
+        if ($instance === null) {
+            throw new \InvalidArgumentException("You must provide at least one view template path");
+        }
+        return $instance;
+    }
+
+
     /**
      * Create a new instance of the blade view factory.
      *

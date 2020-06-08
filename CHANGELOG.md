@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## 4.16.0 - 2025-05-13
+
+### Changed
+
+* [BladeInstance] Added a named constructor for supporting multiple paths.
+
+--------
+
 ## 4.15.0 - 2025-03-06
 
 ### Changed

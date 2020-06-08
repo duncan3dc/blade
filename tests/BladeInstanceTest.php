@@ -22,6 +22,22 @@ class BladeInstanceTest extends TestCase
     }
 
 
+    public function testFromPaths1(): void
+    {
+        $blade = BladeInstance::fromPaths([__DIR__ . "/views", __DIR__ . "/views/alt"], Utils::getCachePath());
+        $this->assertSame(file_get_contents(__DIR__ . "/views/view1.blade.php"), $blade->render("view1"));
+        self::assertSame(file_get_contents(__DIR__ . "/views/alt/view3.blade.php"), $blade->render("view3"));
+    }
+
+
+    public function testFromPaths2(): void
+    {
+        self::expectException(\InvalidArgumentException::class);
+        self::expectExceptionMessage("You must provide at least one view template path");
+        BladeInstance::fromPaths([], Utils::getCachePath());
+    }
+
+
     public function testAddExtension1(): void
     {
         $this->blade->addExtension("custom");
