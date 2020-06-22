@@ -210,7 +210,7 @@ class BladeInstance implements BladeInterface
     {
         $this
             ->getCompiler()
-            ->component($path, $alias);
+            ->aliasComponent($path, $alias);
 
         return $this;
     }
