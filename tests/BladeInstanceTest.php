@@ -198,7 +198,7 @@ class BladeInstanceTest extends TestCase
     /**
      * @dataProvider customConditionProvider
      */
-    public function testCustomConditions(bool $global, string $expected)
+    public function testCustomConditions(bool $global, string $expected): void
     {
         $this->blade->if("global", function () use ($global) {
             return $global;

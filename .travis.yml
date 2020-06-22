@@ -34,7 +34,7 @@ jobs:
 
     - stage: code quality
       script:
-        - vendor/bin/phpstan analyse --level=max src
+        - vendor/bin/phpstan analyse --level=max --configuration=phpstan-src.neon src
         - vendor/bin/phpstan analyse --level=max --configuration=phpstan-tests.neon tests
 
     - stage: coverage

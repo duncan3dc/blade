@@ -1,4 +1,5 @@
 parameters:
+	checkMissingIterableValueType: false
 	ignoreErrors:
 		- '/Access to an undefined property duncan3dc\\ObjectIntruder\\Intruder::/'
 	excludes_analyse:

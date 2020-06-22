@@ -33,7 +33,7 @@ jobs:
 
       - name: PHPStan
         run: |
-          docker exec ci vendor/bin/phpstan analyse --level=max src
+          docker exec ci vendor/bin/phpstan analyse --level=max --configuration=phpstan-src.neon src
           docker exec ci vendor/bin/phpstan analyse --level=max --configuration=phpstan-tests.neon tests
 
       - name: Coding Standards
