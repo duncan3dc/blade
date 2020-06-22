@@ -1,5 +1,5 @@
 {
-    "name": "duncan3dc/blade",
+    "name": "motian/blade",
     "type": "library",
     "description": "Use Laravel Blade templates without the full Laravel framework",
     "keywords": ["laravel", "templating", "template", "views"],
