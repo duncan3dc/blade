@@ -3,6 +3,14 @@ Changelog
 
 ## x.y.z - UNRELEASED
 
+## 4.10.0 - 2020-06-29
+
+### Added
+
+* [BladeInterface] Added a `aliasComponent()` method to replace the deprecated `component()` method.
+
+--------
+
 ## 4.9.0 - 2020-06-26
 
 ### Added
@@ -203,26 +211,3 @@ Changelog
 ### Changed
 
 * [Support] Base this version on Laravel 5.0 which has a new escaping content style.
-commit 20b7f5ec0c577ae3fdd58f553c4d7e727dfb9882 (HEAD -> component, origin/component)
-Author: Craig Duncan <git@duncanc.co.uk>
-Date:   Sat Oct 12 18:55:07 2019 +0100
-
-    Update the coding standarsd for PSR-12
-
-commit 88f8348c5e43167e089489783749bd5e4824ed62
-Author: Craig Duncan <git@duncanc.co.uk>
-Date:   Sat Oct 12 18:48:59 2019 +0100
-
-    Tidy up the component feature and add tests
-
-commit 52862446b7b423d4e2ca0efaf514e156d3f296ef
-Author: Marc Wiest <marc.wiest@gmail.com>
-Date:   Fri Oct 11 22:28:14 2019 +0200
-
-    Added ability to register component aliases
-
-commit 0cf01eefd0275f34e9e5fec62f8ea0936deaacf9 (origin/master, origin/HEAD, master)
-Author: Craig Duncan <git@duncanc.co.uk>
-Date:   Sun Sep 8 22:31:20 2019 +0100
-
-    Create a GitHub action for testing

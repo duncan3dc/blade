@@ -172,6 +172,24 @@ class BladeInstanceTest extends TestCase
     }
 
 
+    public function testAliasComponent1(): void
+    {
+        $this->blade->aliasComponent("self_help_fest");
+
+        $result = $this->blade->render("view19");
+        $this->assertSame(file_get_contents(__DIR__ . "/views/view19.html"), $result);
+    }
+
+
+    public function testAliasComponent2(): void
+    {
+        $this->blade->aliasComponent("self_help_fest", "selfhelp");
+
+        $result = $this->blade->render("view20");
+        $this->assertSame(file_get_contents(__DIR__ . "/views/view20.html"), $result);
+    }
+
+
     public function testComponent1(): void
     {
         $this->blade->component("self_help_fest");

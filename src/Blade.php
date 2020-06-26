@@ -100,6 +100,15 @@ class Blade
      *
      * @return BladeInterface
      */
+    public function aliasComponent(string $path, string $alias=null): BladeInterface
+    {
+        return static::getInstance()->aliasComponent($path, $alias);
+    }
+
+
+    /**
+     * @deprecated Use aliasComponent()
+     */
     public function component(string $path, string $alias=null): BladeInterface
     {
         return static::getInstance()->component($path, $alias);
