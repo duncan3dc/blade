@@ -13,6 +13,7 @@ matrix:
 
 env:
   - LARAVEL_VERSION=""
+  - LARAVEL_VERSION="6.0"
 
 install:
   - travis/laravel.php

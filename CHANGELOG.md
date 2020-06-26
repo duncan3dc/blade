@@ -3,6 +3,12 @@ Changelog
 
 ## x.y.z - UNRELEASED
 
+## 4.9.0 - 2020-06-26
+
+### Added
+
+* [Support] Add support for Laravel 7.0.
+
 --------
 
 ## 4.8.0 - 2019-10-12
