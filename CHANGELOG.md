@@ -3,6 +3,15 @@ Changelog
 
 ## x.y.z - UNRELEASED
 
+## 4.11.0 - 2021-07-24
+
+### Changed
+
+* [Support] Drop support for PHP 7.2.
+* [Support] Added support for PHP 8.0.
+
+--------
+
 ## 4.10.0 - 2020-06-29
 
 ### Added

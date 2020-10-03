@@ -11,7 +11,8 @@ jobs:
       matrix:
         php:
           - 7.3
-          - 7.4-rc
+          - 7.4
+          - 8.0
         composer:
           - ""
           - "--prefer-lowest"
