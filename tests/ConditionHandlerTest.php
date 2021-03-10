@@ -11,7 +11,7 @@ class ConditionHandlerTest extends TestCase
     private $handler;
 
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->handler = new ConditionHandler();
     }
