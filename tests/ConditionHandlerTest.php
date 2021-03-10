@@ -11,7 +11,7 @@ class ConditionHandlerTest extends TestCase
     private $handler;
 
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->handler = new ConditionHandler();
     }
@@ -46,7 +46,7 @@ class ConditionHandlerTest extends TestCase
         });
 
         $result = $this->handler->check("test");
-        $this->assertSame(true, $result);
+        $this->assertTrue($result);
     }
     public function testCheck3(): void
     {

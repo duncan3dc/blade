@@ -16,7 +16,7 @@ class BladeInstanceTest extends TestCase
     private $blade;
 
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->blade = new BladeInstance(__DIR__ . "/views", Utils::getCachePath());
     }

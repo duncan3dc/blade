@@ -15,7 +15,7 @@ use function trim;
 class BladeTest extends TestCase
 {
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $blade = new BladeInstance(__DIR__ . "/views", Utils::getCachePath());
         Blade::setInstance($blade);
