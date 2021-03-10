@@ -17,7 +17,7 @@ class DirectivesTest extends TestCase
     private $compiler;
 
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->directives = (new Directives())
             ->withoutNamespace()
@@ -29,7 +29,7 @@ class DirectivesTest extends TestCase
     }
 
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         Mockery::close();
     }

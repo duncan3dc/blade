@@ -16,7 +16,7 @@ abstract class AbstractTest extends TestCase
     protected $directives;
 
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->blade = new BladeCompiler(new Filesystem(), "/tmp/phpunit/cache/views");
 
