@@ -16,7 +16,7 @@
         "illuminate/events": "^6.0 || ^7.0",
         "illuminate/filesystem": "^6.0 || ^7.0",
         "illuminate/view": "^6.0 || ^7.0",
-        "php": "^7.2"
+        "php": "^7.3"
     },
     "require-dev": {
         "duncan3dc/object-intruder": "^0.3.0",
