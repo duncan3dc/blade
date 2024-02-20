@@ -2,6 +2,7 @@
 
 namespace duncan3dc\Laravel;
 
+use Illuminate\Container\Container;
 use Illuminate\Contracts\View\View as ViewInterface;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
@@ -15,7 +16,6 @@ use Illuminate\View\FileViewFinder;
 
 use function assert;
 use function is_dir;
-use function method_exists;
 use function mkdir;
 
 /**
@@ -135,8 +135,6 @@ class BladeInstance implements BladeInterface
 
     /**
      * Get the laravel view factory.
-     *
-     * @return Factory
      */
     private function getViewFactory(): Factory
     {
@@ -145,6 +143,11 @@ class BladeInstance implements BladeInterface
         }
 
         $this->factory = new Factory($this->getResolver(), $this->getViewFinder(), new Dispatcher());
+
+        # Unfortunately the component() method pulls from the global container state, so we need to register our view factory there
+        $container = Container::getInstance();
+        $container->instance(\Illuminate\Contracts\View\Factory::class, $this->factory);
+        $container->instance("view", $this->factory);
 
         return $this->factory;
     }
@@ -225,28 +228,18 @@ class BladeInstance implements BladeInterface
 
     public function aliasComponent(string $path, ?string $alias = null): BladeInterface
     {
-        $compiler = $this->getCompiler();
-        if (method_exists($compiler, "aliasComponent")) {
-            $compiler->aliasComponent($path, $alias);
-        } else {
-            $compiler->component($path, $alias);
-        }
-
+        $this
+            ->getCompiler()
+            ->aliasComponent($path, $alias);
         return $this;
     }
 
 
-    /**
-     * @deprecated Use aliasComponent()
-     */
-    public function component(string $path, ?string $alias = null): BladeInterface
+    public function component(string $class, ?string $alias = null, string $prefix = ""): BladeInterface
     {
-        $compiler = $this->getCompiler();
-        if (method_exists($compiler, "aliasComponent")) {
-            $compiler->aliasComponent($path, $alias);
-        } else {
-            $compiler->component($path, $alias);
-        }
+        $this
+            ->getCompiler()
+            ->component($class, $alias, $prefix);
 
         return $this;
     }
