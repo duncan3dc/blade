@@ -22,11 +22,12 @@
         "duncan3dc/object-intruder": "^0.3.0 || ^1.0",
         "maglnet/composer-require-checker": "^2.0 || ^3.0",
         "mockery/mockery": "^1.4",
-        "phpstan/phpstan": "^0.12.40",
+        "nikic/php-parser": "^4.18",
+        "phpstan/phpstan": "^0.12.100",
         "phpstan/phpstan-mockery": "^0.12.5",
         "phpstan/phpstan-phpunit": "^0.12.11",
         "squizlabs/php_codesniffer": "^3.6",
-        "phpunit/phpunit": "^8.3"
+        "phpunit/phpunit": "^8.5.36"
     },
     "autoload": {
         "psr-4": {"duncan3dc\\Laravel\\": "src/"}
