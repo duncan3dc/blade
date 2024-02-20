@@ -4,6 +4,7 @@ namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Laravel\BladeInstance;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Blade;
 use PHPUnit\Framework\TestCase;
 
 use function file_get_contents;
@@ -203,7 +204,7 @@ class BladeInstanceTest extends TestCase
     {
         $this->blade->component("self_help_fest", "selfhelp");
 
-        $result = $this->blade->render("view20");
+        $result = $this->blade->render("view21");
         $this->assertSame(file_get_contents(__DIR__ . "/views/view20.html"), $result);
     }
 

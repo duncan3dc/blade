@@ -209,28 +209,19 @@ class BladeInstance implements BladeInterface
     /** @inheritDoc */
     public function aliasComponent(string $path, string $alias = null): BladeInterface
     {
-        $compiler = $this->getCompiler();
-        if (method_exists($compiler, "aliasComponent")) {
-            $compiler->aliasComponent($path, $alias);
-        } else {
-            $compiler->component($path, $alias);
-        }
-
+        $this
+            ->getCompiler()
+            ->aliasComponent($path, $alias);
         return $this;
     }
 
 
-    /**
-     * @deprecated Use aliasComponent()
-     */
-    public function component(string $path, string $alias = null): BladeInterface
+    /** @inheritDoc */
+    public function component(string $class, string $alias = null, string $prefix = ""): BladeInterface
     {
-        $compiler = $this->getCompiler();
-        if (method_exists($compiler, "aliasComponent")) {
-            $compiler->aliasComponent($path, $alias);
-        } else {
-            $compiler->component($path, $alias);
-        }
+        $this
+            ->getCompiler()
+            ->component($class, $alias, $prefix);
 
         return $this;
     }

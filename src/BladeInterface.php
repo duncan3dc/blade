@@ -53,9 +53,11 @@ interface BladeInterface extends FactoryInterface
 
 
     /**
-     * @deprecated Use aliasComponent()
+     * Register a class-based component alias directive.
+     *
+     * @return $this
      */
-    public function component(string $path, string $alias = null): BladeInterface;
+    public function component(string $class, string $alias = null, string $prefix = ""): BladeInterface;
 
 
     /**
