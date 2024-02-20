@@ -7,7 +7,7 @@ Full documentation is available at http://duncan3dc.github.io/blade/
 PHPDoc API documentation is also available at [http://duncan3dc.github.io/blade/api/](http://duncan3dc.github.io/blade/api/namespaces/duncan3dc.Laravel.html)  
 
 [![release](https://poser.pugx.org/duncan3dc/blade/version.svg)](https://packagist.org/packages/duncan3dc/blade)
-[![build](https://travis-ci.org/duncan3dc/blade.svg?branch=master)](https://travis-ci.org/duncan3dc/blade)
+[![build](https://github.com/duncan3dc/blade/workflows/.github/workflows/buildcheck.yml/badge.svg?branch=main)](https://github.com/duncan3dc/blade/actions?query=branch%3Amain+workflow%3A.github%2Fworkflows%2Fbuildcheck.yml)
 [![coverage](https://codecov.io/gh/duncan3dc/blade/graph/badge.svg)](https://codecov.io/gh/duncan3dc/blade)
 
 
