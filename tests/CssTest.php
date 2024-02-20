@@ -4,7 +4,6 @@ namespace duncan3dc\LaravelTests;
 
 class CssTest extends AbstractTest
 {
-
     public function testString(): void
     {
         $this->assertTemplateString("<link rel='stylesheet' type='text/css' href='/css/ok.css'>", "@css('ok')");

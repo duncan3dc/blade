@@ -4,7 +4,6 @@ namespace duncan3dc\LaravelTests;
 
 class JsTest extends AbstractTest
 {
-
     public function testString(): void
     {
         $this->assertTemplateString("<script type='text/javascript' src='/js/ok.js'></script>", "@js('ok')");
