@@ -3,6 +3,15 @@ Changelog
 
 ## x.y.z - UNRELEASED
 
+## 4.13.0 - 2024-02-20
+
+### Changed
+
+* [Support] Added support for Laravel 8, 9, and 10.
+* [Support] Drop support for Laravel 6 and 7.
+
+--------
+
 ## 4.12.0 - 2024-02-20
 
 ### Changed
