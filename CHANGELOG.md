@@ -1,7 +1,13 @@
 Changelog
 =========
 
-## x.y.z - UNRELEASED
+## 4.14.0 - 2024-07-23
+
+### Changed
+
+* [Support] Added support for Laravel 11.
+
+--------
 
 ## 4.13.0 - 2024-02-20
 
