@@ -1,8 +1,8 @@
 parameters:
-	checkMissingIterableValueType: false
 	ignoreErrors:
+		- identifier: missingType.iterableValue
 		- '/Access to an undefined property duncan3dc\\ObjectIntruder\\Intruder::/'
-	excludes_analyse:
+	excludePaths:
 		- %rootDir%/../../../tests/views/*
 
 includes:

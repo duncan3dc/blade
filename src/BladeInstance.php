@@ -13,6 +13,7 @@ use Illuminate\View\Engines\PhpEngine;
 use Illuminate\View\Factory;
 use Illuminate\View\FileViewFinder;
 
+use function assert;
 use function is_dir;
 use function method_exists;
 use function mkdir;
@@ -250,6 +251,7 @@ class BladeInstance implements BladeInterface
             $this->conditionHandler = new ConditionHandler();
             $this->share("_condition_handler", $this->conditionHandler);
         }
+        assert($this->conditionHandler instanceof ConditionHandler);
 
         $this->conditionHandler->add($name, $handler);
 
@@ -316,7 +318,7 @@ class BladeInstance implements BladeInterface
      * Register a composer.
      *
      * @param string $key The name of the composer to register
-     * @param mixed $value The closure or class to use
+     * @param \Closure|string $value The closure or class to use
      *
      * @return array
      */
@@ -330,7 +332,7 @@ class BladeInstance implements BladeInterface
      * Register a creator.
      *
      * @param string $key The name of the creator to register
-     * @param mixed $value The closure or class to use
+     * @param \Closure|string $value The closure or class to use
      *
      * @return array
      */
