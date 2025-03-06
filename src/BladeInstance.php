@@ -64,9 +64,8 @@ class BladeInstance implements BladeInterface
      *
      * @param string $path The default path for views
      * @param string $cache The default path for cached php
-     * @param DirectivesInterface $directives
      */
-    public function __construct(string $path, string $cache, DirectivesInterface $directives = null)
+    public function __construct(string $path, string $cache, ?DirectivesInterface $directives = null)
     {
         $this->path = $path;
         $this->cache = $cache;
@@ -207,8 +206,7 @@ class BladeInstance implements BladeInterface
     }
 
 
-    /** @inheritDoc */
-    public function aliasComponent(string $path, string $alias = null): BladeInterface
+    public function aliasComponent(string $path, ?string $alias = null): BladeInterface
     {
         $compiler = $this->getCompiler();
         if (method_exists($compiler, "aliasComponent")) {
@@ -224,7 +222,7 @@ class BladeInstance implements BladeInterface
     /**
      * @deprecated Use aliasComponent()
      */
-    public function component(string $path, string $alias = null): BladeInterface
+    public function component(string $path, ?string $alias = null): BladeInterface
     {
         $compiler = $this->getCompiler();
         if (method_exists($compiler, "aliasComponent")) {
