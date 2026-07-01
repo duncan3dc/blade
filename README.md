@@ -7,7 +7,7 @@ Full documentation is available at http://duncan3dc.github.io/blade/
 PHPDoc API documentation is also available at [http://duncan3dc.github.io/blade/api/](http://duncan3dc.github.io/blade/api/namespaces/duncan3dc.Laravel.html)  
 
 [![release](https://poser.pugx.org/duncan3dc/blade/version.svg)](https://packagist.org/packages/duncan3dc/blade)
-[![build](https://github.com/duncan3dc/blade/workflows/.github/workflows/buildcheck.yml/badge.svg?branch=main)](https://github.com/duncan3dc/blade/actions?query=branch%3Amain+workflow%3A.github%2Fworkflows%2Fbuildcheck.yml)
+[![build](https://github.com/duncan3dc/blade/actions/workflows/buildcheck.yaml/badge.svg)](https://github.com/duncan3dc/blade/actions/workflows/buildcheck.yaml?query=branch%3Amain)
 [![coverage](https://codecov.io/gh/duncan3dc/blade/graph/badge.svg)](https://codecov.io/gh/duncan3dc/blade)
 
 
@@ -44,10 +44,3 @@ Where to get help
 Found a bug? Got a question? Just not sure how something works?  
 Please [create an issue](//github.com/duncan3dc/blade/issues) and I'll do my best to help out.  
 Alternatively you can catch me on [Twitter](https://twitter.com/duncan3dc)
-
-
-## duncan3dc/blade for enterprise
-
-Available as part of the Tidelift Subscription
-
-The maintainers of duncan3dc/blade and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use. [Learn more.](https://tidelift.com/subscription/pkg/packagist-duncan3dc-blade?utm_source=packagist-duncan3dc-blade&utm_medium=referral&utm_campaign=readme)
