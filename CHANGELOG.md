@@ -1,6 +1,23 @@
 Changelog
 =========
 
+## 5.0.0 - 2026-07-02
+
+### Changed
+
+* [BladeInterface] Updated the `component()` signature to match the new upstream method.
+* [Blade] The `setInstance()` method now requires a `BladeInterface`.
+* [Blade] All methods that previously returned the internal instance now return void.
+* [Blade] Added/corrected types and parameter names for all methods.
+* [Blade/BladeInstance] Both classes are now marked final to avoid inheritance issues.
+
+### Removed
+
+* [Support] Dropped support for Laravel 8, and 9.
+* [Support] Dropped support for PHP 7.3, 7.4, 8.0, 8.1, and 8.2.
+
+--------
+
 ## 4.17.0 - 2026-07-01
 
 ### Changed
