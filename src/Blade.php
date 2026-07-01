@@ -13,29 +13,20 @@ use function realpath;
  */
 class Blade
 {
-    /**
-     * @var BladeInstance|null $instance The internal cache of the BladeInstance to only instantiate it once
-     */
-    private static $instance;
+    private static ?BladeInterface $instance = null;
 
 
     /**
-     * Set the BladeInstance object to use.
-     *
-     * @param BladeInstance $instance The instance to use
-     *
-     * @return void
+     * Set the instance object to use.
      */
-    public static function setInstance(BladeInstance $instance): void
+    public static function setInstance(BladeInterface $instance): void
     {
         self::$instance = $instance;
     }
 
 
     /**
-     * Get the BladeInstance object.
-     *
-     * @return BladeInterface
+     * Get the instance object.
      */
     public static function getInstance(): BladeInterface
     {

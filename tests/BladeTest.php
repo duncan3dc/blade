@@ -4,6 +4,7 @@ namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Laravel\Blade;
 use duncan3dc\Laravel\BladeInstance;
+use duncan3dc\Laravel\BladeInterface;
 use Illuminate\Contracts\View\View;
 use Mockery;
 use PHPUnit\Framework\TestCase;
@@ -137,7 +138,7 @@ class BladeTest extends TestCase
     public function testOverrideInstance(): void
     {
         $this->assertInstanceOf(BladeInstance::class, Blade::getInstance());
-        $blade = Mockery::mock(BladeInstance::class);
+        $blade = Mockery::mock(BladeInterface::class);
         Blade::setInstance($blade);
         $this->assertSame($blade, Blade::getInstance());
     }
