@@ -5,10 +5,9 @@ namespace duncan3dc\LaravelTests;
 use duncan3dc\Laravel\ConditionHandler;
 use PHPUnit\Framework\TestCase;
 
-class ConditionHandlerTest extends TestCase
+final class ConditionHandlerTest extends TestCase
 {
-    /** @var ConditionHandler */
-    private $handler;
+    private ConditionHandler $handler;
 
 
     protected function setUp(): void
@@ -22,6 +21,8 @@ class ConditionHandlerTest extends TestCase
         $result = $this->handler->add("test", "trim");
         $this->assertSame($this->handler, $result);
     }
+
+
     public function testAdd2(): void
     {
         $this->handler->add("test", "trim");
@@ -39,6 +40,8 @@ class ConditionHandlerTest extends TestCase
         $result = $this->handler->check("test", " ok ");
         $this->assertSame("ok", $result);
     }
+
+
     public function testCheck2(): void
     {
         $this->handler->add("test", function () {
@@ -48,6 +51,8 @@ class ConditionHandlerTest extends TestCase
         $result = $this->handler->check("test");
         $this->assertSame(true, $result);
     }
+
+
     public function testCheck3(): void
     {
         $this->expectException(\UnexpectedValueException::class);

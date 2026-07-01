@@ -23,8 +23,6 @@ interface BladeInterface extends FactoryInterface
     /**
      * Register a custom Blade compiler.
      *
-     * @param callable $compiler
-     *
      * @return $this
      */
     public function extend(callable $compiler): BladeInterface;
@@ -32,9 +30,6 @@ interface BladeInterface extends FactoryInterface
 
     /**
      * Register a handler for custom directives.
-     *
-     * @param string $name
-     * @param callable $handler
      *
      * @return $this
      */
@@ -46,8 +41,6 @@ interface BladeInterface extends FactoryInterface
      *
      * @param string $path Path to blade component e.g. `components.radio-input`.
      * @param string|null $alias Name of the component alias. By default the component filename will be used
-     *
-     * @return $this
      */
     public function aliasComponent(string $path, ?string $alias = null): BladeInterface;
 
@@ -61,10 +54,7 @@ interface BladeInterface extends FactoryInterface
 
 
     /**
-     * Register an custom conditional directive.
-     *
-     * @param string $name
-     * @param callable $handler
+     * Register a custom conditional directive.
      *
      * @return $this
      */
@@ -74,8 +64,6 @@ interface BladeInterface extends FactoryInterface
     /**
      * Add a path to look for views in.
      *
-     * @param string $path The path to look in
-     *
      * @return $this
      */
     public function addPath(string $path): BladeInterface;
@@ -83,10 +71,6 @@ interface BladeInterface extends FactoryInterface
 
     /**
      * Check if a view exists.
-     *
-     * @param string $view The name of the view to check
-     *
-     * @return bool
      */
     public function exists($view): bool;
 
@@ -94,7 +78,7 @@ interface BladeInterface extends FactoryInterface
     /**
      * Share data across all views.
      *
-     * @param string $key The name of the variable to share
+     * @param string|array<string, mixed> $key The name of the variable to share
      * @param mixed $value The value to assign to the variable
      *
      * @return $this
@@ -105,30 +89,26 @@ interface BladeInterface extends FactoryInterface
     /**
      * Register a composer.
      *
-     * @param string $key The name of the composer to register
-     * @param mixed $value The closure or class to use
-     *
-     * @return array
+     * @param string|array<string> $views The name of the composer to register
+     * @param \Closure|string $callback The closure or class to use
      */
-    public function composer($key, $value): array;
+    public function composer($views, $callback): array;
 
 
     /**
      * Register a creator.
      *
-     * @param string $key The name of the creator to register
-     * @param mixed $value The closure or class to use
-     *
-     * @return array
+     * @param string|array<string> $views The name of the creator to register
+     * @param \Closure|string $callback The closure or class to use
      */
-    public function creator($key, $value): array;
+    public function creator($views, $callback): array;
 
 
     /**
      * Add a new namespace to the loader.
      *
      * @param string $namespace The namespace to use
-     * @param array|string $hints The hints to apply
+     * @param array<string>|string $hints The hints to apply
      *
      * @return $this
      */
@@ -139,7 +119,7 @@ interface BladeInterface extends FactoryInterface
      * Replace the namespace hints for the given namespace.
      *
      * @param string $namespace The namespace to replace
-     * @param array|string $hints The hints to use
+     * @param array<string>|string $hints The hints to use
      *
      * @return $this
      */
@@ -150,10 +130,8 @@ interface BladeInterface extends FactoryInterface
      * Get the evaluated view contents for the given path.
      *
      * @param string $path The path of the file to use
-     * @param array $data The parameters to pass to the view
-     * @param array $mergeData The extra data to merge
-     *
-     * @return ViewInterface The generated view
+     * @param array<string, mixed> $data The parameters to pass to the view
+     * @param array<string, mixed> $mergeData The extra data to merge
      */
     public function file($path, $data = [], $mergeData = []): ViewInterface;
 
@@ -162,21 +140,17 @@ interface BladeInterface extends FactoryInterface
      * Generate a view.
      *
      * @param string $view The name of the view to make
-     * @param array $params The parameters to pass to the view
-     * @param array $mergeData The extra data to merge
-     *
-     * @return ViewInterface The generated view
+     * @param array<string, mixed> $data The parameters to pass to the view
+     * @param array<string, mixed> $mergeData The extra data to merge
      */
-    public function make($view, $params = [], $mergeData = []): ViewInterface;
+    public function make($view, $data = [], $mergeData = []): ViewInterface;
 
 
     /**
      * Get the content by generating a view.
      *
      * @param string $view The name of the view to make
-     * @param array $params The parameters to pass to the view
-     *
-     * @return string The generated content
+     * @param array<string, mixed> $data The parameters to pass to the view
      */
-    public function render(string $view, array $params = []): string;
+    public function render(string $view, array $data = []): string;
 }

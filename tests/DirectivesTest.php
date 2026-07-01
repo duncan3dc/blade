@@ -9,13 +9,11 @@ use Mockery\MockInterface;
 use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use PHPUnit\Framework\TestCase;
 
-class DirectivesTest extends TestCase
+final class DirectivesTest extends TestCase
 {
-    /** @var Directives */
-    private $directives;
+    private Directives $directives;
 
-    /** @var BladeCompiler&MockInterface */
-    private $compiler;
+    private BladeCompiler&MockInterface $compiler;
 
 
     protected function setUp(): void

@@ -12,16 +12,13 @@ use Mockery;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
-class BladeMockTest extends TestCase
+final class BladeMockTest extends TestCase
 {
-    /** @var BladeInterface */
-    private $blade;
+    private BladeInterface $blade;
 
-    /** @var FileViewFinder|MockInterface */
-    private $finder;
+    private FileViewFinder&MockInterface $finder;
 
-    /** @var Factory|MockInterface */
-    private $factory;
+    private Factory&MockInterface $factory;
 
 
     protected function setUp(): void

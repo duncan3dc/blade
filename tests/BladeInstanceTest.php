@@ -4,7 +4,6 @@ namespace duncan3dc\LaravelTests;
 
 use duncan3dc\Laravel\BladeInstance;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Blade;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -12,10 +11,9 @@ use function file_get_contents;
 use function str_replace;
 use function trim;
 
-class BladeInstanceTest extends TestCase
+final class BladeInstanceTest extends TestCase
 {
-    /** @var BladeInstance */
-    private $blade;
+    private BladeInstance $blade;
 
 
     protected function setUp(): void

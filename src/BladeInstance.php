@@ -21,42 +21,42 @@ use function mkdir;
 /**
  * Standalone class for generating text using blade templates.
  */
-class BladeInstance implements BladeInterface
+final class BladeInstance implements BladeInterface
 {
     /**
      * @var string $path The default path for views.
      */
-    private $path;
+    private string $path;
 
     /**
      * @var string $cache The default path for cached php.
      */
-    private $cache;
+    private string $cache;
 
     /**
      * @var DirectivesInterface $directives The custom directives to apply to this instance.
      */
-    private $directives;
+    private DirectivesInterface $directives;
 
     /**
      * @var Factory|null $factory The internal cache of the Factory to only instantiate it once.
      */
-    private $factory;
+    private ?Factory $factory = null;
 
     /**
      * @var FileViewFinder|null $finder The internal cache of the FileViewFinder to only instantiate it once.
      */
-    private $finder;
+    private ?FileViewFinder $finder = null;
 
     /**
      * @var BladeCompiler|null The internal cache of the BladeCompiler to only instantiate it once.
      */
-    private $compiler;
+    private ?BladeCompiler $compiler = null;
 
     /**
      * @var ConditionHandler|null $conditionHandler The custom conditionals that have been registered.
      */
-    private $conditionHandler;
+    private ?ConditionHandler $conditionHandler = null;
 
 
     public static function fromPaths(array $paths, string $cache, ?DirectivesInterface $directives = null): BladeInterface
@@ -94,9 +94,6 @@ class BladeInstance implements BladeInterface
     }
 
 
-    /**
-     * @return EngineResolver
-     */
     private function getResolver(): EngineResolver
     {
         $resolver = new EngineResolver();
@@ -107,11 +104,11 @@ class BladeInstance implements BladeInterface
         });
 
         $resolver->register("file", function () {
-            return new FileEngine(new \Illuminate\Filesystem\Filesystem());
+            return new FileEngine(new Filesystem());
         });
 
         $resolver->register("php", function () {
-            return new PhpEngine(new \Illuminate\Filesystem\Filesystem());
+            return new PhpEngine(new Filesystem());
         });
 
         return $resolver;
@@ -120,8 +117,6 @@ class BladeInstance implements BladeInterface
 
     /**
      * Get the laravel view finder.
-     *
-     * @return FileViewFinder
      */
     private function getViewFinder(): FileViewFinder
     {
@@ -155,8 +150,6 @@ class BladeInstance implements BladeInterface
 
     /**
      * Get the internal compiler in use.
-     *
-     * @return BladeCompiler
      */
     private function getCompiler(): BladeCompiler
     {
@@ -178,9 +171,6 @@ class BladeInstance implements BladeInterface
     }
 
 
-    /**
-     * @inheritdoc
-     */
     public function addExtension(string $extension): BladeInterface
     {
         $this
@@ -191,13 +181,6 @@ class BladeInstance implements BladeInterface
     }
 
 
-    /**
-     * Register a custom Blade compiler.
-     *
-     * @param callable $compiler
-     *
-     * @return $this
-     */
     public function extend(callable $compiler): BladeInterface
     {
         $this
@@ -208,14 +191,6 @@ class BladeInstance implements BladeInterface
     }
 
 
-    /**
-     * Register a handler for custom directives.
-     *
-     * @param string $name
-     * @param callable $handler
-     *
-     * @return $this
-     */
     public function directive(string $name, callable $handler): BladeInterface
     {
         $this
@@ -240,19 +215,10 @@ class BladeInstance implements BladeInterface
         $this
             ->getCompiler()
             ->component($class, $alias, $prefix);
-
         return $this;
     }
 
 
-    /**
-     * Register an custom conditional directive.
-     *
-     * @param string $name
-     * @param callable $handler
-     *
-     * @return $this
-     */
     public function if(string $name, callable $handler): BladeInterface
     {
         if (!$this->conditionHandler) {
@@ -278,13 +244,6 @@ class BladeInstance implements BladeInterface
     }
 
 
-    /**
-     * Add a path to look for views in.
-     *
-     * @param string $path The path to look in
-     *
-     * @return $this
-     */
     public function addPath(string $path): BladeInterface
     {
         $this->getViewFinder()->addLocation($path);
@@ -293,27 +252,12 @@ class BladeInstance implements BladeInterface
     }
 
 
-    /**
-     * Check if a view exists.
-     *
-     * @param string $view The name of the view to check
-     *
-     * @return bool
-     */
     public function exists($view): bool
     {
         return $this->getViewFactory()->exists($view);
     }
 
 
-    /**
-     * Share data across all views.
-     *
-     * @param string $key The name of the variable to share
-     * @param mixed $value The value to assign to the variable
-     *
-     * @return $this
-     */
     public function share($key, $value = null): BladeInterface
     {
         $this->getViewFactory()->share($key, $value);
@@ -322,107 +266,46 @@ class BladeInstance implements BladeInterface
     }
 
 
-    /**
-     * Register a composer.
-     *
-     * @param string $key The name of the composer to register
-     * @param \Closure|string $value The closure or class to use
-     *
-     * @return array
-     */
-    public function composer($key, $value): array
+    public function composer($views, $callback): array
     {
-        return $this->getViewFactory()->composer($key, $value);
+        return $this->getViewFactory()->composer($views, $callback);
     }
 
 
-    /**
-     * Register a creator.
-     *
-     * @param string $key The name of the creator to register
-     * @param \Closure|string $value The closure or class to use
-     *
-     * @return array
-     */
-    public function creator($key, $value): array
+    public function creator($views, $callback): array
     {
-        return $this->getViewFactory()->creator($key, $value);
+        return $this->getViewFactory()->creator($views, $callback);
     }
 
 
-
-    /**
-     * Add a new namespace to the loader.
-     *
-     * @param string $namespace The namespace to use
-     * @param array|string $hints The hints to apply
-     *
-     * @return $this
-     */
     public function addNamespace($namespace, $hints): BladeInterface
     {
         $this->getViewFactory()->addNamespace($namespace, $hints);
-
         return $this;
     }
 
 
-    /**
-     * Replace the namespace hints for the given namespace.
-     *
-     * @param string $namespace The namespace to replace
-     * @param array|string $hints The hints to use
-     *
-     * @return $this
-     */
     public function replaceNamespace($namespace, $hints): BladeInterface
     {
         $this->getViewFactory()->replaceNamespace($namespace, $hints);
-
         return $this;
     }
 
 
-    /**
-     * Get the evaluated view contents for the given path.
-     *
-     * @param string $path The path of the file to use
-     * @param array $data The parameters to pass to the view
-     * @param array $mergeData The extra data to merge
-     *
-     * @return ViewInterface The generated view
-     */
     public function file($path, $data = [], $mergeData = []): ViewInterface
     {
         return $this->getViewFactory()->file($path, $data, $mergeData);
     }
 
 
-    /**
-     * Generate a view.
-     *
-     * @param string $view The name of the view to make
-     * @param array $params The parameters to pass to the view
-     * @param array $mergeData The extra data to merge
-     *
-     * @return ViewInterface The generated view
-     */
-    public function make($view, $params = [], $mergeData = []): ViewInterface
+    public function make($view, $data = [], $mergeData = []): ViewInterface
     {
-        return $this->getViewFactory()->make($view, $params, $mergeData);
+        return $this->getViewFactory()->make($view, $data, $mergeData);
     }
 
 
-    /**
-     * Get the content by generating a view.
-     *
-     * @param string $view The name of the view to make
-     * @param array $params The parameters to pass to the view
-     *
-     * @return string The generated content
-     */
-    public function render(string $view, array $params = []): string
+    public function render(string $view, array $data = []): string
     {
-        return $this->make($view, $params)->render();
+        return $this->make($view, $data)->render();
     }
 }

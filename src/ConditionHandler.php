@@ -9,14 +9,11 @@ class ConditionHandler
     /**
      * @var array $conditions The conditions registered.
      */
-    private $conditions = [];
+    private array $conditions = [];
 
 
     /**
      * Register an custom conditional directive.
-     *
-     * @param string $name
-     * @param callable $handler
      *
      * @return $this
      */
@@ -34,13 +31,8 @@ class ConditionHandler
 
     /**
      * Call a registered conditional directive.
-     *
-     * @param string $name
-     * @param mixed ...$params
-     *
-     * @return mixed
      */
-    public function check(string $name, ...$params)
+    public function check(string $name, mixed ...$params): mixed
     {
         if (!array_key_exists($name, $this->conditions)) {
             throw new \UnexpectedValueException("Unknown conditional: @{$name}");

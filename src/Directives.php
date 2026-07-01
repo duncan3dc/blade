@@ -11,27 +11,27 @@ use function strlen;
 use function substr;
 use function trim;
 
-class Directives implements DirectivesInterface
+final class Directives implements DirectivesInterface
 {
     /**
      * @var bool $namespace Whether to apply the namespace directive or not.
      */
-    private $namespace = true;
+    private bool $namespace = true;
 
     /**
      * @var bool $use Whether to apply the use directive or not.
      */
-    private $use = true;
+    private bool $use = true;
 
     /**
      * @var string|null $css The path to use for the css directive, or null to not apply the directive.
      */
-    private $css = "css";
+    private ?string $css = "css";
 
     /**
      * @var string|null $js The path to use for the javascript directive, or null to not apply the directive.
      */
-    private $js = "js";
+    private ?string $js = "js";
 
 
     /**
@@ -52,8 +52,6 @@ class Directives implements DirectivesInterface
 
     /**
      * Get a new instance with the namespace directive applied.
-     *
-     * @return self
      */
     public function withNamespace(): self
     {
@@ -63,8 +61,6 @@ class Directives implements DirectivesInterface
 
     /**
      * Get a new instance without the namespace directive applied.
-     *
-     * @return self
      */
     public function withoutNamespace(): self
     {
@@ -74,8 +70,6 @@ class Directives implements DirectivesInterface
 
     /**
      * Get a new instance with the use directive applied.
-     *
-     * @return self
      */
     public function withUse(): self
     {
@@ -85,8 +79,6 @@ class Directives implements DirectivesInterface
 
     /**
      * Get a new instance without the use directive applied.
-     *
-     * @return self
      */
     public function withoutUse(): self
     {
@@ -98,8 +90,6 @@ class Directives implements DirectivesInterface
      * Get a new instance with the css directive applied.
      *
      * @param string $path The default path to the css files
-     *
-     * @return self
      */
     public function withCss(string $path = "css"): self
     {
@@ -109,8 +99,6 @@ class Directives implements DirectivesInterface
 
     /**
      * Get a new instance without the css directive applied.
-     *
-     * @return self
      */
     public function withoutCss(): self
     {
@@ -122,8 +110,6 @@ class Directives implements DirectivesInterface
      * Get a new instance with the javascript directive applied.
      *
      * @param string $path The default path to the javascript files
-     *
-     * @return self
      */
     public function withJs(string $path = "js"): self
     {
@@ -133,8 +119,6 @@ class Directives implements DirectivesInterface
 
     /**
      * Get a new instance without the javascript directive applied.
-     *
-     * @return self
      */
     public function withoutJs(): self
     {
@@ -144,27 +128,23 @@ class Directives implements DirectivesInterface
 
     /**
      * Register all the active directives to the blade templating compiler.
-     *
-     * @param BladeCompiler $blade The compiler to extend
-     *
-     * @return void
      */
     public function register(BladeCompiler $blade): void
     {
         if ($this->namespace) {
-            $blade->directive("namespace", function ($parameter) {
+            $blade->directive("namespace", function (string $parameter) {
                 return "<?php namespace {$parameter} ?>";
             });
         }
 
         if ($this->use) {
-            $blade->directive("use", function ($parameter) {
+            $blade->directive("use", function (string $parameter) {
                 return "<?php use {$parameter} ?>";
             });
         }
 
         if ($this->css !== null) {
-            $blade->directive("css", function ($parameter) {
+            $blade->directive("css", function (string $parameter) {
                 assert(is_string($this->css));
                 $file = $this->assetify($parameter, "css", $this->css);
                 return "<link rel='stylesheet' type='text/css' href='{$file}'>";
@@ -172,7 +152,7 @@ class Directives implements DirectivesInterface
         }
 
         if ($this->js !== null) {
-            $blade->directive("js", function ($parameter) {
+            $blade->directive("js", function (string $parameter) {
                 assert(is_string($this->js));
                 $file = $this->assetify($parameter, "js", $this->js);
                 return "<script type='text/javascript' src='{$file}'></script>";

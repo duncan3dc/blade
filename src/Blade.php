@@ -11,7 +11,7 @@ use function realpath;
 /**
  * Standalone class for generating text using blade templates.
  */
-class Blade
+final class Blade
 {
     private static ?BladeInterface $instance = null;
 
@@ -51,7 +51,7 @@ class Blade
      */
     public static function addExtension(string $extension): void
     {
-        static::getInstance()->addExtension($extension);
+        self::getInstance()->addExtension($extension);
     }
 
 
@@ -60,7 +60,7 @@ class Blade
      */
     public static function extend(callable $compiler): void
     {
-        static::getInstance()->extend($compiler);
+        self::getInstance()->extend($compiler);
     }
 
 
@@ -69,7 +69,7 @@ class Blade
      */
     public static function directive(string $name, callable $handler): void
     {
-        static::getInstance()->directive($name, $handler);
+        self::getInstance()->directive($name, $handler);
     }
 
 
@@ -81,7 +81,7 @@ class Blade
      */
     public function aliasComponent(string $path, ?string $alias = null): void
     {
-        static::getInstance()->aliasComponent($path, $alias);
+        self::getInstance()->aliasComponent($path, $alias);
     }
 
 
@@ -90,7 +90,7 @@ class Blade
      */
     public function component(string $class, ?string $alias = null, string $prefix = ""): void
     {
-        static::getInstance()->component($class, $alias, $prefix);
+        self::getInstance()->component($class, $alias, $prefix);
     }
 
 
@@ -99,7 +99,7 @@ class Blade
      */
     public static function if(string $name, callable $handler): void
     {
-        static::getInstance()->if($name, $handler);
+        self::getInstance()->if($name, $handler);
     }
 
 
@@ -108,60 +108,52 @@ class Blade
      */
     public static function addPath(string $path): void
     {
-        static::getInstance()->addPath($path);
+        self::getInstance()->addPath($path);
     }
 
 
     /**
      * Check if a view exists.
-     *
-     * @param string $view The name of the view to check
-     *
-     * @return bool
      */
     public static function exists(string $view): bool
     {
-        return static::getInstance()->exists($view);
+        return self::getInstance()->exists($view);
     }
 
 
     /**
      * Share data across all views.
      *
-     * @param string $key The name of the variable to share
+     * @param string|array<string, mixed> $key The name of the variable to share
      * @param mixed $value The value to assign to the variable
      */
-    public static function share($key, $value = null): void
+    public static function share(string|array $key, mixed $value = null): void
     {
-        static::getInstance()->share($key, $value);
+        self::getInstance()->share($key, $value);
     }
 
 
     /**
      * Register a composer.
      *
-     * @param string $key The name of the composer to register
-     * @param mixed $value The closure or class to use
-     *
-     * @return array
+     * @param string|array<string> $views The name of the composer to register
+     * @param \Closure|string $callback The closure or class to use
      */
-    public static function composer(string $key, $value): array
+    public static function composer(string|array $views, \Closure|string $callback): array
     {
-        return static::getInstance()->composer($key, $value);
+        return self::getInstance()->composer($views, $callback);
     }
 
 
     /**
      * Register a creator.
      *
-     * @param string $key The name of the creator to register
-     * @param mixed $value The closure or class to use
-     *
-     * @return array
+     * @param string|array<string> $views The name of the creator to register
+     * @param \Closure|string $callback The closure or class to use
      */
-    public static function creator(string $key, $value): array
+    public static function creator(string|array $views, \Closure|string $callback): array
     {
-        return static::getInstance()->creator($key, $value);
+        return self::getInstance()->creator($views, $callback);
     }
 
 
@@ -169,11 +161,11 @@ class Blade
      * Add a new namespace to the loader.
      *
      * @param string $namespace The namespace to use
-     * @param array|string $hints The hints to apply
+     * @param array<string>|string $hints The hints to apply
      */
-    public static function addNamespace(string $namespace, $hints): void
+    public static function addNamespace(string $namespace, array|string $hints): void
     {
-        static::getInstance()->addNamespace($namespace, $hints);
+        self::getInstance()->addNamespace($namespace, $hints);
     }
 
 
@@ -181,11 +173,11 @@ class Blade
      * Replace the namespace hints for the given namespace.
      *
      * @param string $namespace The namespace to replace
-     * @param array|string $hints The hints to use
+     * @param array<string>|string $hints The hints to use
      */
-    public static function replaceNamespace(string $namespace, $hints): void
+    public static function replaceNamespace(string $namespace, array|string $hints): void
     {
-        static::getInstance()->replaceNamespace($namespace, $hints);
+        self::getInstance()->replaceNamespace($namespace, $hints);
     }
 
 
@@ -193,14 +185,12 @@ class Blade
      * Get the evaluated view contents for the given path.
      *
      * @param string $path The path of the file to use
-     * @param array $data The parameters to pass to the view
-     * @param array $mergeData The extra data to merge
-     *
-     * @return ViewInterface The generated view
+     * @param array<string, mixed> $data The parameters to pass to the view
+     * @param array<string, mixed> $mergeData The extra data to merge
      */
     public static function file(string $path, array $data = [], array $mergeData = []): ViewInterface
     {
-        return static::getInstance()->file($path, $data, $mergeData);
+        return self::getInstance()->file($path, $data, $mergeData);
     }
 
 
@@ -208,14 +198,12 @@ class Blade
      * Generate a view.
      *
      * @param string $view The name of the view to make
-     * @param array $params The parameters to pass to the view
-     * @param array $mergeData The extra data to merge
-     *
-     * @return ViewInterface The generated view
+     * @param array<string, mixed> $data The parameters to pass to the view
+     * @param array<string, mixed> $mergeData The extra data to merge
      */
-    public static function make(string $view, array $params = [], array $mergeData = []): ViewInterface
+    public static function make(string $view, array $data = [], array $mergeData = []): ViewInterface
     {
-        return static::getInstance()->make($view, $params, $mergeData);
+        return self::getInstance()->make($view, $data, $mergeData);
     }
 
 
@@ -223,12 +211,10 @@ class Blade
      * Get the content by generating a view.
      *
      * @param string $view The name of the view to make
-     * @param array $params The parameters to pass to the view
-     *
-     * @return string The generated content
+     * @param array<string, mixed> $data The parameters to pass to the view
      */
-    public static function render(string $view, array $params = []): string
+    public static function render(string $view, array $data = []): string
     {
-        return static::getInstance()->render($view, $params);
+        return self::getInstance()->render($view, $data);
     }
 }

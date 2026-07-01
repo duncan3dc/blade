@@ -13,7 +13,7 @@ use function file_get_contents;
 use function str_replace;
 use function trim;
 
-class BladeTest extends TestCase
+final class BladeTest extends TestCase
 {
     protected function setUp(): void
     {

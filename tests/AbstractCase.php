@@ -9,11 +9,9 @@ use PHPUnit\Framework\TestCase;
 
 abstract class AbstractCase extends TestCase
 {
-    /** @var BladeCompiler */
-    private $blade;
+    private BladeCompiler $blade;
 
-    /** @var Directives */
-    protected $directives;
+    protected Directives $directives;
 
 
     protected function setUp(): void

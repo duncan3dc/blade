@@ -2,7 +2,7 @@
 
 namespace duncan3dc\LaravelTests;
 
-class Helper
+final class Helper
 {
     public static function getStuff(): string
     {
