@@ -48,39 +48,28 @@ class Blade
      * Add another extension to use to search for template files.
      *
      * @param string $extension (eg 'blade.php', or 'template')
-     *
-     * @return BladeInterface
      */
-    public static function addExtension(string $extension): BladeInterface
+    public static function addExtension(string $extension): void
     {
-        return static::getInstance()->addExtension($extension);
+        static::getInstance()->addExtension($extension);
     }
 
 
     /**
      * Register a custom Blade compiler.
-     *
-     * @param callable $compiler
-     *
-     * @return BladeInterface
      */
-    public static function extend(callable $compiler): BladeInterface
+    public static function extend(callable $compiler): void
     {
-        return static::getInstance()->extend($compiler);
+        static::getInstance()->extend($compiler);
     }
 
 
     /**
      * Register a handler for custom directives.
-     *
-     * @param string $name
-     * @param callable $handler
-     *
-     * @return BladeInterface
      */
-    public static function directive(string $name, callable $handler): BladeInterface
+    public static function directive(string $name, callable $handler): void
     {
-        return static::getInstance()->directive($name, $handler);
+        static::getInstance()->directive($name, $handler);
     }
 
 
@@ -89,48 +78,37 @@ class Blade
      *
      * @param string $path Path to blade component e.g. `components.radio-input`.
      * @param string|null $alias Name of the component alias. By default the component filename will be used
-     *
-     * @return BladeInterface
      */
-    public function aliasComponent(string $path, ?string $alias = null): BladeInterface
+    public function aliasComponent(string $path, ?string $alias = null): void
     {
-        return static::getInstance()->aliasComponent($path, $alias);
+        static::getInstance()->aliasComponent($path, $alias);
     }
 
 
     /**
      * Register a class-based component alias directive.
      */
-    public function component(string $class, ?string $alias = null, string $prefix = ""): BladeInterface
+    public function component(string $class, ?string $alias = null, string $prefix = ""): void
     {
-        return static::getInstance()->component($class, $alias, $prefix);
+        static::getInstance()->component($class, $alias, $prefix);
     }
 
 
     /**
-     * Register an custom conditional directive.
-     *
-     * @param string $name
-     * @param callable $handler
-     *
-     * @return BladeInterface
+     * Register a custom conditional directive.
      */
-    public static function if(string $name, callable $handler): BladeInterface
+    public static function if(string $name, callable $handler): void
     {
-        return static::getInstance()->if($name, $handler);
+        static::getInstance()->if($name, $handler);
     }
 
 
     /**
      * Add a path to look for views in.
-     *
-     * @param string $path The path to look in
-     *
-     * @return BladeInterface
      */
-    public static function addPath(string $path): BladeInterface
+    public static function addPath(string $path): void
     {
-        return static::getInstance()->addPath($path);
+        static::getInstance()->addPath($path);
     }
 
 
@@ -152,12 +130,10 @@ class Blade
      *
      * @param string $key The name of the variable to share
      * @param mixed $value The value to assign to the variable
-     *
-     * @return BladeInterface
      */
-    public static function share(string $key, $value = null): BladeInterface
+    public static function share($key, $value = null): void
     {
-        return static::getInstance()->share($key, $value);
+        static::getInstance()->share($key, $value);
     }
 
 
@@ -194,12 +170,10 @@ class Blade
      *
      * @param string $namespace The namespace to use
      * @param array|string $hints The hints to apply
-     *
-     * @return BladeInterface
      */
-    public static function addNamespace(string $namespace, $hints): BladeInterface
+    public static function addNamespace(string $namespace, $hints): void
     {
-        return static::getInstance()->addNamespace($namespace, $hints);
+        static::getInstance()->addNamespace($namespace, $hints);
     }
 
 
@@ -208,12 +182,10 @@ class Blade
      *
      * @param string $namespace The namespace to replace
      * @param array|string $hints The hints to use
-     *
-     * @return BladeInterface
      */
-    public static function replaceNamespace(string $namespace, $hints): BladeInterface
+    public static function replaceNamespace(string $namespace, $hints): void
     {
-        return static::getInstance()->replaceNamespace($namespace, $hints);
+        static::getInstance()->replaceNamespace($namespace, $hints);
     }
 
 
