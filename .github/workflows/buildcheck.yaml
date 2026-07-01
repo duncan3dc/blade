@@ -12,16 +12,74 @@ jobs:
       fail-fast: false
       matrix:
         php:
-          - "7.3"
-          - "7.4"
-          - "8.0"
-          - "8.1"
           - "8.2"
           - "8.3"
           - "8.4"
         composer:
           - ""
           - "--prefer-lowest"
+        laravel:
+          - ""
+          - "8.0"
+          - "9.0"
+          - "10.0"
+          - "11.0"
+          - "12.0"
+        include:
+          - php: "7.3"
+            laravel: ""
+            composer: ""
+          - php: "7.3"
+            laravel: ""
+            composer: "--prefer-lowest"
+          - php: "7.4"
+            laravel: ""
+            composer: ""
+          - php: "7.4"
+            laravel: ""
+            composer: "--prefer-lowest"
+          - php: "8.0"
+            laravel: ""
+            composer: ""
+          - php: "8.0"
+            laravel: ""
+            composer: "--prefer-lowest"
+          - php: "8.0"
+            laravel: "8.0"
+            composer: ""
+          - php: "8.0"
+            laravel: "8.0"
+            composer: "--prefer-lowest"
+          - php: "8.0"
+            laravel: "9.0"
+            composer: ""
+          - php: "8.0"
+            laravel: "9.0"
+            composer: "--prefer-lowest"
+          - php: "8.1"
+            laravel: ""
+            composer: ""
+          - php: "8.1"
+            laravel: ""
+            composer: "--prefer-lowest"
+          - php: "8.1"
+            laravel: "8.0"
+            composer: ""
+          - php: "8.1"
+            laravel: "8.0"
+            composer: "--prefer-lowest"
+          - php: "8.1"
+            laravel: "9.0"
+            composer: ""
+          - php: "8.1"
+            laravel: "9.0"
+            composer: "--prefer-lowest"
+          - php: "8.1"
+            laravel: "10.0"
+            composer: ""
+          - php: "8.1"
+            laravel: "10.0"
+            composer: "--prefer-lowest"
 
     steps:
       - uses: actions/checkout@v1
@@ -32,7 +90,9 @@ jobs:
           docker run --interactive --detach --volume ${{ github.workspace }}:/app --name ci ci-image
 
       - name: Install Dependencies
-        run: docker exec ci composer update --no-interaction --no-ansi --prefer-dist ${{ matrix.composer }}
+        run: |
+          docker exec ci .github/laravel.php ${{ matrix.laravel }}
+          docker exec ci composer update --no-interaction --no-ansi --prefer-dist ${{ matrix.composer }}
 
       - name: PHPUnit
         run: docker exec ci vendor/bin/phpunit

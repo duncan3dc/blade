@@ -1,19 +1,22 @@
 #!/usr/bin/env php
 <?php
 
-if (!getenv("LARAVEL_VERSION")) {
+$override = $_SERVER["argv"][1] ?? "";
+if (!$override) {
     return;
 }
 
-$json = file_get_contents(__DIR__ . "/../composer.json");
+$path = __DIR__ . "/../composer.json";
+
+$json = (string) file_get_contents($path);
 $composer = json_decode($json);
 
 foreach ($composer->require as $package => &$version) {
     if (substr($package, 0, 11) === "illuminate/") {
-        $version = getenv("LARAVEL_VERSION") . ".*";
+        $version = "^{$override}";
     }
 }
 unset($version);
 
 $json = json_encode($composer);
-file_put_contents(__DIR__ . "/../composer.json", $json);
+file_put_contents($path, $json);
