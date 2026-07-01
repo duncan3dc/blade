@@ -12,18 +12,18 @@
         "role": "Developer"
     }],
     "require": {
-        "illuminate/contracts": "^8.0 || ^9.0 || ^10.0 || ^11.0 || ^12.0 || ^13.0",
-        "illuminate/events": "^8.0 || ^9.0 || ^10.0 || ^11.0 || ^12.0 || ^13.0",
-        "illuminate/filesystem": "^8.0 || ^9.0 || ^10.0 || ^11.0 || ^12.0 || ^13.0",
-        "illuminate/support": "^8.0 || ^9.0 || ^10.0 || ^11.0 || ^12.0 || ^13.0",
-        "illuminate/view": "^8.0 || ^9.0 || ^10.0 || ^11.0 || ^12.0 || ^13.0",
-        "php": "^7.3 || ^8.0"
+        "illuminate/container": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "illuminate/contracts": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "illuminate/events": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "illuminate/filesystem": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "illuminate/support": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "illuminate/view": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "php": "^8.3"
     },
     "require-dev": {
-        "duncan3dc/object-intruder": "^0.3.0 || ^1.0",
-        "maglnet/composer-require-checker": "^2.0 || ^3.0",
-        "mockery/mockery": "^1.4",
-        "nikic/php-parser": "^4.18",
+        "duncan3dc/object-intruder": "^1.0",
+        "maglnet/composer-require-checker": "^4.0",
+        "mockery/mockery": "^1.6.12",
         "phpstan/phpstan": "^1.12",
         "phpstan/phpstan-mockery": "^1.1",
         "phpstan/phpstan-phpunit": "^1.4",
