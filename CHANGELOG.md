@@ -1,6 +1,15 @@
 Changelog
 =========
 
+## 4.17.0 - 2026-07-01
+
+### Changed
+
+* [Support] Added support for Laravel 13.
+* [Support] Added support for PHP 8.5.
+
+--------
+
 ## 4.16.0 - 2025-05-13
 
 ### Changed
