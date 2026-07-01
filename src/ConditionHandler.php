@@ -7,7 +7,7 @@ use function array_key_exists;
 class ConditionHandler
 {
     /**
-     * @var array $conditions The conditions registered.
+     * @var array<string, callable> $conditions The conditions registered.
      */
     private array $conditions = [];
 

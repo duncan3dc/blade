@@ -24,9 +24,9 @@
         "duncan3dc/object-intruder": "^1.0",
         "maglnet/composer-require-checker": "^4.0",
         "mockery/mockery": "^1.6.12",
-        "phpstan/phpstan": "^1.12",
-        "phpstan/phpstan-mockery": "^1.1",
-        "phpstan/phpstan-phpunit": "^1.4",
+        "phpstan/phpstan": "^2.2.3",
+        "phpstan/phpstan-mockery": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
         "squizlabs/php_codesniffer": "^4.0",
         "phpunit/phpunit": "^12.0"
     },

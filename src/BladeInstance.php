@@ -59,6 +59,9 @@ final class BladeInstance implements BladeInterface
     private ?ConditionHandler $conditionHandler = null;
 
 
+    /**
+     * @param array<string> $paths
+     */
     public static function fromPaths(array $paths, string $cache, ?DirectivesInterface $directives = null): BladeInterface
     {
         $instance = null;
