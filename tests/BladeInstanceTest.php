@@ -5,6 +5,7 @@ namespace duncan3dc\LaravelTests;
 use duncan3dc\Laravel\BladeInstance;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Blade;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function file_get_contents;
@@ -225,14 +226,14 @@ class BladeInstanceTest extends TestCase
     }
 
 
-    public function customConditionProvider(): iterable
+    public static function customConditionProvider(): iterable
     {
         yield [false, "off"];
         yield [true, "on"];
     }
-    /**
-     * @dataProvider customConditionProvider
-     */
+
+
+    #[DataProvider("customConditionProvider")]
     public function testCustomConditions(bool $global, string $expected): void
     {
         $this->blade->if("global", function () use ($global) {
@@ -242,9 +243,9 @@ class BladeInstanceTest extends TestCase
         $result = $this->blade->render("view14");
         $this->assertSame("{$expected}\n", $result);
     }
-    /**
-     * @dataProvider customConditionProvider
-     */
+
+
+    #[DataProvider("customConditionProvider")]
     public function testCustomConditionArguments(bool $global, string $expected): void
     {
         $this->blade->if("global", function (bool $global) {

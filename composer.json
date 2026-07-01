@@ -28,7 +28,7 @@
         "phpstan/phpstan-mockery": "^1.1",
         "phpstan/phpstan-phpunit": "^1.4",
         "squizlabs/php_codesniffer": "^4.0",
-        "phpunit/phpunit": "^8.5.36"
+        "phpunit/phpunit": "^12.0"
     },
     "autoload": {
         "psr-4": {"duncan3dc\\Laravel\\": "src/"}

@@ -6,6 +6,7 @@ use duncan3dc\Laravel\Directives;
 use Illuminate\View\Compilers\BladeCompiler;
 use Mockery;
 use Mockery\MockInterface;
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use PHPUnit\Framework\TestCase;
 
 class DirectivesTest extends TestCase
@@ -35,6 +36,7 @@ class DirectivesTest extends TestCase
     }
 
 
+    #[DoesNotPerformAssertions]
     public function testDefaults(): void
     {
         $directives = new Directives();
@@ -45,10 +47,10 @@ class DirectivesTest extends TestCase
         $this->compiler->shouldReceive("directive")->with("js", Mockery::any());
 
         $directives->register($this->compiler);
-        $this->assertTrue(true);
     }
 
 
+    #[DoesNotPerformAssertions]
     public function testWithNamespace(): void
     {
         $this->directives->withNamespace();
@@ -56,10 +58,10 @@ class DirectivesTest extends TestCase
         $this->compiler->shouldReceive("directive")->with("namespace", Mockery::any());
 
         $this->directives->register($this->compiler);
-        $this->assertTrue(true);
     }
 
 
+    #[DoesNotPerformAssertions]
     public function testWithUse(): void
     {
         $this->directives->withUse();
@@ -67,10 +69,10 @@ class DirectivesTest extends TestCase
         $this->compiler->shouldReceive("directive")->with("use", Mockery::any());
 
         $this->directives->register($this->compiler);
-        $this->assertTrue(true);
     }
 
 
+    #[DoesNotPerformAssertions]
     public function testWithCss(): void
     {
         $this->directives->withCss();
@@ -78,10 +80,10 @@ class DirectivesTest extends TestCase
         $this->compiler->shouldReceive("directive")->with("css", Mockery::any());
 
         $this->directives->register($this->compiler);
-        $this->assertTrue(true);
     }
 
 
+    #[DoesNotPerformAssertions]
     public function testWithJs(): void
     {
         $this->directives->withJs();
@@ -89,6 +91,5 @@ class DirectivesTest extends TestCase
         $this->compiler->shouldReceive("directive")->with("js", Mockery::any());
 
         $this->directives->register($this->compiler);
-        $this->assertTrue(true);
     }
 }

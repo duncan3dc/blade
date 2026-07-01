@@ -7,7 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\Compilers\BladeCompiler;
 use PHPUnit\Framework\TestCase;
 
-abstract class AbstractTest extends TestCase
+abstract class AbstractCase extends TestCase
 {
     /** @var BladeCompiler */
     private $blade;

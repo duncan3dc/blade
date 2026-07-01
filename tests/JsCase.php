@@ -2,7 +2,7 @@
 
 namespace duncan3dc\LaravelTests;
 
-class JsTest extends AbstractTest
+class JsCase extends AbstractCase
 {
     public function testString(): void
     {
